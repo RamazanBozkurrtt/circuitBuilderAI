@@ -6,6 +6,7 @@ from ai_pcb.models.validation import (
     ValidationResult,
     ValidationSeverity,
     ValidationStatus,
+    ValidatorApplicability,
 )
 
 
@@ -16,9 +17,18 @@ class MasterSpecValidator:
     def name(self) -> str:
         return "master_spec"
 
+    @property
+    def applicability(self) -> ValidatorApplicability:
+        return ValidatorApplicability(applicable_stages=["SPECIFICATION"])
+
     def validate(self, state: DesignState) -> list[ValidationResult]:
         results: list[ValidationResult] = []
+        active_domains = {
+            domain.value for domain in state.specialization_context().requirement_domains
+        }
         for section_name, section in state.master_spec.sections().items():
+            if section_name not in active_domains:
+                continue
             if not section.requirements:
                 results.append(
                     ValidationResult(
@@ -57,4 +67,3 @@ class MasterSpecValidator:
                 )
             )
         return results
-

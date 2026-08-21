@@ -11,6 +11,7 @@ from pydantic import TypeAdapter
 from ai_pcb.models.common import Identifier
 from ai_pcb.models.spec import MasterSpec
 from ai_pcb.models.state import DesignState
+from ai_pcb.specializations.builtin import builtin_registry
 
 
 class ProjectRepositoryError(RuntimeError):
@@ -37,7 +38,10 @@ class ProjectRepository:
         safe_name = TypeAdapter(Identifier).validate_python(project_name)
         return self.projects_root / safe_name
 
-    def init(self, project_name: str) -> DesignState:
+    def init(self, project_name: str, *, specializations: list[str] | None = None) -> DesignState:
+        requested = specializations or ["generic"]
+        # Resolve before creating directories so an invalid request leaves no partial project.
+        builtin_registry().resolve(requested)
         root = self.project_path(project_name)
         try:
             root.mkdir(parents=True, exist_ok=False)
@@ -45,7 +49,7 @@ class ProjectRepository:
             raise ProjectAlreadyExistsError(f"project already exists: {project_name}") from exc
         for subdirectory in ("state", "evidence", "outputs"):
             (root / subdirectory).mkdir()
-        spec = MasterSpec.empty_template(project_name)
+        spec = MasterSpec.empty_template(project_name, specializations=requested)
         state = DesignState(project_name=project_name, master_spec=spec)
         self._atomic_replace(root / "master_spec.yaml", _yaml_bytes(spec))
         self.save_current(state)
@@ -65,7 +69,11 @@ class ProjectRepository:
         state = DesignState.model_validate_json(path.read_text(encoding="utf-8"))
         current_spec = self.load_spec(project_name)
         if state.master_spec != current_spec:
-            state = state.model_copy(update={"master_spec": current_spec})
+            raw_state = state.model_dump(mode="json")
+            raw_state["master_spec"] = current_spec.model_dump(mode="json")
+            raw_state.pop("requested_specializations", None)
+            raw_state.pop("resolved_specializations", None)
+            state = DesignState.model_validate(raw_state)
         return state
 
     def save_current(self, state: DesignState) -> Path:
@@ -131,7 +139,5 @@ class ProjectRepository:
 
 
 def _yaml_bytes(spec: MasterSpec) -> bytes:
-    rendered = yaml.safe_dump(
-        spec.model_dump(mode="json"), sort_keys=False, allow_unicode=True
-    )
+    rendered = yaml.safe_dump(spec.model_dump(mode="json"), sort_keys=False, allow_unicode=True)
     return rendered.encode("utf-8")

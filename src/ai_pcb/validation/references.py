@@ -6,6 +6,7 @@ from ai_pcb.models.validation import (
     ValidationResult,
     ValidationSeverity,
     ValidationStatus,
+    ValidatorApplicability,
 )
 
 
@@ -16,6 +17,10 @@ class EvidenceReferenceValidator:
     @property
     def name(self) -> str:
         return "evidence_references"
+
+    @property
+    def applicability(self) -> ValidatorApplicability:
+        return ValidatorApplicability()
 
     def validate(self, state: DesignState) -> list[ValidationResult]:
         referenced = set(state.evidence_ids)
@@ -50,6 +55,10 @@ class EvidenceValidationUnavailable:
     @property
     def name(self) -> str:
         return "evidence_references"
+
+    @property
+    def applicability(self) -> ValidatorApplicability:
+        return ValidatorApplicability()
 
     def validate(self, state: DesignState) -> list[ValidationResult]:
         referenced = set(state.evidence_ids)

@@ -2,13 +2,13 @@
 
 ## Project
 
-This repository contains a local AI-assisted PCB engineering system.
+This repository contains a general-purpose AI-assisted PCB engineering engine with optional domain specialization layers.
 
 Primary long-term objective:
 
 `MASTER_SPEC → architecture → component selection → evidence → schematic → verification → PCB layout → verification → iterative correction → manufacturing outputs`
 
-The first real target design will be an Active Noise Cancellation controller PCB.
+The first deep domain target is an Active Noise Cancellation controller PCB. ANC expertise extends the generic engine; it is not a universal assumption.
 
 This system prioritizes engineering correctness and design quality over simplicity.
 
@@ -33,6 +33,12 @@ This system prioritizes engineering correctness and design quality over simplici
 ---
 
 ## Architecture
+
+The engineering flow is:
+
+`MASTER_SPEC → generic PCB core → resolved domain specializations → one generic workflow with domain enhancements → validation/review/optimization`
+
+Do not create separate workflow graphs per domain. Agents and validators consume only the resolved specialization context relevant to the current project.
 
 Primary stack:
 
@@ -154,6 +160,12 @@ Missing information must use explicit typed unresolved states.
 
 Engineering-sensitive defaults must not be invented.
 
+MASTER_SPEC controls project intent, including requested domain specializations. The generic PCB core always applies. Resolved specializations add engineering requirements, guidance, evidence expectations, and future validation capabilities without replacing generic correctness checks.
+
+Specialization inheritance and composition must be explicit, typed, deterministic, and traceable. Unknown dependencies, cycles, and conflicts must fail explicitly. Store both requested and resolved specialization identities and versions in engineering state.
+
+ANC-specific assumptions must never leak into unrelated projects. A generic board must not be forced to declare microphones, codecs, DSP, audio performance, or ANC latency. Future RF, power, high-speed, and other specializations may reach the same depth as ANC.
+
 ---
 
 ## Evidence
@@ -220,7 +232,7 @@ Expected validation sources eventually include:
 * KiCad DRC
 * ngspice
 * custom electrical rules
-* audio/ANC-specific constraints
+* specialization-specific constraints when their domains are active
 * signal integrity checks where required
 * power integrity checks where required
 
@@ -275,7 +287,7 @@ Logical roles may include:
 * Electrical Review
 * PCB Layout
 * PCB Review
-* ANC Performance Review
+* ANC Performance Review when the ANC specialization is active
 * Failure Analysis
 * Manufacturing Review
 
@@ -289,9 +301,9 @@ Agent separation exists for reasoning quality and verification independence, not
 
 ---
 
-## ANC-Specific Quality Goals
+## ANC Specialization Quality Goals
 
-The target PCB is intended for real-time Active Noise Cancellation.
+When `audio_anc` is selected, the resolved project includes the generic, mixed-signal, audio, and ANC engineering layers. These requirements must remain available at high quality but inactive for unrelated boards.
 
 Future validation must consider, where applicable:
 
@@ -322,6 +334,8 @@ Future validation must consider, where applicable:
 A PCB that merely powers on is not sufficient.
 
 ANC performance requirements are first-class engineering requirements.
+
+These are declarative future requirements until the corresponding deterministic validators exist. An unavailable ANC validator or capability must report UNKNOWN/unavailable, never PASS.
 
 ---
 
@@ -426,6 +440,7 @@ src/ai_pcb/
     models/
     llm/
     workflow/
+    specializations/
     evidence/
     validation/
     tools/

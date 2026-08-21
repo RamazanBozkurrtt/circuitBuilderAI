@@ -16,4 +16,7 @@ projects/*/state/iteration_*.json
 projects/*/outputs/*
 !projects/.gitkeep
 !projects/*/outputs/.gitkeep
-
+knowledge/indexes/
+knowledge/ingestion/
+knowledge/.embedding-cache/
+projects/local_runtime/
