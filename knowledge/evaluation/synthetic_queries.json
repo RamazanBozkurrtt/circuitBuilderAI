@@ -1,0 +1,20 @@
+[
+  {
+    "case_id": "core-voltage",
+    "query": {
+      "query": "What voltage powers the digital processing core?",
+      "top_k": 3
+    },
+    "expected_document_id": "doc-06207d1e4f83166f15232b81",
+    "expected_page": 1
+  },
+  {
+    "case_id": "clock-register",
+    "query": {
+      "query": "PLL_CTRL MCLK",
+      "top_k": 3
+    },
+    "expected_document_id": "doc-06207d1e4f83166f15232b81",
+    "expected_page": 1
+  }
+]

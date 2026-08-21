@@ -4,7 +4,8 @@ from enum import StrEnum
 
 from pydantic import Field, model_validator
 
-from ai_pcb.models.common import Identifier, NonEmptyString, TimestampedModel
+from ai_pcb.models.common import Identifier, NonEmptyString, StrictModel, TimestampedModel
+from ai_pcb.specializations.models import EngineeringCapability
 
 
 class ValidationStatus(StrEnum):
@@ -21,6 +22,14 @@ class ValidationSeverity(StrEnum):
     MEDIUM = "MEDIUM"
     HIGH = "HIGH"
     CRITICAL = "CRITICAL"
+
+
+class ValidatorApplicability(StrictModel):
+    """Declarative validator selection metadata; empty specialization/stage lists mean all."""
+
+    applicable_specializations: list[Identifier] = Field(default_factory=list)
+    applicable_stages: list[Identifier] = Field(default_factory=list)
+    required_capability: EngineeringCapability | None = None
 
 
 class ValidationResult(TimestampedModel):

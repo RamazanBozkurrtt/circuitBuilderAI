@@ -43,11 +43,18 @@ class ProjectMetadata(StrictModel):
     author: str | None = None
 
 
+class DesignIntent(StrictModel):
+    """User-requested specialization IDs; dependencies are resolved separately."""
+
+    specializations: list[Identifier] = Field(default_factory=lambda: ["generic"])
+
+
 class MasterSpec(StrictModel):
     """Authoritative, user-maintained engineering requirement contract."""
 
     schema_version: NonEmptyString
     project: ProjectMetadata
+    design: DesignIntent = Field(default_factory=DesignIntent)
     electrical: RequirementSection
     audio: RequirementSection
     processing: RequirementSection
@@ -60,10 +67,13 @@ class MasterSpec(StrictModel):
     acceptance_criteria: RequirementSection
 
     @classmethod
-    def empty_template(cls, project_name: str) -> MasterSpec:
+    def empty_template(
+        cls, project_name: str, *, specializations: list[str] | None = None
+    ) -> MasterSpec:
         return cls(
-            schema_version="1.0",
+            schema_version="1.1",
             project=ProjectMetadata(project_name=project_name, revision="0.1"),
+            design=DesignIntent(specializations=specializations or ["generic"]),
             electrical=RequirementSection(requirements={}),
             audio=RequirementSection(requirements={}),
             processing=RequirementSection(requirements={}),

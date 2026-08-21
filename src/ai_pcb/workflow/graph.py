@@ -62,8 +62,8 @@ _CORRECTION_TARGET: dict[str, str] = {
 }
 
 
-class Phase1Workflow:
-    """Real LangGraph routing with fail-closed Phase 1 placeholder stages."""
+class GenericPCBWorkflow:
+    """One specialization-aware generic graph with fail-closed placeholder stages."""
 
     def __init__(
         self,
@@ -90,6 +90,9 @@ class Phase1Workflow:
     def _build_graph(self) -> Any:
         builder = StateGraph(WorkflowContext)
         builder.add_node("load_spec", self._load_spec)  # type: ignore[call-overload]
+        builder.add_node(  # type: ignore[call-overload]
+            "resolve_specializations", self._resolve_specializations
+        )
         builder.add_node("validate_spec", self._validate_spec)  # type: ignore[call-overload]
         for node_name in _STAGE_BY_NODE:
             # LangGraph's overload does not accept its own callable shape under strict mypy.
@@ -100,7 +103,8 @@ class Phase1Workflow:
         builder.add_node("blocked", self._blocked)  # type: ignore[call-overload]
 
         builder.add_edge(START, "load_spec")
-        builder.add_edge("load_spec", "validate_spec")
+        builder.add_edge("load_spec", "resolve_specializations")
+        builder.add_edge("resolve_specializations", "validate_spec")
         builder.add_conditional_edges(
             "validate_spec", self._route, {"architecture": "architecture", "blocked": "blocked"}
         )
@@ -134,6 +138,12 @@ class Phase1Workflow:
     @staticmethod
     def _load_spec(context: WorkflowContext) -> WorkflowContext:
         # Repository loading happens before graph invocation; this node makes that routing explicit.
+        return {**context, "route": "resolve_specializations"}
+
+    @staticmethod
+    def _resolve_specializations(context: WorkflowContext) -> WorkflowContext:
+        # DesignState verifies the stored version/fingerprint snapshot against this context.
+        context["design_state"].specialization_context()
         return {**context, "route": "validate_spec"}
 
     def _validate_spec(self, context: WorkflowContext) -> WorkflowContext:
@@ -159,9 +169,7 @@ class Phase1Workflow:
             "correction_target": "",
         }
 
-    def _make_stage_node(
-        self, node_name: str
-    ) -> Callable[[WorkflowContext], WorkflowContext]:
+    def _make_stage_node(self, node_name: str) -> Callable[[WorkflowContext], WorkflowContext]:
         def run(context: WorkflowContext) -> WorkflowContext:
             state = self._enter_stage(context["design_state"], node_name)
             handler = self.stage_handlers.get(node_name)
@@ -265,3 +273,7 @@ class Phase1Workflow:
     def _checkpoint(self, state: DesignState) -> None:
         if self.checkpoint is not None:
             self.checkpoint(state)
+
+
+# Backward-compatible name for Phase 1 callers; it is the same graph, not a domain fork.
+Phase1Workflow = GenericPCBWorkflow
