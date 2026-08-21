@@ -9,13 +9,23 @@ from ai_pcb.evidence.retrieval import (
 from ai_pcb.evidence.store import EvidenceNotFoundError, EvidenceStore
 
 __all__ = [
+    "DocumentationAcquisitionProvider",
     "EmbeddingProvider",
     "EvidenceNotFoundError",
     "EvidenceRetriever",
     "EvidenceStore",
     "FastEmbedProvider",
+    "HttpManufacturerDocumentationProvider",
+    "ManufacturerEvidenceAcquisitionPipeline",
     "PdfDocumentIngestor",
     "QdrantHybridEvidenceIndex",
     "extract_engineering_fact",
+    "load_acquisition_manifest",
     "promote_retrieval_candidate",
 ]
+from ai_pcb.evidence.acquisition import (
+    DocumentationAcquisitionProvider,
+    HttpManufacturerDocumentationProvider,
+    ManufacturerEvidenceAcquisitionPipeline,
+    load_acquisition_manifest,
+)

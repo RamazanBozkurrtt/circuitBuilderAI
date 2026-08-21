@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-08-21T21:13:59.074751Z",
+  "evidence_id": "fact-ad1938-dac-delay",
+  "title": "AD1938 dac_latency",
+  "provenance": {
+    "created_at": "2026-08-21T21:13:59.074741Z",
+    "source": "DATASHEET",
+    "manufacturer": "Analog Devices",
+    "document": "ad1938-datasheet-45957be7b198d70b.pdf",
+    "revision": null,
+    "page": "6",
+    "section": null,
+    "locator": "page=6",
+    "source_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/ad1938.pdf",
+    "sha256": "45957be7b198d70bd6998324be0d0d84114c0d99907dc415711c4e28feaab5f3",
+    "acquisition_id": "acquisition-0da3c952b99279d5d2cf8a65"
+  },
+  "extracted_content": "DAC INTERPOLATION FILTER",
+  "normalized_fact": "AD1938 DAC group delay is documented separately for 48, 96, and 192 kHz modes.",
+  "confidence": null,
+  "artifact_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\analog_devices\\ad1938-datasheet-45957be7b198d70b.pdf"
+}

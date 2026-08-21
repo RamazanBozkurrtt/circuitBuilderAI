@@ -1,0 +1,188 @@
+[
+  {
+    "case_id": "real-adsp-clock",
+    "query": {"query": "maximum SHARC+ core clock frequency", "part_number": "ADSP-21569", "top_k": 5},
+    "expected_document_id": "doc-95221221bd9522f368d4a5fd",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-adsp-l1-memory",
+    "query": {"query": "L1 SRAM memory capacity", "part_number": "ADSP-21569", "top_k": 5},
+    "expected_document_id": "doc-95221221bd9522f368d4a5fd",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-adsp-l2-memory",
+    "query": {"query": "ADSP-21569 L2 SRAM 1024 kB", "part_number": "ADSP-21569", "top_k": 5},
+    "expected_document_id": "doc-95221221bd9522f368d4a5fd",
+    "expected_page": 3
+  },
+  {
+    "case_id": "real-adsp-sport",
+    "query": {"query": "number of full SPORT digital audio interfaces", "part_number": "ADSP-21569", "top_k": 5},
+    "expected_document_id": "doc-95221221bd9522f368d4a5fd",
+    "expected_page": 3
+  },
+  {
+    "case_id": "real-adsp-accelerators",
+    "query": {"query": "enhanced FIR and IIR hardware accelerators", "part_number": "ADSP-21569", "top_k": 5},
+    "expected_document_id": "doc-95221221bd9522f368d4a5fd",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-adsp-clocks",
+    "query": {"query": "precision clock generator count", "part_number": "ADSP-21569", "top_k": 5},
+    "expected_document_id": "doc-95221221bd9522f368d4a5fd",
+    "expected_page": 3
+  },
+  {
+    "case_id": "real-adsp-applications",
+    "query": {"query": "ANC RNC target applications", "part_number": "ADSP-21569", "top_k": 5},
+    "expected_document_id": "doc-95221221bd9522f368d4a5fd",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-pcm-adc-channels",
+    "query": {"query": "number of ADC input channels", "part_number": "PCM3168A", "top_k": 5},
+    "expected_document_id": "doc-3a0c9139619505d3b5c5bfb9",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-pcm-dac-channels",
+    "query": {"query": "number of DAC output channels", "part_number": "PCM3168A", "top_k": 5},
+    "expected_document_id": "doc-3a0c9139619505d3b5c5bfb9",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-pcm-adc-rate",
+    "query": {"query": "ADC supported sampling rate range", "part_number": "PCM3168A", "top_k": 5},
+    "expected_document_id": "doc-3a0c9139619505d3b5c5bfb9",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-pcm-dac-rate",
+    "query": {"query": "DAC sampling rate 192 kHz", "part_number": "PCM3168A", "top_k": 5},
+    "expected_document_id": "doc-3a0c9139619505d3b5c5bfb9",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-pcm-performance",
+    "query": {"query": "ADC SNR and THD+N differential 48 kHz", "part_number": "PCM3168A", "top_k": 5},
+    "expected_document_id": "doc-3a0c9139619505d3b5c5bfb9",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-pcm-supplies",
+    "query": {"query": "analog and digital power supply voltages", "part_number": "PCM3168A", "top_k": 5},
+    "expected_document_id": "doc-3a0c9139619505d3b5c5bfb9",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-pcm-adc-delay",
+    "query": {"query": "ADC digital filter group delay time single speed", "part_number": "PCM3168A", "top_k": 5},
+    "expected_document_id": "doc-3a0c9139619505d3b5c5bfb9",
+    "expected_page": 10
+  },
+  {
+    "case_id": "real-ad1938-channels",
+    "query": {"query": "four ADC eight DAC converter channels", "part_number": "AD1938", "top_k": 5},
+    "expected_document_id": "doc-157a71fd7a3c98bd783c242d",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-ad1938-rate-depth",
+    "query": {"query": "24 bit 8 kHz to 192 kHz sample rates", "part_number": "AD1938", "top_k": 5},
+    "expected_document_id": "doc-157a71fd7a3c98bd783c242d",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-ad1938-performance",
+    "query": {"query": "DAC ADC SNR THD+N performance", "part_number": "AD1938", "top_k": 5},
+    "expected_document_id": "doc-157a71fd7a3c98bd783c242d",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-ad1938-interface",
+    "query": {"query": "I2S TDM right justified left justified serial modes", "part_number": "AD1938", "top_k": 5},
+    "expected_document_id": "doc-157a71fd7a3c98bd783c242d",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-ad1938-delay",
+    "query": {"query": "ADC DAC digital filter group delay", "part_number": "AD1938", "top_k": 5},
+    "expected_document_id": "doc-157a71fd7a3c98bd783c242d",
+    "expected_page": 6
+  },
+  {
+    "case_id": "real-adau-channels",
+    "query": {"query": "quad ADC four differential inputs", "part_number": "ADAU1978", "top_k": 5},
+    "expected_document_id": "doc-0b11dc12b9252bbae514fe75",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-adau-rate-depth",
+    "query": {"query": "24 bit ADC 8 kHz to 192 kHz", "part_number": "ADAU1978", "top_k": 5},
+    "expected_document_id": "doc-0b11dc12b9252bbae514fe75",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-adau-performance",
+    "query": {"query": "ADC dynamic range THD+N", "part_number": "ADAU1978", "top_k": 5},
+    "expected_document_id": "doc-0b11dc12b9252bbae514fe75",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-adau-delay",
+    "query": {"query": "digital filter group delay", "part_number": "ADAU1978", "top_k": 5},
+    "expected_document_id": "doc-0b11dc12b9252bbae514fe75",
+    "expected_page": 4
+  },
+  {
+    "case_id": "real-tas-channels",
+    "query": {"query": "four channel digital input Class-D amplifier", "part_number": "TAS6424-Q1", "top_k": 5},
+    "expected_document_id": "doc-65522416cfc0ceb9a550712a",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-tas-supply",
+    "query": {"query": "power supply operating range 4.5 V to 26.4 V", "part_number": "TAS6424-Q1", "top_k": 5},
+    "expected_document_id": "doc-65522416cfc0ceb9a550712a",
+    "expected_page": 3
+  },
+  {
+    "case_id": "real-tas-output-power",
+    "query": {"query": "output power 27 W 4 ohm 45 W 2 ohm 75 W conditions", "part_number": "TAS6424-Q1", "top_k": 5},
+    "expected_document_id": "doc-65522416cfc0ceb9a550712a",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-tas-sample-rate",
+    "query": {"query": "digital audio input sample rate 96 kHz", "part_number": "TAS6424-Q1", "top_k": 5},
+    "expected_document_id": "doc-65522416cfc0ceb9a550712a",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-tas-format",
+    "query": {"query": "I2S left justified TDM digital input format", "part_number": "TAS6424-Q1", "top_k": 5},
+    "expected_document_id": "doc-65522416cfc0ceb9a550712a",
+    "expected_page": 18
+  },
+  {
+    "case_id": "real-tas-noise",
+    "query": {"query": "output noise voltage measurement conditions", "part_number": "TAS6424-Q1", "top_k": 5},
+    "expected_document_id": "doc-65522416cfc0ceb9a550712a",
+    "expected_page": 8
+  },
+  {
+    "case_id": "real-tas-switching",
+    "query": {"query": "2.1 MHz PWM switching frequency", "part_number": "TAS6424-Q1", "top_k": 5},
+    "expected_document_id": "doc-65522416cfc0ceb9a550712a",
+    "expected_page": 1
+  },
+  {
+    "case_id": "real-tas-layout",
+    "query": {"query": "thermal PowerPAD high power flowthrough layout guidelines", "part_number": "TAS6424-Q1", "top_k": 5},
+    "expected_document_id": "doc-65522416cfc0ceb9a550712a",
+    "expected_page": 55
+  }
+]

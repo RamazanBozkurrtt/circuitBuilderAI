@@ -64,14 +64,18 @@ class FastEmbedProvider:
         model_name: str = "BAAI/bge-small-en-v1.5",
         device: str = "cpu",
         cache_dir: Path | None = None,
+        batch_size: int = 16,
     ) -> None:
         if not model_name.strip():
             raise ValueError("embedding model must be configured")
         if device not in {"cpu", "cuda"}:
             raise ValueError("embedding device must be 'cpu' or 'cuda'")
+        if batch_size < 1:
+            raise ValueError("embedding batch size must be positive")
         self._model_name = model_name
         self.device = device
         self.cache = EmbeddingCache(cache_dir) if cache_dir is not None else None
+        self.batch_size = batch_size
         self._model: TextEmbedding | None = None
         self._dimension: int | None = None
 
@@ -120,25 +124,27 @@ class FastEmbedProvider:
             else:
                 results[index] = cached
         if missing_texts:
-            try:
-                model = self._load()
-                vectors = [
-                    [float(value) for value in vector] for vector in model.embed(missing_texts)
-                ]
-            except Exception as exc:
-                if isinstance(exc, EmbeddingError):
-                    raise
-                raise EmbeddingError("local embedding generation failed") from exc
-            if len(vectors) != len(missing_texts):
-                raise EmbeddingError("embedding provider returned the wrong vector count")
-            for position, text, vector in zip(
-                missing_positions, missing_texts, vectors, strict=True
-            ):
-                if not vector:
-                    raise EmbeddingError("embedding provider returned an empty vector")
-                results[position] = vector
-                if self.cache:
-                    self.cache.put(self.model_name, text, vector)
+            model = self._load()
+            for start in range(0, len(missing_texts), self.batch_size):
+                batch_texts = missing_texts[start : start + self.batch_size]
+                batch_positions = missing_positions[start : start + self.batch_size]
+                try:
+                    vectors = [
+                        [float(value) for value in vector]
+                        for vector in model.embed(batch_texts)
+                    ]
+                except Exception as exc:
+                    raise EmbeddingError("local embedding generation failed") from exc
+                if len(vectors) != len(batch_texts):
+                    raise EmbeddingError("embedding provider returned the wrong vector count")
+                for position, text, vector in zip(
+                    batch_positions, batch_texts, vectors, strict=True
+                ):
+                    if not vector:
+                        raise EmbeddingError("embedding provider returned an empty vector")
+                    results[position] = vector
+                    if self.cache:
+                        self.cache.put(self.model_name, text, vector)
         complete = [result for result in results if result is not None]
         if len(complete) != len(texts):
             raise EmbeddingError("embedding generation did not complete")

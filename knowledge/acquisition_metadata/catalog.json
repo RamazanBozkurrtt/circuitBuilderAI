@@ -1,0 +1,538 @@
+{
+  "documents": [
+    {
+      "acquisition_id": "acquisition-e7fb2a74d5f69cae96221c1b",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adsp-21562-21563-21565-21566-21567-21569.pdf",
+      "final_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adsp-21562-21563-21565-21566-21567-21569.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "ADSP-21569",
+      "document_type": "DATASHEET",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:16:16.712541Z",
+      "sha256": "0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\analog_devices\\adsp_21569-datasheet-0c908438ea8f71cc.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-7531add382135c4dfa733cd9",
+      "original_url": "https://www.analog.com/media/en/dsp-documentation/processor-manuals/adsp-2156x_hwr.pdf",
+      "final_url": "https://www.analog.com/media/en/dsp-documentation/processor-manuals/adsp-2156x_hwr.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "ADSP-2156x",
+      "document_type": "HARDWARE_REFERENCE",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:16:19.062626Z",
+      "sha256": "96545b862402a7fd803d3aa69d42e7bc81f9b966309702f114de7ff7f4680867",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\reference_designs\\analog_devices\\adsp_2156x-hardware_reference-96545b862402a7fd.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-cf106d1c564de1bd51c60cb7",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/application-notes/EE408V02.pdf",
+      "final_url": "https://www.analog.com/media/en/technical-documentation/application-notes/EE408V02.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "ADSP-2156x",
+      "document_type": "APPLICATION_NOTE",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:16:20.072506Z",
+      "sha256": "95aa576936cdc2ade620bdbbd8299c9d9dc1dd1d33aa95de72d5b6478310df0d",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\app_notes\\analog_devices\\adsp_2156x-application_note-95aa576936cdc2ad.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-979510da34d0c25d1e7e4387",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/application-notes/ee414.pdf",
+      "final_url": "https://www.analog.com/media/en/technical-documentation/application-notes/ee414.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "ADSP-2156x",
+      "document_type": "APPLICATION_NOTE",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:16:21.292198Z",
+      "sha256": "6d309560a7e412206e4df91ba0c9c51a4c9020ad7ab61b192841269c7d58ae92",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\app_notes\\analog_devices\\adsp_2156x-application_note-6d309560a7e41220.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-92665f6e199792acf92a6901",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/application-notes/ee-470.pdf",
+      "final_url": "https://www.analog.com/media/en/technical-documentation/application-notes/ee-470.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "ADSP-2156x",
+      "document_type": "APPLICATION_NOTE",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:16:22.317426Z",
+      "sha256": "99f1ef29705ec864f259cba3ad6f4562d4034f8241f3b2b8a30aaeefde40c061",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\app_notes\\analog_devices\\adsp_2156x-application_note-99f1ef29705ec864.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-719ee649491b885c840285fa",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/application-notes/ee418v02.pdf",
+      "final_url": "https://www.analog.com/media/en/technical-documentation/application-notes/ee418v02.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "ADSP-2156x",
+      "document_type": "APPLICATION_NOTE",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:16:23.394767Z",
+      "sha256": "5cf5847980dfb32e53723ed765f951ad7d26026b70e98bc0f8347d6b555c92df",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\app_notes\\analog_devices\\adsp_2156x-application_note-5cf5847980dfb32e.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-02e0d5cd468632f5d1e23845",
+      "original_url": "https://www.analog.com/media/en/dsp-documentation/integrated-circuit-anomalies/adsp-21562-21563-21565-21566-21567-21569-anomalies.pdf",
+      "final_url": "https://www.analog.com/media/en/dsp-documentation/integrated-circuit-anomalies/adsp-21562-21563-21565-21566-21567-21569-anomalies.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "ADSP-21569",
+      "document_type": "ERRATA",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:16:24.234787Z",
+      "sha256": "84b9653c85367a246898e06bcf11d766a51d092811350ce3c5973db7b2d26a58",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\quarantine\\analog_devices\\adsp_21569-errata-84b9653c85367a24.pdf",
+      "http_status": 200,
+      "verification_status": "IDENTITY_UNVERIFIED",
+      "verification_messages": [
+        "expected part number does not appear in the PDF"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-b9b36bb58ddfa153a6a6c12e",
+      "original_url": "https://www.ti.com/lit/gpn/pcm3168a",
+      "final_url": "https://www.ti.com/lit/ds/symlink/pcm3168a.pdf?ts=1787342996917",
+      "manufacturer": "Texas Instruments",
+      "part_number": "PCM3168A",
+      "document_type": "DATASHEET",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:16:25.889894Z",
+      "sha256": "959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\quarantine\\texas_instruments\\pcm3168a-datasheet-959ffa69e2f9656f.pdf",
+      "http_status": 200,
+      "verification_status": "IDENTITY_UNVERIFIED",
+      "verification_messages": [
+        "expected revision does not appear in the PDF"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-0da3c952b99279d5d2cf8a65",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/ad1938.pdf",
+      "final_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/ad1938.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "AD1938",
+      "document_type": "DATASHEET",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:16:26.895454Z",
+      "sha256": "45957be7b198d70bd6998324be0d0d84114c0d99907dc415711c4e28feaab5f3",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\analog_devices\\ad1938-datasheet-45957be7b198d70b.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-bc51d34a5f871bc519c72acb",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adau1978.pdf",
+      "final_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adau1978.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "ADAU1978",
+      "document_type": "DATASHEET",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:16:28.056891Z",
+      "sha256": "5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\analog_devices\\adau1978-datasheet-5b80650206aba034.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-9dc21be9f38b714c28f0df83",
+      "original_url": "https://www.ti.com/lit/gpn/tas6424-q1",
+      "final_url": "https://www.ti.com/lit/ds/symlink/tas6424-q1.pdf?ts=1787342997065",
+      "manufacturer": "Texas Instruments",
+      "part_number": "TAS6424-Q1",
+      "document_type": "DATASHEET",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:16:29.363799Z",
+      "sha256": "4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\quarantine\\texas_instruments\\tas6424_q1-datasheet-4cbfe2ed1be61492.pdf",
+      "http_status": 200,
+      "verification_status": "IDENTITY_UNVERIFIED",
+      "verification_messages": [
+        "expected revision does not appear in the PDF"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-015dfefbf2d316a92dbf6d53",
+      "original_url": "https://www.ti.com/lit/pdf/sloa242",
+      "final_url": "https://www.ti.com/lit/an/sloa242a/sloa242a.pdf?ts=1787342997017",
+      "manufacturer": "Texas Instruments",
+      "part_number": "SLOA242",
+      "document_type": "APPLICATION_NOTE",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:16:30.498125Z",
+      "sha256": "dee93b9cf35b75c0f3b2df98132ac655db5859e56fe9e209b22b5b4bbed4abc1",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\quarantine\\texas_instruments\\sloa242-application_note-dee93b9cf35b75c0.pdf",
+      "http_status": 200,
+      "verification_status": "IDENTITY_UNVERIFIED",
+      "verification_messages": [
+        "expected revision does not appear in the PDF"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-144fc8551fe3592246bf2689",
+      "original_url": "https://www.ti.com/lit/pdf/slaa701",
+      "final_url": "https://www.ti.com/lit/an/slaa701b/slaa701b.pdf?ts=1787304149574&ref_url=https%253A%252F%252Fwww.google.com%252F",
+      "manufacturer": "Texas Instruments",
+      "part_number": "SLAA701",
+      "document_type": "APPLICATION_NOTE",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:16:31.864198Z",
+      "sha256": "c0b700ff064306630ae5d8995f7371880df06970bedd4cf43d8c825e8de5e040",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\quarantine\\texas_instruments\\slaa701-application_note-c0b700ff06430663.pdf",
+      "http_status": 200,
+      "verification_status": "IDENTITY_UNVERIFIED",
+      "verification_messages": [
+        "expected revision does not appear in the PDF"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-02e0d5cd468632f5d1e23845",
+      "original_url": "https://www.analog.com/media/en/dsp-documentation/integrated-circuit-anomalies/adsp-21562-21563-21565-21566-21567-21569-anomalies.pdf",
+      "final_url": "https://www.analog.com/media/en/dsp-documentation/integrated-circuit-anomalies/adsp-21562-21563-21565-21566-21567-21569-anomalies.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "ADSP-2156x",
+      "document_type": "ERRATA",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:17:15.232002Z",
+      "sha256": "84b9653c85367a246898e06bcf11d766a51d092811350ce3c5973db7b2d26a58",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\quarantine\\analog_devices\\adsp_2156x-errata-84b9653c85367a24.pdf",
+      "http_status": 200,
+      "verification_status": "IDENTITY_UNVERIFIED",
+      "verification_messages": [
+        "expected part number does not appear in the PDF"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-a8f1f3a77cf273a787a83e51",
+      "original_url": "https://www.ti.com/lit/ds/symlink/pcm3168a.pdf",
+      "final_url": "https://www.ti.com/lit/ds/symlink/pcm3168a.pdf",
+      "manufacturer": "Texas Instruments",
+      "part_number": "PCM3168A",
+      "document_type": "DATASHEET",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:17:16.315735Z",
+      "sha256": "959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\texas_instruments\\pcm3168a-datasheet-959ffa69e2f9656f.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-e3d49fb08688ebd9fed8d4fd",
+      "original_url": "https://www.ti.com/lit/ds/symlink/tas6424-q1.pdf",
+      "final_url": "https://www.ti.com/lit/ds/symlink/tas6424-q1.pdf",
+      "manufacturer": "Texas Instruments",
+      "part_number": "TAS6424-Q1",
+      "document_type": "DATASHEET",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:17:19.280317Z",
+      "sha256": "4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\texas_instruments\\tas6424_q1-datasheet-4cbfe2ed1be61492.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-186acfd89ea560edffd6ff97",
+      "original_url": "https://www.ti.com/lit/an/sloa242a/sloa242a.pdf",
+      "final_url": "https://www.ti.com/lit/an/sloa242a/sloa242a.pdf",
+      "manufacturer": "Texas Instruments",
+      "part_number": "SLOA242",
+      "document_type": "APPLICATION_NOTE",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:17:20.107597Z",
+      "sha256": "dee93b9cf35b75c0f3b2df98132ac655db5859e56fe9e209b22b5b4bbed4abc1",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\app_notes\\texas_instruments\\sloa242-application_note-dee93b9cf35b75c0.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-abad662b01108a2e248b1568",
+      "original_url": "https://www.ti.com/lit/an/slaa701b/slaa701b.pdf",
+      "final_url": "https://www.ti.com/lit/an/slaa701b/slaa701b.pdf",
+      "manufacturer": "Texas Instruments",
+      "part_number": "SLAA701",
+      "document_type": "APPLICATION_NOTE",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T20:17:21.136743Z",
+      "sha256": "c0b700ff064306630ae5d8995f7371880df06970bedd4cf43d8c825e8de5e040",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\app_notes\\texas_instruments\\slaa701-application_note-c0b700ff06430663.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-02e0d5cd468632f5d1e23845",
+      "original_url": "https://www.analog.com/media/en/dsp-documentation/integrated-circuit-anomalies/adsp-21562-21563-21565-21566-21567-21569-anomalies.pdf",
+      "final_url": "https://www.analog.com/media/en/dsp-documentation/integrated-circuit-anomalies/adsp-21562-21563-21565-21566-21567-21569-anomalies.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "ADSP-21562",
+      "document_type": "ERRATA",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-21T21:13:40.489690Z",
+      "sha256": "84b9653c85367a246898e06bcf11d766a51d092811350ce3c5973db7b2d26a58",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\errata\\analog_devices\\adsp_21562-errata-84b9653c85367a24.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    }
+  ],
+  "events": [
+    {
+      "event_id": "event-8e714c8c69f4b0965ba42f2f",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-e7fb2a74d5f69cae96221c1b",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adsp-21562-21563-21565-21566-21567-21569.pdf",
+      "occurred_at": "2026-08-21T20:16:16.712713Z",
+      "previous_sha256": null,
+      "sha256": "0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e"
+    },
+    {
+      "event_id": "event-4f91ba8f18c2ca04b834dcca",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-7531add382135c4dfa733cd9",
+      "original_url": "https://www.analog.com/media/en/dsp-documentation/processor-manuals/adsp-2156x_hwr.pdf",
+      "occurred_at": "2026-08-21T20:16:19.085840Z",
+      "previous_sha256": null,
+      "sha256": "96545b862402a7fd803d3aa69d42e7bc81f9b966309702f114de7ff7f4680867"
+    },
+    {
+      "event_id": "event-c29a3c236b9b27e0d41a1872",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-cf106d1c564de1bd51c60cb7",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/application-notes/EE408V02.pdf",
+      "occurred_at": "2026-08-21T20:16:20.094931Z",
+      "previous_sha256": null,
+      "sha256": "95aa576936cdc2ade620bdbbd8299c9d9dc1dd1d33aa95de72d5b6478310df0d"
+    },
+    {
+      "event_id": "event-5c5405e2a825204069f76386",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-979510da34d0c25d1e7e4387",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/application-notes/ee414.pdf",
+      "occurred_at": "2026-08-21T20:16:21.317510Z",
+      "previous_sha256": null,
+      "sha256": "6d309560a7e412206e4df91ba0c9c51a4c9020ad7ab61b192841269c7d58ae92"
+    },
+    {
+      "event_id": "event-b6328a971e396a71df0ec0ed",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-92665f6e199792acf92a6901",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/application-notes/ee-470.pdf",
+      "occurred_at": "2026-08-21T20:16:22.342555Z",
+      "previous_sha256": null,
+      "sha256": "99f1ef29705ec864f259cba3ad6f4562d4034f8241f3b2b8a30aaeefde40c061"
+    },
+    {
+      "event_id": "event-aedb3efe882f9b6a80a96ad0",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-719ee649491b885c840285fa",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/application-notes/ee418v02.pdf",
+      "occurred_at": "2026-08-21T20:16:23.418460Z",
+      "previous_sha256": null,
+      "sha256": "5cf5847980dfb32e53723ed765f951ad7d26026b70e98bc0f8347d6b555c92df"
+    },
+    {
+      "event_id": "event-0b62e8f351c225a2731d18e1",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-02e0d5cd468632f5d1e23845",
+      "original_url": "https://www.analog.com/media/en/dsp-documentation/integrated-circuit-anomalies/adsp-21562-21563-21565-21566-21567-21569-anomalies.pdf",
+      "occurred_at": "2026-08-21T20:16:24.257810Z",
+      "previous_sha256": null,
+      "sha256": "84b9653c85367a246898e06bcf11d766a51d092811350ce3c5973db7b2d26a58"
+    },
+    {
+      "event_id": "event-84c2ea1e9c71d0e3a3b0263b",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-b9b36bb58ddfa153a6a6c12e",
+      "original_url": "https://www.ti.com/lit/gpn/pcm3168a",
+      "occurred_at": "2026-08-21T20:16:25.921334Z",
+      "previous_sha256": null,
+      "sha256": "959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93"
+    },
+    {
+      "event_id": "event-b9f038c24a67677841db4b27",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-0da3c952b99279d5d2cf8a65",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/ad1938.pdf",
+      "occurred_at": "2026-08-21T20:16:26.916390Z",
+      "previous_sha256": null,
+      "sha256": "45957be7b198d70bd6998324be0d0d84114c0d99907dc415711c4e28feaab5f3"
+    },
+    {
+      "event_id": "event-fed6f8327e9cbd1618569d6e",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-bc51d34a5f871bc519c72acb",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adau1978.pdf",
+      "occurred_at": "2026-08-21T20:16:28.078791Z",
+      "previous_sha256": null,
+      "sha256": "5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838"
+    },
+    {
+      "event_id": "event-d12fbb50a6c5078d37f0d34e",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-9dc21be9f38b714c28f0df83",
+      "original_url": "https://www.ti.com/lit/gpn/tas6424-q1",
+      "occurred_at": "2026-08-21T20:16:29.387436Z",
+      "previous_sha256": null,
+      "sha256": "4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e"
+    },
+    {
+      "event_id": "event-004668ab76788689ad0a635d",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-015dfefbf2d316a92dbf6d53",
+      "original_url": "https://www.ti.com/lit/pdf/sloa242",
+      "occurred_at": "2026-08-21T20:16:30.525352Z",
+      "previous_sha256": null,
+      "sha256": "dee93b9cf35b75c0f3b2df98132ac655db5859e56fe9e209b22b5b4bbed4abc1"
+    },
+    {
+      "event_id": "event-8cab20d1b44f5f17dfcd539c",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-144fc8551fe3592246bf2689",
+      "original_url": "https://www.ti.com/lit/pdf/slaa701",
+      "occurred_at": "2026-08-21T20:16:31.887391Z",
+      "previous_sha256": null,
+      "sha256": "c0b700ff064306630ae5d8995f7371880df06970bedd4cf43d8c825e8de5e040"
+    },
+    {
+      "event_id": "event-b9debebe804db12237a29e68",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-02e0d5cd468632f5d1e23845",
+      "original_url": "https://www.analog.com/media/en/dsp-documentation/integrated-circuit-anomalies/adsp-21562-21563-21565-21566-21567-21569-anomalies.pdf",
+      "occurred_at": "2026-08-21T20:17:15.232333Z",
+      "previous_sha256": null,
+      "sha256": "84b9653c85367a246898e06bcf11d766a51d092811350ce3c5973db7b2d26a58"
+    },
+    {
+      "event_id": "event-2880c3496ffc851983b1befc",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-a8f1f3a77cf273a787a83e51",
+      "original_url": "https://www.ti.com/lit/ds/symlink/pcm3168a.pdf",
+      "occurred_at": "2026-08-21T20:17:16.342502Z",
+      "previous_sha256": null,
+      "sha256": "959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93"
+    },
+    {
+      "event_id": "event-154c28980a28119ad790343b",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-e3d49fb08688ebd9fed8d4fd",
+      "original_url": "https://www.ti.com/lit/ds/symlink/tas6424-q1.pdf",
+      "occurred_at": "2026-08-21T20:17:19.280723Z",
+      "previous_sha256": null,
+      "sha256": "4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e"
+    },
+    {
+      "event_id": "event-fa4859b9456d539a15af7b51",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-186acfd89ea560edffd6ff97",
+      "original_url": "https://www.ti.com/lit/an/sloa242a/sloa242a.pdf",
+      "occurred_at": "2026-08-21T20:17:20.134876Z",
+      "previous_sha256": null,
+      "sha256": "dee93b9cf35b75c0f3b2df98132ac655db5859e56fe9e209b22b5b4bbed4abc1"
+    },
+    {
+      "event_id": "event-3473e54273771ab781cdb48c",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-abad662b01108a2e248b1568",
+      "original_url": "https://www.ti.com/lit/an/slaa701b/slaa701b.pdf",
+      "occurred_at": "2026-08-21T20:17:21.159491Z",
+      "previous_sha256": null,
+      "sha256": "c0b700ff064306630ae5d8995f7371880df06970bedd4cf43d8c825e8de5e040"
+    },
+    {
+      "event_id": "event-40f91b7b12cf01a126184f02",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-02e0d5cd468632f5d1e23845",
+      "original_url": "https://www.analog.com/media/en/dsp-documentation/integrated-circuit-anomalies/adsp-21562-21563-21565-21566-21567-21569-anomalies.pdf",
+      "occurred_at": "2026-08-21T21:13:40.490044Z",
+      "previous_sha256": null,
+      "sha256": "84b9653c85367a246898e06bcf11d766a51d092811350ce3c5973db7b2d26a58"
+    }
+  ]
+}

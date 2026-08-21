@@ -73,7 +73,7 @@ class ProjectRepository:
             raw_state["master_spec"] = current_spec.model_dump(mode="json")
             raw_state.pop("requested_specializations", None)
             raw_state.pop("resolved_specializations", None)
-            state = DesignState.model_validate(raw_state)
+            state = DesignState.model_validate_json(json.dumps(raw_state))
         return state
 
     def save_current(self, state: DesignState) -> Path:

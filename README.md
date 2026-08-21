@@ -114,6 +114,19 @@ scores, and expanded context. Callers never construct raw Qdrant queries.
 
 ## Evidence trust boundary and fact extraction
 
+Manufacturer documents can be acquired from a typed YAML manifest. Only allowlisted manufacturer
+domains are contacted, every redirect is rechecked, originals are content-addressed, and only
+identity-verified PDFs can flow into Phase 2 ingestion:
+
+```bash
+python -m ai_pcb.cli acquire-documents projects/anc_controller_v1/evidence_manifest.yaml
+python -m ai_pcb.cli acquire-documents projects/anc_controller_v1/evidence_manifest.index.yaml --ingest
+```
+
+Acquisition metadata and content-change events are separate from immutable source files. A changed
+response creates a new version; an unchanged response is idempotent. `MODEL_GENERATED` URL origins
+must be curated before the provider will contact them.
+
 Retrieval output is candidate material only. `promote_retrieval_candidate` requires explicit review,
 copies source text and provenance into the existing `Evidence` contract, and deliberately does not
 map retrieval score into evidence confidence. A model-generated statement cannot be passed to that
@@ -129,7 +142,7 @@ deletes conflicts or assumes that different operating conditions are comparable.
 ## Retrieval evaluation
 
 Evaluation cases contain a typed query and expected document plus optional page/chunk. The harness
-computes Recall@K and mean reciprocal rank (MRR). Unit tests build a deterministic datasheet-like PDF
+computes Recall@1, Recall@3, Recall@5, and mean reciprocal rank (MRR). Unit tests build a deterministic datasheet-like PDF
 and a deterministic semantic corpus without network access. This synthetic baseline verifies the
 mechanism; it is not evidence of production retrieval quality. Add a local evaluation JSON file using
 the `RetrievalEvaluationCase` schema after indexing representative documents.
@@ -152,8 +165,10 @@ Tests marked `integration` are the only tests allowed to require a live Ollama s
 - The exact-term ranker currently scans the metadata-filtered local payload corpus; very large
   corpora will need a persistent inverted/sparse index without changing the retrieval abstraction.
 - RRF scores are query-relative and are not engineering confidence or validation.
-- The bundled evaluation data is synthetic; meaningful thresholds require a curated local corpus.
+- Synthetic and real manufacturer evaluation data are reported separately. The current real corpus
+  is a fixed 31-query Phase 3.1 baseline; its misses remain categorized rather than hidden.
 - Fact extraction requires a configured `StructuredLLM`, but ingestion/retrieval/tests do not.
 
-Phase 3 component selection, schematic generation, KiCad automation, PCB layout, ANC circuit design,
-and manufacturing generation are explicitly out of scope.
+Phase 3.1 supports evidence-aware architecture and component closure. Schematic generation, KiCad
+automation, PCB layout, circuit validation, and manufacturing generation remain explicitly out of
+scope and no Phase 4 implementation is present.

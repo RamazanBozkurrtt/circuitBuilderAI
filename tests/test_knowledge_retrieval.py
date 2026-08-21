@@ -11,8 +11,9 @@ import pytest
 from qdrant_client import models
 
 from ai_pcb.evidence.chunking import EngineeringChunker
+from ai_pcb.evidence.embedding import FastEmbedProvider
 from ai_pcb.evidence.errors import EmbeddingError, MissingIndexError
-from ai_pcb.evidence.evaluation import evaluate_retrieval
+from ai_pcb.evidence.evaluation import evaluate_retrieval, evaluate_retrieval_corpora
 from ai_pcb.evidence.retrieval import QdrantHybridEvidenceIndex
 from ai_pcb.models.evidence import EvidenceSource
 from ai_pcb.models.knowledge import (
@@ -28,6 +29,25 @@ from ai_pcb.models.knowledge import (
     RetrievalEvaluationCase,
     RetrievalMethod,
 )
+
+
+def test_fastembed_uses_bounded_batches_for_large_real_documents(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    class RecordingModel:
+        def __init__(self) -> None:
+            self.batch_sizes: list[int] = []
+
+        def embed(self, texts: Sequence[str]) -> list[list[float]]:
+            self.batch_sizes.append(len(texts))
+            return [[1.0, 0.0] for _ in texts]
+
+    model = RecordingModel()
+    provider = FastEmbedProvider(batch_size=3)
+    monkeypatch.setattr(provider, "_load", lambda: model)
+    vectors = provider.embed_documents([f"chunk {index}" for index in range(8)])
+    assert len(vectors) == 8
+    assert model.batch_sizes == [3, 3, 2]
 
 
 class SyntheticSemanticEmbedding:
@@ -272,6 +292,35 @@ def test_retrieval_evaluation_reports_recall_and_mrr(tmp_path: Path) -> None:
         assert metrics.cases == 2
         assert metrics.recall_at_k == 1.0
         assert metrics.mean_reciprocal_rank == 1.0
+    finally:
+        index.close()
+
+
+def test_synthetic_and_real_datasheet_metrics_are_reported_separately(
+    tmp_path: Path,
+) -> None:
+    index, _, _ = build_index(tmp_path)
+    try:
+        synthetic_path = Path("knowledge/evaluation/synthetic_queries.json")
+        real_path = Path("knowledge/evaluation/real_datasheet_queries.json")
+        synthetic = [
+            RetrievalEvaluationCase.model_validate(case)
+            for case in json.loads(synthetic_path.read_text(encoding="utf-8"))
+        ]
+        real = [
+            RetrievalEvaluationCase.model_validate(case)
+            for case in json.loads(real_path.read_text(encoding="utf-8"))
+        ]
+        metrics = evaluate_retrieval_corpora(
+            index, synthetic_cases=synthetic, real_datasheet_cases=real
+        )
+        assert metrics.synthetic.cases == 2
+        assert metrics.synthetic.recall_at_k == 1.0
+        assert metrics.synthetic.mean_reciprocal_rank == 1.0
+        assert metrics.real_datasheets.cases == 31
+        assert metrics.real_datasheets.recall_at_k == 0.0
+        assert metrics.real_datasheets.mean_reciprocal_rank == 0.0
+        assert metrics.real_corpus_meaningful
     finally:
         index.close()
 

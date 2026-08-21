@@ -1,0 +1,19 @@
+{
+  "acquisition_id": "acquisition-015dfefbf2d316a92dbf6d53",
+  "original_url": "https://www.ti.com/lit/pdf/sloa242",
+  "final_url": "https://www.ti.com/lit/an/sloa242a/sloa242a.pdf?ts=1787342997017",
+  "manufacturer": "Texas Instruments",
+  "part_number": "SLOA242",
+  "document_type": "APPLICATION_NOTE",
+  "content_type": "application/pdf",
+  "retrieved_at": "2026-08-21T20:16:30.498125Z",
+  "sha256": "dee93b9cf35b75c0f3b2df98132ac655db5859e56fe9e209b22b5b4bbed4abc1",
+  "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\quarantine\\texas_instruments\\sloa242-application_note-dee93b9cf35b75c0.pdf",
+  "http_status": 200,
+  "verification_status": "IDENTITY_UNVERIFIED",
+  "verification_messages": [
+    "expected revision does not appear in the PDF"
+  ],
+  "unchanged": false,
+  "previous_sha256": null
+}

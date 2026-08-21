@@ -1,0 +1,40 @@
+{
+  "synthetic_isolated_fixture": {
+    "cases": 2,
+    "recall_at_1": 1.0,
+    "recall_at_3": 1.0,
+    "recall_at_5": 1.0,
+    "mean_reciprocal_rank": 1.0,
+    "note": "Evaluated against the isolated synthetic corpus constructed by the Phase 2 regression test."
+  },
+  "real_manufacturer_datasheets": {
+    "cases": 31,
+    "recall_at_1": 0.25806451612903225,
+    "recall_at_3": 0.45161290322580644,
+    "recall_at_5": 0.5161290322580645,
+    "mean_reciprocal_rank": 0.3586021505376344,
+    "failure_counts": {
+      "HYBRID_RANKING_ISSUE": 12,
+      "CROSS_PAGE_CONTEXT_ISSUE": 2,
+      "TABLE_EXTRACTION_FAILURE": 1
+    },
+    "failed_case_ids": [
+      "real-adsp-sport",
+      "real-adsp-clocks",
+      "real-pcm-adc-channels",
+      "real-pcm-dac-channels",
+      "real-pcm-adc-rate",
+      "real-pcm-dac-rate",
+      "real-pcm-supplies",
+      "real-pcm-adc-delay",
+      "real-ad1938-channels",
+      "real-ad1938-interface",
+      "real-ad1938-delay",
+      "real-adau-rate-depth",
+      "real-tas-output-power",
+      "real-tas-sample-rate",
+      "real-tas-switching"
+    ],
+    "note": "Expected pages are fixed, manually curated locations and were not moved after evaluation."
+  }
+}

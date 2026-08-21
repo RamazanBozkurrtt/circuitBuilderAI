@@ -453,6 +453,7 @@ class QdrantHybridEvidenceIndex:
             part_number=chunk.part_number,
             document_title=chunk.document_title,
             document_revision=chunk.document_revision,
+            acquisition=chunk.acquisition,
             document_hash=chunk.document_hash,
             page=chunk.page,
             section=chunk.section,
@@ -499,6 +500,7 @@ class QdrantHybridEvidenceIndex:
                 section=chunk.section,
                 locator=chunk.locator,
                 text=chunk.text,
+                acquisition=chunk.acquisition,
             )
             for chunk in selected
         ]
@@ -528,6 +530,11 @@ def promote_retrieval_candidate(
             page=str(candidate.page),
             section=candidate.section,
             locator=candidate.locator,
+            source_url=(candidate.acquisition.final_url if candidate.acquisition else None),
+            sha256=candidate.document_hash,
+            acquisition_id=(
+                candidate.acquisition.acquisition_id if candidate.acquisition else None
+            ),
         ),
         extracted_content=candidate.extracted_text,
         normalized_fact=normalized_fact,

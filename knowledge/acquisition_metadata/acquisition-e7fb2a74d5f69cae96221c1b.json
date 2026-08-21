@@ -1,0 +1,19 @@
+{
+  "acquisition_id": "acquisition-e7fb2a74d5f69cae96221c1b",
+  "original_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adsp-21562-21563-21565-21566-21567-21569.pdf",
+  "final_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adsp-21562-21563-21565-21566-21567-21569.pdf",
+  "manufacturer": "Analog Devices",
+  "part_number": "ADSP-21569",
+  "document_type": "DATASHEET",
+  "content_type": "application/pdf",
+  "retrieved_at": "2026-08-21T20:16:16.712541Z",
+  "sha256": "0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e",
+  "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\analog_devices\\adsp_21569-datasheet-0c908438ea8f71cc.pdf",
+  "http_status": 200,
+  "verification_status": "TRUSTED",
+  "verification_messages": [
+    "trusted domain, PDF format, manufacturer, part number, and document type verified"
+  ],
+  "unchanged": false,
+  "previous_sha256": null
+}

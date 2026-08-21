@@ -1,9 +1,12 @@
 from ai_pcb.specializations.models import (
     AcceptanceCriterionExtension,
+    ArchitectureBlockGuidance,
     CapabilityRequirement,
+    ComponentCategoryGuidance,
     DesignSpecialization,
     EngineeringCapability,
     EngineeringGuidance,
+    EvaluationCriterionGuidance,
     EvidenceRequirement,
     RequirementDomain,
     SpecializationMetadata,
@@ -30,8 +33,7 @@ AUDIO_ANC = DesignSpecialization(
             capability=EngineeringCapability.REAL_TIME_PROCESSING_ANALYSIS,
             applicable_stages=["ARCHITECTURE", "SCHEMATIC_VERIFICATION"],
             rationale=(
-                "FxLMS and multichannel ANC must fit the real-time compute and buffering "
-                "budget."
+                "FxLMS and multichannel ANC must fit the real-time compute and buffering budget."
             ),
         ),
         CapabilityRequirement(
@@ -102,6 +104,80 @@ AUDIO_ANC = DesignSpecialization(
                 "switching-regulator and amplifier coupling",
                 "EMI and EMC behavior",
             ],
+        ),
+    ],
+    architecture_blocks=[
+        ArchitectureBlockGuidance(
+            role="dsp_processor",
+            required_capabilities=[
+                "deterministic real-time processing",
+                "FxLMS computational and memory headroom",
+                "synchronized multichannel audio interfaces",
+            ],
+            rationale="ANC processing suitability requires compute evidence beyond audio I/O.",
+            retrieval_hints=["DSP FxLMS MAC memory audio interface latency"],
+        ),
+        ArchitectureBlockGuidance(
+            role="output_amplification",
+            required_capabilities=["multichannel low-noise speaker drive and protection"],
+            rationale="The output path must meet explicit amplification requirements.",
+            retrieval_hints=["Class-D amplifier channels load power protection thermal"],
+        ),
+    ],
+    component_categories=[
+        ComponentCategoryGuidance(
+            category="DSP_PROCESSOR",
+            required_facts=[
+                "audio_input_capacity",
+                "audio_output_capacity",
+                "compute_throughput",
+                "memory",
+                "audio_interfaces",
+                "clocking",
+                "programming_support",
+                "latency_suitability",
+            ],
+            retrieval_hints=["real-time audio DSP MAC memory latency development tools"],
+        ),
+        ComponentCategoryGuidance(
+            category="CLASS_D_AMPLIFIER",
+            required_facts=[
+                "channel_count",
+                "speaker_load",
+                "output_power",
+                "efficiency",
+                "noise",
+                "thd_n",
+                "switching_frequency",
+                "protection",
+                "thermal_limits",
+            ],
+            retrieval_hints=["four channel Class-D amplifier output power load protection thermal"],
+        ),
+    ],
+    evaluation_criteria=[
+        EvaluationCriterionGuidance(
+            criterion_id="latency_suitability",
+            dimension="latency suitability",
+            applicable_categories=[
+                "DSP_PROCESSOR",
+                "ADC",
+                "DAC",
+                "AUDIO_CODEC",
+                "CLASS_D_AMPLIFIER",
+            ],
+            default_weight=2.0,
+        ),
+        EvaluationCriterionGuidance(
+            criterion_id="processing_headroom",
+            dimension="processing headroom",
+            applicable_categories=["DSP_PROCESSOR"],
+            default_weight=2.0,
+        ),
+        EvaluationCriterionGuidance(
+            criterion_id="development_tooling",
+            dimension="development and tooling suitability",
+            applicable_categories=["DSP_PROCESSOR"],
         ),
     ],
     evidence_requirements=[

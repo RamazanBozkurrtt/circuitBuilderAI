@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-08-21T20:26:50.286387Z",
+  "evidence_id": "fact-pcm3168a-interface",
+  "title": "PCM3168A audio_interface",
+  "provenance": {
+    "created_at": "2026-08-21T20:26:50.286364Z",
+    "source": "DATASHEET",
+    "manufacturer": "Texas Instruments",
+    "document": "pcm3168a-datasheet-959ffa69e2f9656f.pdf",
+    "revision": null,
+    "page": "1",
+    "section": null,
+    "locator": "page=1",
+    "source_url": "https://www.ti.com/lit/ds/symlink/pcm3168a.pdf",
+    "sha256": "959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93",
+    "acquisition_id": "acquisition-a8f1f3a77cf273a787a83e51"
+  },
+  "extracted_content": "ADC/DAC Independent I2S",
+  "normalized_fact": "PCM3168A supports the documented serial audio formats.",
+  "confidence": null,
+  "artifact_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\texas_instruments\\pcm3168a-datasheet-959ffa69e2f9656f.pdf"
+}

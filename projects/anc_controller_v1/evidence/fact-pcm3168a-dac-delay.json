@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-08-21T21:13:59.012590Z",
+  "evidence_id": "fact-pcm3168a-dac-delay",
+  "title": "PCM3168A dac_latency",
+  "provenance": {
+    "created_at": "2026-08-21T21:13:59.012581Z",
+    "source": "DATASHEET",
+    "manufacturer": "Texas Instruments",
+    "document": "pcm3168a-datasheet-959ffa69e2f9656f.pdf",
+    "revision": null,
+    "page": "12",
+    "section": null,
+    "locator": "page=12",
+    "source_url": "https://www.ti.com/lit/ds/symlink/pcm3168a.pdf",
+    "sha256": "959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93",
+    "acquisition_id": "acquisition-a8f1f3a77cf273a787a83e51"
+  },
+  "extracted_content": "Group delay time (single, dual)",
+  "normalized_fact": "PCM3168A DAC group delay is 28/fS in single or dual speed and 19/fS in quad speed.",
+  "confidence": null,
+  "artifact_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\texas_instruments\\pcm3168a-datasheet-959ffa69e2f9656f.pdf"
+}

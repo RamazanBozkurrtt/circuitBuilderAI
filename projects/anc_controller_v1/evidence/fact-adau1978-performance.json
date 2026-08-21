@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-08-21T20:27:03.886636Z",
+  "evidence_id": "fact-adau1978-performance",
+  "title": "ADAU1978 snr",
+  "provenance": {
+    "created_at": "2026-08-21T20:27:03.886617Z",
+    "source": "DATASHEET",
+    "manufacturer": "Analog Devices",
+    "document": "adau1978-datasheet-5b80650206aba034.pdf",
+    "revision": null,
+    "page": "1",
+    "section": null,
+    "locator": "page=1",
+    "source_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adau1978.pdf",
+    "sha256": "5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838",
+    "acquisition_id": "acquisition-bc51d34a5f871bc519c72acb"
+  },
+  "extracted_content": "109 dB analog-to-digital converter (ADC) dynamic range",
+  "normalized_fact": "ADAU1978 lists 109 dB ADC dynamic range.",
+  "confidence": null,
+  "artifact_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\analog_devices\\adau1978-datasheet-5b80650206aba034.pdf"
+}

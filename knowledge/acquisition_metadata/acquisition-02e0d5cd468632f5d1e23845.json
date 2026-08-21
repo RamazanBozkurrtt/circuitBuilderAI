@@ -1,0 +1,19 @@
+{
+  "acquisition_id": "acquisition-02e0d5cd468632f5d1e23845",
+  "original_url": "https://www.analog.com/media/en/dsp-documentation/integrated-circuit-anomalies/adsp-21562-21563-21565-21566-21567-21569-anomalies.pdf",
+  "final_url": "https://www.analog.com/media/en/dsp-documentation/integrated-circuit-anomalies/adsp-21562-21563-21565-21566-21567-21569-anomalies.pdf",
+  "manufacturer": "Analog Devices",
+  "part_number": "ADSP-21569",
+  "document_type": "ERRATA",
+  "content_type": "application/pdf",
+  "retrieved_at": "2026-08-21T20:16:24.234787Z",
+  "sha256": "84b9653c85367a246898e06bcf11d766a51d092811350ce3c5973db7b2d26a58",
+  "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\quarantine\\analog_devices\\adsp_21569-errata-84b9653c85367a24.pdf",
+  "http_status": 200,
+  "verification_status": "IDENTITY_UNVERIFIED",
+  "verification_messages": [
+    "expected part number does not appear in the PDF"
+  ],
+  "unchanged": false,
+  "previous_sha256": null
+}

@@ -12,6 +12,29 @@ from importlib import import_module
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
+    from ai_pcb.models.acquisition import (
+        AcquisitionManifest,
+        AcquisitionRequest,
+        AcquisitionResult,
+        ManufacturerDocumentType,
+    )
+    from ai_pcb.models.analysis import ComputationalBudget, LatencyBudget
+    from ai_pcb.models.architecture import (
+        ArchitectureCandidate,
+        ArchitectureDecision,
+        ArchitectureEvaluation,
+        ArchitectureRisk,
+        BlockInterface,
+        FunctionalBlock,
+        SystemArchitecture,
+    )
+    from ai_pcb.models.components import (
+        ComponentCandidate,
+        ComponentEvaluation,
+        ComponentRequirement,
+        ComponentSelection,
+        EvidenceAcquisitionRequirement,
+    )
     from ai_pcb.models.decision import DecisionStatus, EngineeringDecision
     from ai_pcb.models.evidence import Evidence, EvidenceProvenance, EvidenceSource
     from ai_pcb.models.knowledge import (
@@ -34,6 +57,19 @@ if TYPE_CHECKING:
     )
 
 _EXPORT_MODULES = {
+    "AcquisitionManifest": "ai_pcb.models.acquisition",
+    "AcquisitionRequest": "ai_pcb.models.acquisition",
+    "AcquisitionResult": "ai_pcb.models.acquisition",
+    "ArchitectureCandidate": "ai_pcb.models.architecture",
+    "ArchitectureDecision": "ai_pcb.models.architecture",
+    "ArchitectureEvaluation": "ai_pcb.models.architecture",
+    "ArchitectureRisk": "ai_pcb.models.architecture",
+    "BlockInterface": "ai_pcb.models.architecture",
+    "ComponentCandidate": "ai_pcb.models.components",
+    "ComponentEvaluation": "ai_pcb.models.components",
+    "ComponentRequirement": "ai_pcb.models.components",
+    "ComponentSelection": "ai_pcb.models.components",
+    "ComputationalBudget": "ai_pcb.models.analysis",
     "DecisionStatus": "ai_pcb.models.decision",
     "DesignIntent": "ai_pcb.models.spec",
     "DesignState": "ai_pcb.models.state",
@@ -45,12 +81,17 @@ _EXPORT_MODULES = {
     "EngineeringEvidenceQuery": "ai_pcb.models.knowledge",
     "EngineeringFactCandidate": "ai_pcb.models.knowledge",
     "Evidence": "ai_pcb.models.evidence",
+    "EvidenceAcquisitionRequirement": "ai_pcb.models.components",
     "EvidenceProvenance": "ai_pcb.models.evidence",
     "EvidenceSource": "ai_pcb.models.evidence",
     "IngestionReport": "ai_pcb.models.knowledge",
+    "FunctionalBlock": "ai_pcb.models.architecture",
+    "LatencyBudget": "ai_pcb.models.analysis",
     "MasterSpec": "ai_pcb.models.spec",
+    "ManufacturerDocumentType": "ai_pcb.models.acquisition",
     "Requirement": "ai_pcb.models.spec",
     "RequirementStatus": "ai_pcb.models.spec",
+    "SystemArchitecture": "ai_pcb.models.architecture",
     "ValidationResult": "ai_pcb.models.validation",
     "ValidationSeverity": "ai_pcb.models.validation",
     "ValidationStatus": "ai_pcb.models.validation",

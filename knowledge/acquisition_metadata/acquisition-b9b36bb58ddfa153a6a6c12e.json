@@ -1,0 +1,19 @@
+{
+  "acquisition_id": "acquisition-b9b36bb58ddfa153a6a6c12e",
+  "original_url": "https://www.ti.com/lit/gpn/pcm3168a",
+  "final_url": "https://www.ti.com/lit/ds/symlink/pcm3168a.pdf?ts=1787342996917",
+  "manufacturer": "Texas Instruments",
+  "part_number": "PCM3168A",
+  "document_type": "DATASHEET",
+  "content_type": "application/pdf",
+  "retrieved_at": "2026-08-21T20:16:25.889894Z",
+  "sha256": "959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93",
+  "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\quarantine\\texas_instruments\\pcm3168a-datasheet-959ffa69e2f9656f.pdf",
+  "http_status": 200,
+  "verification_status": "IDENTITY_UNVERIFIED",
+  "verification_messages": [
+    "expected revision does not appear in the PDF"
+  ],
+  "unchanged": false,
+  "previous_sha256": null
+}

@@ -13,20 +13,20 @@ _NEXT: dict[WorkflowStage, frozenset[WorkflowStage]] = {
         {WorkflowStage.COMPONENT_SELECTION, WorkflowStage.BLOCKED}
     ),
     WorkflowStage.COMPONENT_SELECTION: frozenset(
-        {WorkflowStage.DATASHEET_ANALYSIS, WorkflowStage.BLOCKED}
+        {
+            WorkflowStage.ARCHITECTURE,
+            WorkflowStage.DATASHEET_ANALYSIS,
+            WorkflowStage.BLOCKED,
+        }
     ),
-    WorkflowStage.DATASHEET_ANALYSIS: frozenset(
-        {WorkflowStage.SCHEMATIC, WorkflowStage.BLOCKED}
-    ),
+    WorkflowStage.DATASHEET_ANALYSIS: frozenset({WorkflowStage.SCHEMATIC, WorkflowStage.BLOCKED}),
     WorkflowStage.SCHEMATIC: frozenset(
         {WorkflowStage.SCHEMATIC_VERIFICATION, WorkflowStage.BLOCKED}
     ),
     WorkflowStage.SCHEMATIC_VERIFICATION: frozenset(
         {WorkflowStage.SCHEMATIC, WorkflowStage.PCB_LAYOUT, WorkflowStage.BLOCKED}
     ),
-    WorkflowStage.PCB_LAYOUT: frozenset(
-        {WorkflowStage.PCB_VERIFICATION, WorkflowStage.BLOCKED}
-    ),
+    WorkflowStage.PCB_LAYOUT: frozenset({WorkflowStage.PCB_VERIFICATION, WorkflowStage.BLOCKED}),
     WorkflowStage.PCB_VERIFICATION: frozenset(
         {WorkflowStage.PCB_LAYOUT, WorkflowStage.MANUFACTURING, WorkflowStage.BLOCKED}
     ),

@@ -1,0 +1,19 @@
+{
+  "acquisition_id": "acquisition-7531add382135c4dfa733cd9",
+  "original_url": "https://www.analog.com/media/en/dsp-documentation/processor-manuals/adsp-2156x_hwr.pdf",
+  "final_url": "https://www.analog.com/media/en/dsp-documentation/processor-manuals/adsp-2156x_hwr.pdf",
+  "manufacturer": "Analog Devices",
+  "part_number": "ADSP-2156x",
+  "document_type": "HARDWARE_REFERENCE",
+  "content_type": "application/pdf",
+  "retrieved_at": "2026-08-21T20:16:19.062626Z",
+  "sha256": "96545b862402a7fd803d3aa69d42e7bc81f9b966309702f114de7ff7f4680867",
+  "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\reference_designs\\analog_devices\\adsp_2156x-hardware_reference-96545b862402a7fd.pdf",
+  "http_status": 200,
+  "verification_status": "TRUSTED",
+  "verification_messages": [
+    "trusted domain, PDF format, manufacturer, part number, and document type verified"
+  ],
+  "unchanged": false,
+  "previous_sha256": null
+}
