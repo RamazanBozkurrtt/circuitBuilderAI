@@ -14,18 +14,22 @@ from ai_pcb.evidence.chunking import EngineeringChunker
 from ai_pcb.evidence.embedding import FastEmbedProvider
 from ai_pcb.evidence.errors import EmbeddingError, MissingIndexError
 from ai_pcb.evidence.evaluation import evaluate_retrieval, evaluate_retrieval_corpora
+from ai_pcb.evidence.query import classify_engineering_query
 from ai_pcb.evidence.retrieval import QdrantHybridEvidenceIndex
 from ai_pcb.models.evidence import EvidenceSource
 from ai_pcb.models.knowledge import (
     BlockKind,
     BoundingBox,
+    ChunkKind,
     DocumentBlock,
+    DocumentChunk,
     DocumentMetadata,
     DocumentPage,
     DocumentRecord,
     DocumentSection,
     EngineeringEvidenceQuery,
     ExtractionStatus,
+    QueryIntent,
     RetrievalEvaluationCase,
     RetrievalMethod,
 )
@@ -152,9 +156,7 @@ def record(part: str, paragraphs: list[tuple[str, str]], *, suffix: str) -> Docu
         blocks=blocks,
         section_ids=[section.section_id for section in sections],
     )
-    chunks = EngineeringChunker(target_characters=300, max_characters=600).chunk(
-        metadata, [page]
-    )
+    chunks = EngineeringChunker(target_characters=300, max_characters=600).chunk(metadata, [page])
     return DocumentRecord(metadata=metadata, pages=[page], sections=sections, chunks=chunks)
 
 
@@ -325,6 +327,21 @@ def test_synthetic_and_real_datasheet_metrics_are_reported_separately(
         index.close()
 
 
+def test_phase33_holdout_queries_are_valid_and_distinct_from_tuned_cases() -> None:
+    tuned_raw = json.loads(
+        Path("knowledge/evaluation/real_datasheet_queries.json").read_text(encoding="utf-8")
+    )
+    holdout_raw = json.loads(
+        Path("knowledge/evaluation/phase33_holdout_queries.json").read_text(encoding="utf-8")
+    )
+    holdout = [RetrievalEvaluationCase.model_validate(case) for case in holdout_raw]
+    assert len(holdout) == 10
+    assert {case.case_id for case in holdout}.isdisjoint(
+        {str(case["case_id"]) for case in tuned_raw}
+    )
+    assert len({case.query.query for case in holdout}) == len(holdout)
+
+
 def test_missing_index_and_embedding_failure_are_explicit(tmp_path: Path) -> None:
     missing = QdrantHybridEvidenceIndex(
         path=tmp_path / "missing-qdrant",
@@ -357,3 +374,120 @@ def test_missing_index_and_embedding_failure_are_explicit(tmp_path: Path) -> Non
             )
     finally:
         failing.close()
+
+
+@pytest.mark.parametrize(
+    ("query", "intent"),
+    [
+        ("PLL_CTRL register value", QueryIntent.EXACT_IDENTIFIER),
+        ("analog supply voltage operating range", QueryIntent.ELECTRICAL_SPECIFICATION),
+        ("I2S TDM master clock", QueryIntent.INTERFACE_CLOCK),
+        ("ADC SNR and THD+N", QueryIntent.PERFORMANCE),
+        ("digital filter group delay", QueryIntent.TIMING_LATENCY),
+        ("PowerPAD thermal layout", QueryIntent.LAYOUT_THERMAL),
+        ("recommended application", QueryIntent.GENERAL_SEMANTIC),
+    ],
+)
+def test_query_intent_classification_is_deterministic(query: str, intent: QueryIntent) -> None:
+    first = classify_engineering_query(query)
+    assert first == classify_engineering_query(query)
+    assert first.intent is intent
+
+
+def test_query_decomposition_and_ranking_controls_are_typed() -> None:
+    classification = classify_engineering_query(
+        "ADC SNR and THD+N differential, output noise conditions"
+    )
+    assert classification.intent is QueryIntent.PERFORMANCE
+    assert len(classification.decomposed_queries) >= 3
+    assert classification.prefer_overview
+    assert classify_engineering_query("precision clock generator count").prefer_overview
+
+
+def test_table_symbol_normalization_overview_boost_and_page_diversity(tmp_path: Path) -> None:
+    digest = hashlib.sha256(b"rank-hardening").hexdigest()
+    document_id = f"doc-{digest[:24]}"
+    metadata = DocumentMetadata(
+        document_id=document_id,
+        source_file="missing/rank-hardening.pdf",
+        sha256=digest,
+        source_type=EvidenceSource.DATASHEET,
+        manufacturer="Test Manufacturer",
+        part_number="RANK-1",
+        title="Ranking hardening fixture",
+        total_pages=3,
+    )
+    raw = [
+        (
+            1,
+            "GENERAL DESCRIPTION",
+            ChunkKind.TEXT,
+            "Eight DAC output channels support 192 kHz audio.",
+        ),
+        (2, "REGISTER MAP", ChunkKind.TEXT, "DAC output channel register " * 30),
+        (
+            3,
+            "RECOMMENDED OPERATING CONDITIONS",
+            ChunkKind.TABLE,
+            "PARAMETER | MIN | MAX | UNIT\nPVDD | 4.5 | 26.4 | V\nLOAD | 4 | 4 | Ω",
+        ),
+    ]
+    chunks = [
+        DocumentChunk(
+            chunk_id=f"chunk-rank-{page}",
+            document_id=document_id,
+            source_file=metadata.source_file,
+            document_hash=digest,
+            source_type=EvidenceSource.DATASHEET,
+            manufacturer=metadata.manufacturer,
+            part_number=metadata.part_number,
+            document_title=metadata.title,
+            page=page,
+            section=section,
+            kind=kind,
+            text=text,
+            locator=f"page={page}",
+            previous_chunk_id=f"chunk-rank-{page - 1}" if page > 1 else None,
+            next_chunk_id=f"chunk-rank-{page + 1}" if page < 3 else None,
+        )
+        for page, section, kind, text in raw
+    ]
+    pages = [
+        DocumentPage(
+            page_number=page,
+            width=600,
+            height=800,
+            extraction_status=ExtractionStatus.COMPLETE,
+            machine_readable_characters=len(text),
+        )
+        for page, _, _, text in raw
+    ]
+    record = DocumentRecord(metadata=metadata, pages=pages, sections=[], chunks=chunks)
+    index = QdrantHybridEvidenceIndex(
+        path=tmp_path / "rank-qdrant",
+        ingestion_path=tmp_path / "rank-ingestion",
+        embedding_provider=SyntheticSemanticEmbedding(),
+    )
+    try:
+        index.index_document(record)
+        overview = index.search(
+            EngineeringEvidenceQuery(
+                query="number of DAC output channels and supported sampling rate",
+                part_number="RANK-1",
+                top_k=3,
+            )
+        )
+        assert overview[0].page == 1
+        assert len({item.page for item in overview}) == len(overview)
+        table = index.search(
+            EngineeringEvidenceQuery(
+                query="PVDD operating range and 4 ohm load",
+                part_number="RANK-1",
+                top_k=3,
+                context_expansion=1,
+            )
+        )
+        assert table[0].page == 3
+        assert any(piece.page == 2 for piece in table[0].context)
+    finally:
+        index.close()

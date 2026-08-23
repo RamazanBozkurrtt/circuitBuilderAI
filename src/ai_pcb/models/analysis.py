@@ -31,10 +31,20 @@ class LatencyContribution(StrictModel):
         return self
 
 
+class LatencyPathComparison(StrictModel):
+    comparison_id: Identifier
+    architecture: NonEmptyString
+    candidate_part_numbers: list[NonEmptyString] = Field(min_length=1)
+    sample_rate: EngineeringValue
+    documented_converter_delay: EngineeringValue
+    unknown_contributors: list[LatencyContributor] = Field(default_factory=list)
+
+
 class LatencyBudget(StrictModel):
     budget_id: Identifier
     contributions: list[LatencyContribution] = Field(min_length=1)
     total: EngineeringValue
+    candidate_comparisons: list[LatencyPathComparison] = Field(default_factory=list)
 
     @classmethod
     def from_contributions(
@@ -111,6 +121,10 @@ class FxLMSScenario(StrictModel):
 
 
 class FxLMSSuitabilityStatus(StrEnum):
+    INSUFFICIENT = "INSUFFICIENT"
+    LIKELY_CAPABLE = "LIKELY_CAPABLE"
+    ANALYTICALLY_SUPPORTED = "ANALYTICALLY_SUPPORTED"
+    REQUIRES_HARDWARE_BENCHMARK = "REQUIRES_HARDWARE_BENCHMARK"
     SUPPORTED = "SUPPORTED"
     UNSUPPORTED = "UNSUPPORTED"
     ARCHITECTURE_COMPATIBLE = "ARCHITECTURE_COMPATIBLE"
@@ -133,6 +147,7 @@ class ComputationalBudget(StrictModel):
         if self.suitability in {
             FxLMSSuitabilityStatus.SUPPORTED,
             FxLMSSuitabilityStatus.EVIDENCE_VERIFIED_FOR_SCENARIO,
+            FxLMSSuitabilityStatus.ANALYTICALLY_SUPPORTED,
         }:
             if self.candidate_id is None or not self.evidence_ids:
                 raise ValueError("supported FxLMS suitability requires a candidate and evidence")
@@ -152,6 +167,8 @@ class ComputationalBudget(StrictModel):
         if self.suitability in {
             FxLMSSuitabilityStatus.ARCHITECTURE_COMPATIBLE,
             FxLMSSuitabilityStatus.LIKELY_CAPABLE_PENDING_WORKLOAD,
+            FxLMSSuitabilityStatus.LIKELY_CAPABLE,
+            FxLMSSuitabilityStatus.REQUIRES_HARDWARE_BENCHMARK,
         } and (self.candidate_id is None or not self.evidence_ids):
             raise ValueError("evidence-grounded FxLMS compatibility requires candidate evidence")
         return self

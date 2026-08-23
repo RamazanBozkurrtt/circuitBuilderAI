@@ -5,36 +5,34 @@
     "recall_at_3": 1.0,
     "recall_at_5": 1.0,
     "mean_reciprocal_rank": 1.0,
-    "note": "Evaluated against the isolated synthetic corpus constructed by the Phase 2 regression test."
+    "note": "Evaluated against the isolated synthetic corpus constructed by the retrieval regression test."
   },
   "real_manufacturer_datasheets": {
     "cases": 31,
-    "recall_at_1": 0.25806451612903225,
-    "recall_at_3": 0.45161290322580644,
-    "recall_at_5": 0.5161290322580645,
-    "mean_reciprocal_rank": 0.3586021505376344,
-    "failure_counts": {
-      "HYBRID_RANKING_ISSUE": 12,
-      "CROSS_PAGE_CONTEXT_ISSUE": 2,
-      "TABLE_EXTRACTION_FAILURE": 1
+    "before": {
+      "recall_at_1": 0.25806451612903225,
+      "recall_at_3": 0.45161290322580644,
+      "recall_at_5": 0.5161290322580645,
+      "mean_reciprocal_rank": 0.3586021505376344
     },
-    "failed_case_ids": [
-      "real-adsp-sport",
-      "real-adsp-clocks",
-      "real-pcm-adc-channels",
-      "real-pcm-dac-channels",
-      "real-pcm-adc-rate",
-      "real-pcm-dac-rate",
-      "real-pcm-supplies",
-      "real-pcm-adc-delay",
-      "real-ad1938-channels",
-      "real-ad1938-interface",
-      "real-ad1938-delay",
-      "real-adau-rate-depth",
-      "real-tas-output-power",
-      "real-tas-sample-rate",
-      "real-tas-switching"
-    ],
-    "note": "Expected pages are fixed, manually curated locations and were not moved after evaluation."
+    "after": {
+      "recall_at_1": 0.6774193548387096,
+      "recall_at_3": 0.9354838709677419,
+      "recall_at_5": 1.0,
+      "mean_reciprocal_rank": 0.8102150537634408,
+      "failure_counts": {},
+      "failed_case_ids": []
+    },
+    "note": "The 31 expected document/page locations are unchanged from Phase 3.1."
+  },
+  "phase33_unseen_holdout": {
+    "cases": 10,
+    "recall_at_1": 0.2,
+    "recall_at_3": 0.9,
+    "recall_at_5": 1.0,
+    "mean_reciprocal_rank": 0.52,
+    "failure_counts": {},
+    "failed_case_ids": [],
+    "note": "Held-out query wording and newly targeted pages; not used for Phase 3.2 tuning."
   }
 }

@@ -32,6 +32,27 @@ class RetrievalMethod(StrEnum):
     HYBRID = "HYBRID"
 
 
+class QueryIntent(StrEnum):
+    EXACT_IDENTIFIER = "EXACT_IDENTIFIER"
+    ELECTRICAL_SPECIFICATION = "ELECTRICAL_SPECIFICATION"
+    INTERFACE_CLOCK = "INTERFACE_CLOCK"
+    PERFORMANCE = "PERFORMANCE"
+    TIMING_LATENCY = "TIMING_LATENCY"
+    LAYOUT_THERMAL = "LAYOUT_THERMAL"
+    GENERAL_SEMANTIC = "GENERAL_SEMANTIC"
+
+
+class QueryClassification(StrictModel):
+    """Deterministic retrieval controls derived from an engineering query."""
+
+    intent: QueryIntent
+    exact_terms: list[NonEmptyString] = Field(default_factory=list)
+    decomposed_queries: list[NonEmptyString] = Field(min_length=1)
+    preferred_sections: list[NonEmptyString] = Field(default_factory=list)
+    prefer_tables: bool = False
+    prefer_overview: bool = False
+
+
 class FactStatus(StrEnum):
     EXTRACTED = "EXTRACTED"
     INSUFFICIENT_EVIDENCE = "INSUFFICIENT_EVIDENCE"

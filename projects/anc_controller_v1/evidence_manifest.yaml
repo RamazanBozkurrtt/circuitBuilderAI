@@ -88,3 +88,10 @@ documents:
     canonical_source_url: https://www.ti.com/lit/an/slaa701b/slaa701b.pdf
     expected_title: LC Filter Design
     url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Analog Devices
+    part_number: ADP5054
+    document_type: DATASHEET
+    canonical_source_url: https://www.analog.com/media/en/technical-documentation/data-sheets/adp5054.pdf
+    expected_revision: Rev. G
+    url_origin: MANUFACTURER_PRODUCT_PAGE

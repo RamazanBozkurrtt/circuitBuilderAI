@@ -11,6 +11,13 @@ from ai_pcb.models.architecture import (
     ArchitectureReview,
     SystemArchitecture,
 )
+from ai_pcb.models.closure import (
+    DesignVariable,
+    MicrophoneFrontEnd,
+    Phase4ReadinessAssessment,
+    ProvisionalClockTree,
+    ProvisionalPowerTree,
+)
 from ai_pcb.models.common import Identifier, NonEmptyString, StrictModel, TimestampedModel
 from ai_pcb.models.components import (
     ComponentCandidate,
@@ -81,6 +88,11 @@ class DesignState(TimestampedModel):
     )
     computational_budget: ComputationalBudget | None = None
     latency_budget: LatencyBudget | None = None
+    design_variables: list[DesignVariable] = Field(default_factory=list)
+    microphone_front_end: MicrophoneFrontEnd | None = None
+    clock_tree: ProvisionalClockTree | None = None
+    power_tree: ProvisionalPowerTree | None = None
+    phase4_readiness: Phase4ReadinessAssessment | None = None
     phase3_complete: bool = False
     evidence_ids: list[Identifier] = Field(default_factory=list)
     decisions: list[EngineeringDecision] = Field(default_factory=list)

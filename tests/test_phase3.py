@@ -32,6 +32,7 @@ from ai_pcb.models.architecture import (
     EngineeringValue,
     ValueStatus,
 )
+from ai_pcb.models.closure import DesignVariableKind, DesignVariableStatus, ReadinessStatus
 from ai_pcb.models.components import (
     CandidateEvidenceStatus,
     CandidateViability,
@@ -64,9 +65,7 @@ def run_phase3() -> DesignState:
 
 def run_phase31(tmp_path: Path) -> DesignState:
     facts = TrustedManufacturerFactRepository(
-        fact_catalog_path=Path(
-            "projects/anc_controller_v1/manufacturer_component_facts.yaml"
-        ),
+        fact_catalog_path=Path("projects/anc_controller_v1/manufacturer_component_facts.yaml"),
         acquisition_catalog_path=Path("knowledge/acquisition_metadata/catalog.json"),
         evidence_store=EvidenceStore(tmp_path / "evidence"),
     )
@@ -372,8 +371,14 @@ def test_real_manufacturer_evidence_advances_candidates_without_unsafe_approval(
     assert by_part["AD1938"].verified_evidence_ids
     assert by_part["ADAU1978"].verified_evidence_ids
     assert by_part["TAS6424-Q1"].verified_evidence_ids
+    assert by_part["ADP5054"].verified_evidence_ids
     assert state.architecture is not None
-    assert state.architecture.topology == "multichannel_codec"
+    assert state.architecture.topology == "adc_dsp_digital_class_d"
+    assert "dac" not in {block.role for block in state.architecture.functional_blocks}
+    assert any(
+        connection.interface_type == "synchronous_tdm4_digital_audio"
+        for connection in state.architecture.connections
+    )
     assert state.architecture_decision is not None
     assert state.architecture_decision.rejected_candidate_ids
     assert all(
@@ -382,35 +387,42 @@ def test_real_manufacturer_evidence_advances_candidates_without_unsafe_approval(
     )
 
 
-def test_unresolved_load_blocks_class_d_finalization(tmp_path: Path) -> None:
+def test_unresolved_load_keeps_class_d_selection_provisional_inside_envelope(
+    tmp_path: Path,
+) -> None:
     state = run_phase31(tmp_path)
     selection = next(
-        item
-        for item in state.components
-        if item.category is ComponentCategory.CLASS_D_AMPLIFIER
+        item for item in state.components if item.category is ComponentCategory.CLASS_D_AMPLIFIER
     )
-    assert selection.selected_candidate_id is None
+    assert selection.selected_candidate_id is not None
+    assert selection.status is DecisionStatus.PROPOSED
     tas = next(item for item in state.component_candidates if item.part_number == "TAS6424-Q1")
     evaluation = next(
         item for item in state.component_evaluations if item.candidate_id == tas.candidate_id
     )
-    load = next(
-        item for item in evaluation.criteria if item.criterion_id.endswith("speaker_load")
-    )
+    load = next(item for item in evaluation.criteria if item.criterion_id.endswith("speaker_load"))
     assert load.status is ValidationStatus.UNKNOWN
 
 
-def test_unresolved_workload_prevents_false_fxlms_validation(tmp_path: Path) -> None:
+def test_fxlms_scenarios_produce_conservative_likely_capable_status(tmp_path: Path) -> None:
     state = run_phase31(tmp_path)
     assert state.computational_budget is not None
-    assert (
-        state.computational_budget.suitability
-        is FxLMSSuitabilityStatus.LIKELY_CAPABLE_PENDING_WORKLOAD
-    )
+    assert state.computational_budget.suitability is FxLMSSuitabilityStatus.LIKELY_CAPABLE
     assert all(
-        scenario.operations_per_second.status is ValueStatus.UNKNOWN
+        scenario.operations_per_second.status is ValueStatus.ESTIMATED
         for scenario in state.computational_budget.scenarios
     )
+    assert all(
+        scenario.processing_headroom.status is ValueStatus.ESTIMATED
+        for scenario in state.computational_budget.scenarios
+    )
+    stress = next(
+        scenario
+        for scenario in state.computational_budget.scenarios
+        if scenario.scenario_id.endswith("16paths")
+    )
+    assert stress.operations_per_second.value == 1_966_080_000
+    assert stress.processing_headroom.value == 0.0
     dsp = next(
         item for item in state.components if item.category is ComponentCategory.DSP_PROCESSOR
     )
@@ -418,7 +430,9 @@ def test_unresolved_workload_prevents_false_fxlms_validation(tmp_path: Path) -> 
     assert dsp.selected_candidate_id is not None
 
 
-def test_phase31_unknown_latency_remains_unknown(tmp_path: Path) -> None:
+def test_phase33_selected_latency_path_removes_dac_and_keeps_unknown_total(
+    tmp_path: Path,
+) -> None:
     state = run_phase31(tmp_path)
     assert state.latency_budget is not None
     assert state.latency_budget.total.status is ValueStatus.UNKNOWN
@@ -427,9 +441,67 @@ def test_phase31_unknown_latency_remains_unknown(tmp_path: Path) -> None:
         for item in state.latency_budget.contributions
         if item.contributor is LatencyContributor.ADC
     )
-    assert adc.latency.status is ValueStatus.UNKNOWN
+    assert adc.latency.status is ValueStatus.KNOWN
     assert adc.latency.evidence_ids
-    assert any("PCM3168A" in item for item in adc.latency.conditions)
+    assert any("ADAU1978" in item for item in adc.latency.conditions)
+    assert all(
+        item.contributor is not LatencyContributor.DAC
+        for item in state.latency_budget.contributions
+    )
+    known = [
+        item.latency.value
+        for item in state.latency_budget.contributions
+        if item.latency.status is ValueStatus.KNOWN
+    ]
+    assert sum(float(value) for value in known if value is not None) == pytest.approx(364.4208333)
+    assert state.latency_budget.candidate_comparisons
+    selected = state.latency_budget.candidate_comparisons[0]
+    assert selected.comparison_id == "latency-path-adau1978-tas6424-96k"
+    assert selected.documented_converter_delay.status is ValueStatus.KNOWN
+
+
+def test_design_variables_are_classified_closed_and_do_not_rewrite_master_spec(
+    tmp_path: Path,
+) -> None:
+    state = run_phase31(tmp_path)
+    variables = {item.variable_id: item for item in state.design_variables}
+    assert variables["audio.sample_rate"].kind is DesignVariableKind.ENGINEERING_DESIGN_VARIABLE
+    assert variables["audio.sample_rate"].status is DesignVariableStatus.RESOLVED
+    assert variables["audio.sample_rate"].resolution is not None
+    assert variables["audio.sample_rate"].resolution.value == 96
+    assert variables["audio.sample_rate"].evidence_ids
+    assert variables["electrical.speaker_impedance"].kind is DesignVariableKind.USER_CONSTRAINT
+    assert variables["electrical.speaker_impedance"].status is DesignVariableStatus.DESIGN_ENVELOPE
+    assert variables["electrical.speaker_impedance"].envelope is not None
+    assert state.master_spec.audio.requirements["sample_rate"].status is RequirementStatus.UNKNOWN
+    assert state.master_spec.electrical.requirements["speaker_impedance"].value is None
+
+
+def test_phase4_readiness_closes_phase33_architecture_gate(tmp_path: Path) -> None:
+    state = run_phase31(tmp_path)
+    assert state.phase4_readiness is not None
+    assert state.phase4_readiness.status is ReadinessStatus.READY_FOR_PHASE_4
+    assert not state.phase4_readiness.blockers
+    interface = next(
+        item
+        for item in state.phase4_readiness.criteria
+        if item.criterion_id == "major-interface-compatibility"
+    )
+    assert interface.status is ValidationStatus.PASS
+    assert state.microphone_front_end is not None
+    assert state.microphone_front_end.adc_part_number == "ADAU1978"
+    assert state.clock_tree is not None
+    signals = {item.signal_id: item for item in state.clock_tree.signals}
+    assert signals["audio-mclk"].frequency_hz == 24_576_000
+    assert signals["audio-bclk"].frequency_hz == 12_288_000
+    assert signals["audio-fsync"].frequency_hz == 96_000
+    assert state.power_tree is not None
+    assert {rail.rail_id for rail in state.power_tree.rails} == {
+        "pvdd-vbat",
+        "3v3-digital-analog",
+        "1v8-reference-analog",
+        "1v0-dsp-core",
+    }
 
 
 def test_component_fact_repository_rejects_nontrusted_manufacturer_document(

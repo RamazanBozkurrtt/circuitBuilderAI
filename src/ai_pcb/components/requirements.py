@@ -90,8 +90,8 @@ class ComponentRequirementDeriver:
         return {
             "sample_rate": ("audio", "sample_rate"),
             "bit_depth": ("audio", "bit_depth"),
-            "speaker_load": ("audio", "speaker_impedance"),
-            "output_power": ("audio", "speaker_power_per_channel"),
+            "speaker_load": ("electrical", "speaker_impedance"),
+            "output_power": ("electrical", "speaker_power_per_channel"),
             "input_voltage_range": ("power", "input_supply_voltage"),
         }.get(fact)
 

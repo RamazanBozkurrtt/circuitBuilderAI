@@ -472,3 +472,259 @@ facts:
     page: 8
     evidence_text: Channel overtemperature warning
     normalized_fact: TAS6424-Q1 channel overtemperature warning threshold is documented as 150 C.
+
+  - fact_id: fact-tas6424-sample-rate
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: sample_rate
+    value: [44.1, 48, 96]
+    unit: kHz
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 19
+    evidence_text: The device supports FSYNC rates of 44.1 kHz, 48 kHz, or 96 kHz.
+    normalized_fact: TAS6424-Q1 supports 44.1 kHz, 48 kHz, and 96 kHz audio sample rates.
+
+  - fact_id: fact-tas6424-input-voltage
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: input_voltage_range
+    value: 4.5-26.4
+    unit: V
+    conditions: [PVDD recommended operating range relative to GND.]
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 7
+    evidence_text: PVDD Output FET supply voltage Relative to GND 4.5 26.4 V
+    normalized_fact: TAS6424-Q1 PVDD recommended operating range is 4.5 V to 26.4 V.
+
+  - fact_id: fact-ad1938-clocking
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: AD1938
+    attribute: clocking
+    value: on-chip PLL with selectable PLL or MCLK ADC and DAC clock sources
+    acquisition_id: acquisition-0da3c952b99279d5d2cf8a65
+    document_sha256: 45957be7b198d70bd6998324be0d0d84114c0d99907dc415711c4e28feaab5f3
+    page: 24
+    evidence_text: PLL AND CLOCK CONTROL REGISTERS
+    normalized_fact: AD1938 provides an on-chip PLL and selectable converter clock sources.
+
+  - fact_id: fact-adsp-21569-debug-interface
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: programming_support
+    value: IEEE 1149.1 JTAG debug access port
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 19
+    evidence_text: IEEE 1149.1 JTAG inter-
+    normalized_fact: ADSP-21569 provides an IEEE 1149.1 JTAG debug interface.
+
+  - fact_id: fact-adau1978-input-range
+    candidate_category: ADC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADAU1978
+    attribute: analog_input
+    value: 2 V rms differential full scale, 1.5 V dc common mode, 28.6 kohm differential input
+    acquisition_id: acquisition-bc51d34a5f871bc519c72acb
+    document_sha256: 5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838
+    page: 3
+    evidence_text: Full-Scale AC Differential Input Voltage 2 V rms
+    normalized_fact: ADAU1978 has a 2 V rms differential full-scale input at 1.5 V common mode.
+
+  - fact_id: fact-adau1978-clocking
+    candidate_category: ADC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADAU1978
+    attribute: clocking
+    value: MCLK or LRCLK PLL input; serial port master or slave; TDM4 supports 128 fS with 32-bit slots
+    acquisition_id: acquisition-bc51d34a5f871bc519c72acb
+    document_sha256: 5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838
+    page: 19
+    evidence_text: TDM4 64 × fS 96 × fS 128 × fS
+    normalized_fact: ADAU1978 supports slave TDM4 at 128 fS and derives internal clocks from MCLK or LRCLK.
+
+  - fact_id: fact-adau1978-power
+    candidate_category: ADC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADAU1978
+    attribute: power_supply
+    value: 3.3 V AVDD, 1.62-3.6 V IOVDD, internal 1.8 V DVDD; 14 mA AVDD and 0.88 mA IOVDD typical at 96 kHz
+    acquisition_id: acquisition-bc51d34a5f871bc519c72acb
+    document_sha256: 5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838
+    page: 4
+    evidence_text: 4-channel ADC, DVDD internal 14 mA
+    normalized_fact: ADAU1978 requires 3.3 V analog power and draws documented typical currents at 96 kHz.
+
+  - fact_id: fact-adsp-21569-operating-rails
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: power_supply
+    value: VDD_INT 1.0 V, VDD_EXT 3.3 V, VDD_REF and VDD_ANA 1.8 V; VDD_DMC omitted when DDR is unused
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 44
+    evidence_text: VDD_INT Internal (Core) Supply Voltage
+    normalized_fact: ADSP-21569 requires documented 1.0 V, 1.8 V, and 3.3 V domains; VDD_DMC applies to DDR.
+
+  - fact_id: fact-adsp-21569-current
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: power_current
+    value: 1157 mA typical VDD_INT at 1 GHz, full core activity and 456 MB/s DMA
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 47
+    evidence_text: IDD_TYP VDD_INT Current
+    normalized_fact: ADSP-21569 documents 1157 mA typical core current for the stated 1 GHz activity condition.
+
+  - fact_id: fact-adsp-21569-sequencing
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: power_sequencing
+    value: hold SYS_HWRST until all supplies and SYS_CLKIN0 are stable; maintain VDD_EXT delta to VDD_REF and VDD_ANA
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 53
+    evidence_text: SYS_HWRST Deasserted after VDD_SUPPLIES
+    normalized_fact: ADSP-21569 reset release and rail-delta sequencing requirements are explicit.
+
+  - fact_id: fact-adsp-21569-clock-rates
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: clock_rates
+    value: SYS_CLKIN0 20-30 MHz
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 54
+    evidence_text: SYS_CLKIN0 Frequency (External SYS_CLKIN0)
+    normalized_fact: ADSP-21569 accepts the provisional 24.576 MHz external clock input.
+
+  - fact_id: fact-adsp-21569-core-clock-rates
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: core_clock_rates
+    value: CCLK 400-1000 MHz; SYSCLK 200-500 MHz
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 45
+    evidence_text: Core Clock (CCLK) Frequency
+    normalized_fact: ADSP-21569 clock ranges admit the provisional 983.04 MHz core plan.
+
+  - fact_id: fact-adsp-21569-fir-throughput
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: accelerator_throughput
+    value: four FIR MAC units running at core clock frequency
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 16
+    evidence_text: four multiplier-accumulator (MAC) units
+    normalized_fact: ADSP-21569 FIR accelerator provides four MAC units at the core clock frequency.
+
+  - fact_id: fact-tas6424-clocking
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: clocking
+    value: TDM4 or TDM8; SCLK 128 or 256 fS in TDM; MCLK 128, 256, or 512 fS; 25 MHz maximum
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 19
+    evidence_text: In TDM mode SCLK and MCLK can be connected together
+    normalized_fact: TAS6424-Q1 accepts the selected 96 kHz TDM4, 128 fS BCLK, and 256 fS MCLK plan.
+
+  - fact_id: fact-tas6424-latency
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: latency
+    value: 12 FSYNC samples at 96 kHz
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 10
+    evidence_text: FSYNC = 96 kHz 12
+    normalized_fact: TAS6424-Q1 documents 12 sample periods of input-to-output latency at 96 kHz.
+
+  - fact_id: fact-tas6424-supplies
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: power_supply
+    value: PVDD high-current, VBAT higher-voltage analog, and 3.3 V VDD logic; PVDD and VBAT may share a source in range
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 55
+    evidence_text: The TAS6424-Q1 requires three power supplies
+    normalized_fact: TAS6424-Q1 uses PVDD, VBAT, and 3.3 V VDD with documented supply recommendations.
+
+  - fact_id: fact-adp5054-input
+    candidate_category: POWER_MANAGEMENT
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADP5054
+    attribute: input_voltage_range
+    value: 4.5-15.5
+    unit: V
+    acquisition_id: acquisition-f175bbce0ba1b9cd383c5ca5
+    document_sha256: 577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79
+    page: 1
+    evidence_text: "Wide input voltage range: 4.5 V to 15.5 V"
+    normalized_fact: ADP5054 accepts 4.5 V to 15.5 V.
+
+  - fact_id: fact-adp5054-output-voltage
+    candidate_category: POWER_MANAGEMENT
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADP5054
+    attribute: output_voltage
+    value: four adjustable buck outputs with 0.8 V feedback reference
+    acquisition_id: acquisition-f175bbce0ba1b9cd383c5ca5
+    document_sha256: 577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79
+    page: 6
+    evidence_text: Adjustable Feedback Voltage VFB1 0.800 V
+    normalized_fact: ADP5054 provides four adjustable buck outputs suitable for the provisional low-voltage rails.
+
+  - fact_id: fact-adp5054-output-current
+    candidate_category: POWER_MANAGEMENT
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADP5054
+    attribute: output_current
+    value: channels 1 and 2 programmable 2/4/6 A; channels 3 and 4 2.5 A
+    acquisition_id: acquisition-f175bbce0ba1b9cd383c5ca5
+    document_sha256: 577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79
+    page: 1
+    evidence_text: Programmable 2 A/4 A/6 A sync buck regulators with low-side FET drivers
+    normalized_fact: ADP5054 current capabilities cover the provisional DSP and auxiliary rail envelopes.
+
+  - fact_id: fact-adp5054-efficiency
+    candidate_category: POWER_MANAGEMENT
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADP5054
+    attribute: efficiency
+    value: condition-dependent curves; must be recalculated for each selected rail
+    acquisition_id: acquisition-f175bbce0ba1b9cd383c5ca5
+    document_sha256: 577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79
+    page: 11
+    evidence_text: Channel 3/Channel 4 Efficiency Curve, VIN = 12 V
+    normalized_fact: ADP5054 efficiency is operating-point dependent and remains a schematic calculation.
+
+  - fact_id: fact-adp5054-thermal
+    candidate_category: POWER_MANAGEMENT
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADP5054
+    attribute: thermal_limits
+    value: 150 C typical thermal shutdown with 15 C hysteresis
+    acquisition_id: acquisition-f175bbce0ba1b9cd383c5ca5
+    document_sha256: 577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79
+    page: 5
+    evidence_text: Thermal Shutdown Threshold TSHDN 150 °C
+    normalized_fact: ADP5054 documents thermal shutdown and hysteresis.

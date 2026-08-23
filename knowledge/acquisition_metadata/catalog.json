@@ -360,6 +360,25 @@
       ],
       "unchanged": false,
       "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-f175bbce0ba1b9cd383c5ca5",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adp5054.pdf",
+      "final_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adp5054.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "ADP5054",
+      "document_type": "DATASHEET",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-22T22:55:55.868314Z",
+      "sha256": "577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\analog_devices\\adp5054-datasheet-577509c6d7feba56.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
     }
   ],
   "events": [
@@ -533,6 +552,15 @@
       "occurred_at": "2026-08-21T21:13:40.490044Z",
       "previous_sha256": null,
       "sha256": "84b9653c85367a246898e06bcf11d766a51d092811350ce3c5973db7b2d26a58"
+    },
+    {
+      "event_id": "event-693a0cefbc24368469c97626",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-f175bbce0ba1b9cd383c5ca5",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adp5054.pdf",
+      "occurred_at": "2026-08-22T22:55:55.868900Z",
+      "previous_sha256": null,
+      "sha256": "577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79"
     }
   ]
 }

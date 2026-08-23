@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-08-22T22:38:32.548308Z",
+  "evidence_id": "fact-tas6424-sample-rate",
+  "title": "TAS6424-Q1 sample_rate",
+  "provenance": {
+    "created_at": "2026-08-22T22:38:32.548298Z",
+    "source": "DATASHEET",
+    "manufacturer": "Texas Instruments",
+    "document": "tas6424_q1-datasheet-4cbfe2ed1be61492.pdf",
+    "revision": null,
+    "page": "19",
+    "section": null,
+    "locator": "page=19",
+    "source_url": "https://www.ti.com/lit/ds/symlink/tas6424-q1.pdf",
+    "sha256": "4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e",
+    "acquisition_id": "acquisition-e3d49fb08688ebd9fed8d4fd"
+  },
+  "extracted_content": "The device supports FSYNC rates of 44.1 kHz, 48 kHz, or 96 kHz.",
+  "normalized_fact": "TAS6424-Q1 supports 44.1 kHz, 48 kHz, and 96 kHz audio sample rates.",
+  "confidence": null,
+  "artifact_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\texas_instruments\\tas6424_q1-datasheet-4cbfe2ed1be61492.pdf"
+}
