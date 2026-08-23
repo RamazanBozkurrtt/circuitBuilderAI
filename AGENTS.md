@@ -460,11 +460,42 @@ The exact structure may evolve if there is a concrete engineering reason.
 
 ---
 
+## Repository Inspection & Token Efficiency
+
+Minimize repository inspection without sacrificing correctness.
+
+For every task:
+
+1. Treat paths explicitly listed in the task prompt as the primary inspection scope.
+2. Do NOT recursively scan or read the entire repository unless the task explicitly requires a repository-wide change.
+3. Start with targeted filename/symbol search, then open only files required to understand the relevant interfaces.
+4. Follow imports/dependencies only when they materially affect the requested implementation.
+5. Once an interface or module is understood, do not repeatedly reopen unchanged files.
+6. If a required dependency exists outside the requested scope, inspect only the specific relevant file(s), not the surrounding directory.
+7. Do not read generated/runtime data unless explicitly required:
+   - vector indexes
+   - caches
+   - build artifacts
+   - `.git`
+   - project state history
+   - generated reports
+   - generated outputs
+8. Do not inspect `knowledge/` PDFs or datasheets unless the task specifically requires evidence, retrieval, component research, or datasheet validation.
+9. Do not inspect unrelated project directories under `projects/`.
+10. Do not read all tests before implementation. Inspect tests relevant to the changed modules, add targeted tests, then run the full suite only at completion when required.
+11. Prefer targeted searches such as symbol/name/reference lookup over opening whole directories or large files.
+12. Do not perform repository-wide architecture audits, scope scans, or searches at task completion unless explicitly requested.
+13. Existing passing modules outside task scope should be treated as stable unless evidence shows they must change.
+14. If the task prompt contains an explicit `Scope` or `Inspect only` section, treat it as a strong boundary. Leave that boundary only for concrete dependencies required for correctness.
+15. Engineering correctness overrides token optimization: inspect additional files when genuinely necessary, but keep expansion minimal and targeted.
+
+---
+
 ## Development Workflow
 
 For each implementation task:
 
-1. Inspect existing code first.
+1. Inspect only the existing code relevant to the requested task first; do not begin with a repository-wide scan.
 2. Preserve working architecture unless change is justified.
 3. Implement the requested scope only.
 4. Add/update tests.
