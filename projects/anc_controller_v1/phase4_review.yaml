@@ -1,0 +1,97 @@
+phase: 4
+status: NOT_READY_FOR_SCHEMATIC_VERIFICATION
+candidate_component_set:
+  signal_chain:
+    adc: ADAU1978WBCPZ
+    dsp: ADSP-21569BBCZ10
+    class_d_amplifier: TAS6424QDKQRQ1
+    power_management: ADP5054ACPZ-R7
+  evidence_selected_support:
+    afe_amplifier: THP210DR
+    microphone_esd: TPD2E2U06DCKR
+    oscillator: ASDLJ-24.576MHZ-D-X-R-T
+    clock_translator: SN74AVC2T245RSWR
+    reset_supervisor_candidate: ADM6315-30D3ARTZR7
+    boot_flash_candidate: IS25LP512M
+    class_d_dual_inductor_candidate: Cyntec VAMV06077E-3R3MM2-79
+  provisional_only:
+    microphone_connector: UNKNOWN
+    power_connector: UNKNOWN
+    input_fuse: UNKNOWN
+    reverse_polarity_protection: UNKNOWN
+    surge_clamp: UNKNOWN
+    jtag_connector: UNKNOWN
+    speaker_connectors: UNKNOWN
+    exact_lc_filter_capacitor: UNKNOWN
+
+sheet_structure:
+  - microphone_afe.kicad_sch
+  - adc.kicad_sch
+  - dsp.kicad_sch
+  - class_d_output.kicad_sch
+  - clock.kicad_sch
+  - power.kicad_sch
+  - boot_debug_control.kicad_sch
+
+calculated_values:
+  tdm:
+    sample_rate_hz: 96000
+    sample_width_bits: 24
+    slots: 4
+    slot_width_bits: 32
+    bclk_hz: 12288000
+    mclk_hz: 24576000
+  afe_provisional_envelope:
+    gain_db: 20
+    input_full_scale_rms_v: 0.2
+    input_resistor_ohm: 2000
+    feedback_resistor_ohm: 20000
+    ac_coupling_capacitor_f: 0.0000047
+    calculated_high_pass_hz: 16.93
+    note: This is not approved until microphone sensitivity and acoustic overload are known.
+  adp5054:
+    switching_frequency_hz: 500000
+    rt_calculated_ohm: 39008.9
+    rt_selected_ohm: 39000
+    feedback_bottom_ohm: 10000
+    channel_1_1v0:
+      feedback_top_calculated_ohm: 2500
+      feedback_top_selected_ohm: 2490
+      inductor_calculated_at_15v5_uH: 3.564
+      inductor_candidate_uH: 4.7
+    channel_3_3v3:
+      feedback_top_calculated_ohm: 31250
+      feedback_top_selected_ohm: 31600
+      inductor_calculated_at_15v5_uH: 5.937
+      inductor_candidate_uH: 6.8
+    channel_4_1v8:
+      feedback_top_calculated_ohm: 12500
+      feedback_top_selected_ohm: 12400
+      inductor_calculated_at_15v5_uH: 3.636
+      inductor_candidate_uH: 4.7
+  class_d_filter_envelope:
+    inductance_per_leg_uH: 3.3
+    capacitance_per_leg_uF: 1.0
+    documented_cutoff_hz_4ohm: 116000
+    documented_cutoff_hz_2ohm: 64000
+
+independent_review:
+  pass:
+    - Typed IR rejects unknown pins and pins connected to more than one net.
+    - Official ADSP-21569-family BSDL signal-ball map is hash pinned and parsed deterministically.
+    - ADAU1978 and TAS6424-Q1 support 96 kHz TDM4 with 128-fS BCLK and 256-fS MCLK.
+    - DSP is the only BCLK/FSYNC master; ADC and amplifier are slaves.
+    - The selected oscillator is exact, 1.8 V, 24.576 MHz, and documented at 150 fs maximum RMS jitter.
+    - The selected translator supports 1.8 V to 3.3 V operation well above 24.576 MHz.
+    - ADP5054 500 kHz avoids the 1.0 V channel minimum-on-time problem at the 15.5 V input-envelope maximum.
+  critical_unknown:
+    - Generated child sheets do not contain electrically wired KiCad symbol instances; they contain hierarchy and typed-IR annotations only.
+    - Full ADSP-21569 power and ground balls are still grouped placeholders and have not been expanded into the project-local symbol.
+    - AFE passives, VREF buffer, input coupling, RF filter, ESD return strategy, and headroom cannot be approved without the microphone sensitivity and overload envelope.
+    - ADP5054 compensation, bootstrap, low-side MOSFET, input/output capacitors, current-limit configuration, and sequence circuitry are absent.
+    - Boot flash, boot straps, reset supervisor/gating, JTAG connector, and unused DSP pins are absent from the emitted sheets.
+    - TAS6424-Q1 AREF, VREG, VCOM, AVDD, GVDD, bootstrap, PVDD bypass, output filters, snubbers, and speaker connectors are absent.
+    - Regulated-input connector, fuse, reverse-polarity protection, and surge protection are not evidence-selected.
+    - No KiCad installation is available, so the generated s-expression files were not parsed by kicad-cli; this is not reported as ERC.
+
+readiness: BLOCKED

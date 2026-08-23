@@ -2,492 +2,202 @@
 
 ## Project
 
-This repository contains a general-purpose AI-assisted PCB engineering engine with optional domain specialization layers.
+General-purpose AI-assisted PCB engineering engine with optional domain specializations.
 
-Primary long-term objective:
+Flow: `MASTER_SPEC → architecture → components → evidence → schematic → verification → PCB → verification → manufacturing`
 
-`MASTER_SPEC → architecture → component selection → evidence → schematic → verification → PCB layout → verification → iterative correction → manufacturing outputs`
+ANC is the first deep specialization, not a universal assumption.
 
-The first deep domain target is an Active Noise Cancellation controller PCB. ANC expertise extends the generic engine; it is not a universal assumption.
+Priority: engineering correctness > evidence/traceability > deterministic validation > reproducibility > token/code efficiency.
 
-This system prioritizes engineering correctness and design quality over simplicity.
+Never trade engineering quality for implementation simplicity.
 
----
+## Core Rules
 
-## Core Engineering Principles
+* LLM output is never the engineering source of truth.
+* Claims require evidence or deterministic validation.
+* Never invent missing engineering values.
+* Missing values remain explicit: `UNKNOWN`, assumption, unresolved requirement, design variable, or design envelope.
+* `UNKNOWN != PASS`; critical `FAIL` or critical `UNKNOWN` blocks progression.
+* Preserve provenance, rejected/superseded decisions, and previous state.
+* Prefer deterministic tools/calculations over LLM judgment.
+* Use LLMs for reasoning, proposals, comparison, review, and failure analysis.
+* Use datasheets, calculations, EDA, simulation, and rule engines for verification.
+* Malformed/unvalidated AI output fails closed.
+* Never implement fake validation.
 
-1. LLM output is never the source of truth.
-2. Engineering claims require evidence or deterministic validation.
-3. Never invent missing engineering values.
-4. Unknown values must remain explicitly UNKNOWN.
-5. UNKNOWN must never silently become PASS.
-6. Critical UNKNOWN values block progression.
-7. All important engineering decisions must have provenance.
-8. Prefer deterministic tools over LLM judgment whenever possible.
-9. Use LLMs for reasoning, proposal generation, comparison and failure analysis.
-10. Use EDA/simulation/rule engines for actual verification.
-11. Preserve design history and rejected/superseded decisions.
-12. Fail closed on malformed or unvalidated AI output.
-13. Do not reduce engineering quality merely to simplify implementation.
+## Repository Inspection & Token Efficiency
 
----
+1. Treat explicit task paths/scope as a strong boundary.
+2. Never recursively scan the repository unless explicitly required.
+3. Start with targeted filename/symbol/reference search.
+4. Open only files needed for relevant interfaces.
+5. Follow dependencies only when they materially affect the task.
+6. Outside scope, inspect only the specific required dependency file.
+7. Do not repeatedly reopen unchanged files once understood.
+8. Treat unrelated passing modules as stable unless evidence requires changes.
+9. Do not perform repo-wide audits or read all tests unless explicitly required.
+10. During development run targeted tests; run the full suite once at completion when requested.
+
+Do not inspect by default: `.git/`, caches, build artifacts, generated indexes, historical snapshots, generated reports/outputs, unrelated projects/tests.
+
+Inspect `knowledge/` only for evidence, retrieval, component research, schematic verification, or engineering validation.
+
+Engineering correctness overrides token optimization when extra inspection is genuinely necessary.
 
 ## Architecture
 
-The engineering flow is:
+Use one generic workflow:
 
-`MASTER_SPEC → generic PCB core → resolved domain specializations → one generic workflow with domain enhancements → validation/review/optimization`
+`MASTER_SPEC → generic core → resolved specializations → domain-aware engineering → validation`
 
-Do not create separate workflow graphs per domain. Agents and validators consume only the resolved specialization context relevant to the current project.
+Do not create separate full workflows per domain.
 
-Primary stack:
+Primary stack: Python 3.12+, Pydantic v2, Ollama, LangGraph, pytest, KiCad/kicad-cli, ngspice, hybrid datasheet retrieval.
 
-* Python 3.12+
-* Ollama
-* Pydantic v2
-* LangGraph
-* PyYAML
-* pytest
-* KiCad
-* kicad-cli
-* KiCad IPC API where appropriate
-* ngspice
-* Git
-
-Future retrieval may use:
-
-* structured datasheet parsing
-* lexical search
-* embeddings
-* hybrid retrieval
-* Qdrant
-
-Do not introduce infrastructure unless it improves engineering quality, reliability, traceability or reproducibility.
-
-Avoid unnecessary:
-
-* microservices
-* authentication
-* frontend frameworks
-* cloud infrastructure
-* distributed systems
-
-This is initially a local single-user engineering application.
-
----
-
-## LLM Rules
-
-Local inference is provided through Ollama.
-
-Never allow domain code to depend directly on Ollama.
-
-Use an abstraction such as:
-
-`StructuredLLM`
-
-LLM requests used by program logic must use typed structured output.
-
-Preferred pattern:
-
-`Pydantic model → model_json_schema() → Ollama structured output → local Pydantic validation`
-
-Do not:
-
-* regex-repair malformed JSON
-* trust unvalidated natural language
-* silently coerce invalid engineering values
-* allow infinite retries
-* give the LLM unrestricted shell access
-
-Use deterministic generation settings where appropriate.
-
-Model name and Ollama endpoint must be configuration values.
-
----
-
-## Engineering State
-
-Maintain one authoritative `DesignState`.
-
-It should eventually contain:
-
-* MASTER_SPEC
-* architecture
-* components
-* evidence
-* engineering decisions
-* verification results
-* warnings
-* blockers
-* workflow stage
-* iteration
-* immutable history
-
-Important workflow stages:
-
-* SPECIFICATION
-* ARCHITECTURE
-* COMPONENT_SELECTION
-* DATASHEET_ANALYSIS
-* SCHEMATIC
-* SCHEMATIC_VERIFICATION
-* PCB_LAYOUT
-* PCB_VERIFICATION
-* MANUFACTURING
-* COMPLETE
-* BLOCKED
-
-State transitions must be explicit.
-
-Persist state after major engineering stages.
-
-Maintain a current snapshot plus immutable historical snapshots.
-
----
+Avoid unnecessary microservices, auth, cloud/distributed systems, or frontend infrastructure. This is initially a local single-user tool.
 
 ## MASTER_SPEC
 
-`MASTER_SPEC` is the authoritative design requirement contract.
+`MASTER_SPEC` is the authoritative project contract.
 
-The user will NOT rely on the local model to translate arbitrary natural language into this contract.
+The local Ollama model must not translate arbitrary user NL into MASTER_SPEC; a stronger external model may prepare/update it before the local workflow starts.
 
-A stronger external reasoning model may create or update MASTER_SPEC before the local engineering pipeline runs.
+Never silently override it.
 
-Never override MASTER_SPEC silently.
+Distinguish: `USER_CONSTRAINT`, `ENGINEERING_DESIGN_VARIABLE`, `ASSUMPTION`, `DESIGN_ENVELOPE`, `UNKNOWN`.
 
-Missing information must use explicit typed unresolved states.
+System proposals must never silently become user requirements.
 
-Engineering-sensitive defaults must not be invented.
+## Specializations
 
-MASTER_SPEC controls project intent, including requested domain specializations. The generic PCB core always applies. Resolved specializations add engineering requirements, guidance, evidence expectations, and future validation capabilities without replacing generic correctness checks.
+Generic PCB engineering always applies.
 
-Specialization inheritance and composition must be explicit, typed, deterministic, and traceable. Unknown dependencies, cycles, and conflicts must fail explicitly. Store both requested and resolved specialization identities and versions in engineering state.
+Supported families may include: `generic`, `mixed_signal`, `audio`, `audio_anc`, `high_speed_digital`, `power_electronics`, `rf`.
 
-ANC-specific assumptions must never leak into unrelated projects. A generic board must not be forced to declare microphones, codecs, DSP, audio performance, or ANC latency. Future RF, power, high-speed, and other specializations may reach the same depth as ANC.
+Resolution must be typed, deterministic, composable, traceable, and reject unknown dependencies, cycles, or unresolved conflicts.
 
----
+Store requested and resolved specializations. Do not load irrelevant domain guidance.
+
+When `audio_anc` is active, additionally consider microphone/input topology, ADC/DSP/output architecture, FxLMS/MIMO workload, compute/memory/headroom, sample rate/bit depth, synchronization, latency, SNR/THD+N/noise, clock jitter, grounding/return paths, low-noise power, partitioning, amplifier coupling, thermal, and EMI/EMC.
+
+Unknown latency is never zero. A board that only powers on is not sufficient for ANC. Unavailable ANC checks remain `UNKNOWN`/unavailable, never `PASS`.
+
+## LLM Rules
+
+Domain logic depends on a provider-independent abstraction such as `StructuredLLM`, not directly on Ollama.
+
+Pattern: `Pydantic → JSON Schema → structured LLM output → local Pydantic validation`.
+
+Do not trust arbitrary NL for program state, regex-repair malformed JSON, silently coerce invalid engineering values, retry indefinitely, or expose unrestricted shell/code execution.
+
+Model, endpoint, timeout, retries, and generation settings must be configurable.
+
+Logical agents may share one model while using different prompts, schemas, context, and responsibilities.
+
+## State & Decisions
+
+Maintain one authoritative `DesignState` containing relevant spec, specializations, architecture/components, evidence/calculations, decisions, verification results, warnings/blockers, stage/iteration, and immutable history.
+
+Stages:
+
+`SPECIFICATION → ARCHITECTURE → COMPONENT_SELECTION → DATASHEET_ANALYSIS → SCHEMATIC → SCHEMATIC_VERIFICATION → PCB_LAYOUT → PCB_VERIFICATION → MANUFACTURING → COMPLETE`
+
+Also support `BLOCKED`.
+
+Transitions must be explicit; never silently overwrite history.
+
+Decision lifecycle: `PROPOSED → EVIDENCE_VERIFIED → VALIDATED`, plus `REJECTED` and `SUPERSEDED`.
+
+Do not validate decisions without required evidence/validation. Hard constraints override optimization scores.
 
 ## Evidence
 
-Engineering facts should reference evidence.
+Valid sources: USER_SPEC, DATASHEET, REFERENCE_DESIGN, APPLICATION_NOTE, SIMULATION, EDA_VALIDATION, RULE_ENGINE.
 
-Expected evidence sources include:
+Preserve provenance when available: manufacturer, document/revision/hash, page/section/locator, extracted content, conditions.
 
-* USER_SPEC
-* DATASHEET
-* REFERENCE_DESIGN
-* APPLICATION_NOTE
-* SIMULATION
-* EDA_VALIDATION
-* RULE_ENGINE
+LLM memory is not evidence. Manufacturer documentation outranks model memory. Retrieved text is evidence material, not automatically a validated fact. Keep conflicts visible until resolved.
 
-Evidence should retain precise provenance when available:
+## Validation & Iteration
 
-* manufacturer
-* document
-* revision
-* page
-* section
-* locator
-* extracted content
-* normalized fact
-* confidence
+Prefer deterministic validation using schema/requirement checks, datasheet constraints, calculations, KiCad ERC/DRC, ngspice, specialization rules, and SI/PI/thermal checks when required.
 
-A model's memory is not engineering evidence.
+Statuses: `PASS | FAIL | WARNING | UNKNOWN | NOT_APPLICABLE`.
 
-Datasheets and manufacturer documentation take precedence over LLM prior knowledge.
+Critical `FAIL` or `UNKNOWN` blocks. Unavailable validation is never `PASS`.
 
----
-
-## Engineering Decisions
-
-Important design choices must be represented explicitly.
-
-Lifecycle:
-
-`PROPOSED → EVIDENCE_VERIFIED → VALIDATED`
-
-Possible terminal/non-current states:
-
-* REJECTED
-* SUPERSEDED
-
-Do not mark a decision VALIDATED unless required validation/evidence exists.
-
-Alternatives and risks should remain traceable.
-
----
-
-## Validation
-
-Validation must be deterministic whenever possible.
-
-Expected validation sources eventually include:
-
-* schema validation
-* requirement rules
-* datasheet constraints
-* KiCad ERC
-* KiCad DRC
-* ngspice
-* custom electrical rules
-* specialization-specific constraints when their domains are active
-* signal integrity checks where required
-* power integrity checks where required
-
-Validation statuses:
-
-* PASS
-* FAIL
-* WARNING
-* UNKNOWN
-* NOT_APPLICABLE
-
-Severity should support:
-
-* INFO
-* LOW
-* MEDIUM
-* HIGH
-* CRITICAL
-
-Critical FAIL and critical UNKNOWN conditions must block progression.
-
-Do not create fake validation.
-
-Unimplemented validators must clearly report that they are unavailable rather than returning PASS.
-
----
-
-## Iterative Design
-
-The final architecture must support controlled loops such as:
+Support bounded loops:
 
 `Design → Validate → Review → Diagnose → Correct → Validate`
 
-All loops must be bounded.
+Every loop must have an iteration limit, preserve prior state/failure reason, return to the correct stage, and stop explicitly when blocked.
 
-Never create infinite autonomous loops.
-
-The workflow must know why it returned to an earlier stage.
-
-Corrections must preserve previous state/history.
-
----
-
-## Agent Responsibilities
-
-Logical roles may include:
-
-* Architecture
-* Component Selection
-* Datasheet Analysis
-* Schematic Design
-* Electrical Review
-* PCB Layout
-* PCB Review
-* ANC Performance Review when the ANC specialization is active
-* Failure Analysis
-* Manufacturing Review
-
-These roles may share the same Ollama model.
-
-Do not run unnecessary separate model instances.
-
-Different roles should use different prompts, context and output schemas.
-
-Agent separation exists for reasoning quality and verification independence, not for architectural decoration.
-
----
-
-## ANC Specialization Quality Goals
-
-When `audio_anc` is selected, the resolved project includes the generic, mixed-signal, audio, and ANC engineering layers. These requirements must remain available at high quality but inactive for unrelated boards.
-
-Future validation must consider, where applicable:
-
-* microphone channel count
-* speaker/output channel count
-* ADC performance
-* DAC performance
-* audio codec architecture
-* DSP capability
-* FxLMS/MIMO processing requirements
-* sample rate
-* bit depth
-* total input-to-output latency
-* converter latency
-* DSP buffering latency
-* channel synchronization
-* SNR
-* THD+N
-* microphone input noise
-* clock quality/jitter
-* power supply noise
-* grounding
-* analog/digital partitioning
-* amplifier noise
-* thermal constraints
-* EMI/EMC considerations
-
-A PCB that merely powers on is not sufficient.
-
-ANC performance requirements are first-class engineering requirements.
-
-These are declarative future requirements until the corresponding deterministic validators exist. An unavailable ANC validator or capability must report UNKNOWN/unavailable, never PASS.
-
----
-
-## KiCad / EDA Integration
-
-Use the most appropriate supported interface for each operation.
-
-Potential interfaces:
-
-* `kicad-cli`
-* KiCad IPC API
-* `kicad-python`
-* validated file generation/transformation when unavoidable
-
-Do not assume one API supports every KiCad operation.
-
-Abstract EDA operations behind typed interfaces.
-
-The LLM must never directly execute arbitrary shell commands.
-
-Use allowlisted tools with typed arguments.
-
----
-
-## Tool Security
-
-All tools must be registered explicitly.
-
-Requirements:
-
-* allowlisted tools only
-* typed inputs
-* validated outputs
-* bounded execution
-* clear failures
-* no unrestricted shell tool
-* no arbitrary code execution originating from model output
-
-Unknown tool requests must be rejected.
-
----
-
-## Testing
-
-Engineering infrastructure requires tests.
-
-Unit tests must not require a running Ollama instance.
-
-Live Ollama tests must be marked integration tests.
-
-Test important failure paths, especially:
-
-* malformed structured AI output
-* missing critical requirements
-* UNKNOWN critical values
-* invalid state transitions
-* missing evidence
-* invalid decisions
-* failed validation
-* excessive retry/iteration
-* unknown tools
-* state snapshot immutability
-* prohibited arbitrary execution
-
-Do not only test happy paths.
-
----
-
-## Coding Guidelines
+## EDA & Tool Security
 
 Prefer:
 
-* small cohesive modules
-* explicit types
-* Pydantic contracts
-* dependency inversion around external systems
-* deterministic functions
-* meaningful domain names
-* clear exceptions
-* testable code
+`LLM → typed engineering IR → deterministic validation → EDA backend`
 
-Avoid:
+Avoid direct arbitrary LLM-generated KiCad content.
 
-* giant agent classes
-* hidden mutable global state
-* magic dictionaries where typed models fit
-* premature abstraction
-* duplicated schemas
-* silent exception swallowing
-* placeholder code pretending to work
+Use appropriate supported interfaces: `kicad-cli`, KiCad IPC API, `kicad-python`, or validated file transformation when unavoidable.
 
-Do not add dependencies without a concrete reason.
+Pin maps, voltage domains, power connections, and interfaces are safety-critical and require evidence validation.
 
----
+Executable tools must be allowlisted with typed inputs, validated outputs, bounded execution, and explicit failures. Never expose unrestricted shell/arbitrary commands/model-generated code execution.
 
-## Repository Layout
+## Components & Retrieval
 
-Preferred high-level layout:
+Never invent part numbers. A candidate requires evidence establishing its identity.
 
-```text
-src/ai_pcb/
-    models/
-    llm/
-    workflow/
-    specializations/
-    evidence/
-    validation/
-    tools/
-    persistence/
+Use labeled design envelopes/scenarios instead of invented fixed requirements when exact values are not user constraints. Scenarios are not user requirements.
 
-tests/
+Use evidence-preserving hybrid retrieval: lexical/exact + semantic + metadata filtering + section/table awareness + bounded context expansion + provenance.
 
-projects/
+Part numbers, pins, rails, registers, and clock names must remain exactly searchable.
 
-knowledge/
-    datasheets/
-    reference_designs/
-    app_notes/
-```
+Do not send entire datasheets to the LLM when targeted retrieval is possible. Keep real retrieval regression tests separate from synthetic tests.
 
-The exact structure may evolve if there is a concrete engineering reason.
+## Testing & Coding
 
----
+Unit tests must not require live Ollama; live model tests are integration tests.
+
+Test important failure paths: malformed LLM output, critical UNKNOWN, invalid transitions, missing evidence, unsupported components, failed validation, excessive retries, unknown tools, history overwrite, specialization leakage, retrieval regressions, invalid pins/interfaces.
+
+Do not weaken existing tests to make new work pass.
+
+Prefer small cohesive modules, explicit typing/Pydantic contracts, deterministic functions, dependency inversion, explicit exceptions, and testable code.
+
+Avoid giant agent classes, mutable globals, untyped magic dictionaries, duplicated schemas, hidden assumptions, silent exception swallowing, fake placeholders, and unnecessary dependencies/abstractions.
 
 ## Development Workflow
 
-For each implementation task:
+1. Read this file.
+2. Inspect only task-relevant code and respect scope/path boundaries.
+3. Understand required interfaces.
+4. Implement only the requested scope.
+5. Add/update targeted tests.
+6. Run targeted tests while developing.
+7. Run required full verification once at completion.
+8. Report concise exact results, blockers, and deferred work.
+9. Do not claim unimplemented capabilities work.
+10. Do not continue into another phase unless requested.
+11. Do not repeatedly rediscover established architecture.
 
-1. Inspect existing code first.
-2. Preserve working architecture unless change is justified.
-3. Implement the requested scope only.
-4. Add/update tests.
-5. Run relevant tests.
-6. Run the full suite when practical.
-7. Report exact results.
-8. Report deferred or mocked functionality explicitly.
-9. Do not claim unimplemented engineering capability works.
-10. Do not proceed into a later project phase unless requested.
-
----
+## Datasheet Inspection Efficiency
+- Do not dump or read entire datasheets into temporary text files by default.
+- Use the existing evidence ingestion/retrieval system first.
+- Retrieve only the pages/chunks needed for the current engineering question.
+- Use targeted PDF page/block extraction only when retrieval is insufficient.
+- Full-document extraction is allowed only when a concrete task requires it.
+- Do not load large extracted files into model context when targeted evidence is available.
 
 ## Definition of Done
 
-A task is complete only when:
+A task is complete when requested behavior exists; contracts remain valid; relevant tests pass; failure paths are handled; evidence/provenance is preserved; architecture remains consistent; no fake validation or unsupported fact promotion exists; phase boundaries are respected; deferred work is explicit.
 
-* requested behavior exists
-* types/contracts are valid
-* relevant tests exist
-* tests pass
-* failure paths are handled
-* architecture remains consistent
-* no fake engineering validation was introduced
-* deferred functionality is documented
+When requested, run: pytest, Ruff, strict MyPy, `git diff --check`.
 
-Engineering correctness takes precedence over minimizing code size.
+Engineering correctness always takes precedence over token/code minimization.
+

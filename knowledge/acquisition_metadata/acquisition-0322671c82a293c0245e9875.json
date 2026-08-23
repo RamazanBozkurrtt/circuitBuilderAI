@@ -1,0 +1,19 @@
+{
+  "acquisition_id": "acquisition-0322671c82a293c0245e9875",
+  "original_url": "https://www.ti.com/lit/ds/symlink/thp210.pdf",
+  "final_url": "https://www.ti.com/lit/ds/symlink/thp210.pdf",
+  "manufacturer": "Texas Instruments",
+  "part_number": "THP210",
+  "document_type": "DATASHEET",
+  "content_type": "application/pdf",
+  "retrieved_at": "2026-08-23T10:49:42.613874Z",
+  "sha256": "c84641ad2e15584c073ae7cd9f1ad2cadd2c1fe5035819b825dc581e364807f8",
+  "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\texas_instruments\\thp210-datasheet-c84641ad2e15584c.pdf",
+  "http_status": 200,
+  "verification_status": "TRUSTED",
+  "verification_messages": [
+    "trusted domain, PDF format, manufacturer, part number, and document type verified"
+  ],
+  "unchanged": false,
+  "previous_sha256": null
+}

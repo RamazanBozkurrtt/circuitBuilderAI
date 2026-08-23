@@ -15,6 +15,7 @@ class ManufacturerDocumentType(StrEnum):
     REFERENCE_DESIGN = "REFERENCE_DESIGN"
     EVALUATION_BOARD_GUIDE = "EVALUATION_BOARD_GUIDE"
     ERRATA = "ERRATA"
+    BOUNDARY_SCAN_DESCRIPTION = "BOUNDARY_SCAN_DESCRIPTION"
 
 
 class AcquisitionUrlOrigin(StrEnum):
@@ -33,6 +34,7 @@ class AcquisitionVerificationStatus(StrEnum):
 class AcquisitionChangeKind(StrEnum):
     ACQUIRED = "ACQUIRED"
     CONTENT_CHANGED = "CONTENT_CHANGED"
+    VERIFICATION_CHANGED = "VERIFICATION_CHANGED"
 
 
 class AcquisitionRequest(StrictModel):
@@ -99,8 +101,16 @@ class AcquisitionResult(StrictModel):
         if self.verification_status is AcquisitionVerificationStatus.TRUSTED:
             if self.http_status < 200 or self.http_status >= 300:
                 raise ValueError("trusted acquisition requires a successful HTTP response")
-            if self.content_type != "application/pdf":
-                raise ValueError("trusted acquisition requires PDF content")
+            expected_types = {
+                ManufacturerDocumentType.BOUNDARY_SCAN_DESCRIPTION: {
+                    "application/octet-stream",
+                    "text/plain",
+                }
+            }.get(self.document_type, {"application/pdf"})
+            if self.content_type not in expected_types:
+                raise ValueError(
+                    "trusted acquisition content type does not match the document type"
+                )
         return self
 
     def provenance(self) -> ManufacturerAcquisitionProvenance:

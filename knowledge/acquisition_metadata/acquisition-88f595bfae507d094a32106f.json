@@ -1,0 +1,19 @@
+{
+  "acquisition_id": "acquisition-88f595bfae507d094a32106f",
+  "original_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adm6315.pdf",
+  "final_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adm6315.pdf",
+  "manufacturer": "Analog Devices",
+  "part_number": "ADM6315",
+  "document_type": "DATASHEET",
+  "content_type": "application/pdf",
+  "retrieved_at": "2026-08-23T10:49:46.015125Z",
+  "sha256": "80976019d58f729126f43fb23092ec368bdb7b28bbf93ef53c7b582609bb2cdd",
+  "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\analog_devices\\adm6315-datasheet-80976019d58f7291.pdf",
+  "http_status": 200,
+  "verification_status": "TRUSTED",
+  "verification_messages": [
+    "trusted domain, PDF format, manufacturer, part number, and document type verified"
+  ],
+  "unchanged": false,
+  "previous_sha256": null
+}

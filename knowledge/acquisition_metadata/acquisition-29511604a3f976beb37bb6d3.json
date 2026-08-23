@@ -1,0 +1,19 @@
+{
+  "acquisition_id": "acquisition-29511604a3f976beb37bb6d3",
+  "original_url": "https://www.analog.com/media/en/simulation-models/bsdl-model-files/adsp-21566_adsp-21567_adsp-21569_bga_bsdl.bsdl",
+  "final_url": "https://www.analog.com/media/en/simulation-models/bsdl-model-files/adsp-21566_adsp-21567_adsp-21569_bga_bsdl.bsdl",
+  "manufacturer": "Analog Devices",
+  "part_number": "ADSP21569",
+  "document_type": "BOUNDARY_SCAN_DESCRIPTION",
+  "content_type": "application/octet-stream",
+  "retrieved_at": "2026-08-23T10:49:39.543199Z",
+  "sha256": "06d87db0de185714250360489f78330732a38d20a32e7bb08df4e711a1430562",
+  "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\boundary_scan\\analog_devices\\adsp21569-boundary_scan_description-06d87db0de185714.bsdl",
+  "http_status": 200,
+  "verification_status": "TRUSTED",
+  "verification_messages": [
+    "trusted domain, BSDL structure, part number, and document type verified"
+  ],
+  "unchanged": false,
+  "previous_sha256": null
+}

@@ -1,0 +1,19 @@
+{
+  "acquisition_id": "acquisition-c38de8a5afaf388b9d163fb6",
+  "original_url": "https://www.analog.com/media/en/technical-documentation/eval-board-schematic/ev-21569-som-schematic.pdf",
+  "final_url": "https://www.analog.com/media/en/technical-documentation/eval-board-schematic/ev-21569-som-schematic.pdf",
+  "manufacturer": "Analog Devices",
+  "part_number": "EV-21569-SOM",
+  "document_type": "REFERENCE_DESIGN",
+  "content_type": "application/pdf",
+  "retrieved_at": "2026-08-23T10:50:37.406088Z",
+  "sha256": "4d17b931291563f925ed3cb1bf14d7b02e0546d92f48c58a2e54da07c3cec9ea",
+  "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\reference_designs\\analog_devices\\ev_21569_som-reference_design-4d17b931291563f9.pdf",
+  "http_status": 200,
+  "verification_status": "TRUSTED",
+  "verification_messages": [
+    "trusted domain, PDF format, manufacturer, part number, and document type verified"
+  ],
+  "unchanged": false,
+  "previous_sha256": "4d17b931291563f925ed3cb1bf14d7b02e0546d92f48c58a2e54da07c3cec9ea"
+}

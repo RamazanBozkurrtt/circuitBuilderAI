@@ -45,7 +45,11 @@ class DocumentIndexer(Protocol):
 _REDIRECT_STATUSES = {301, 302, 303, 307, 308}
 _SAFE_NAME = re.compile(r"[^a-z0-9]+")
 _DOCUMENT_TYPE_MARKERS: dict[ManufacturerDocumentType, tuple[str, ...]] = {
-    ManufacturerDocumentType.DATASHEET: ("data sheet", "datasheet"),
+    ManufacturerDocumentType.DATASHEET: (
+        "data sheet",
+        "datasheet",
+        "electrical specifications",
+    ),
     ManufacturerDocumentType.HARDWARE_REFERENCE: ("hardware reference",),
     ManufacturerDocumentType.APPLICATION_NOTE: (
         "application note",
@@ -53,7 +57,7 @@ _DOCUMENT_TYPE_MARKERS: dict[ManufacturerDocumentType, tuple[str, ...]] = {
         "engineer-to-engineer note",
         "engineer to engineer note",
     ),
-    ManufacturerDocumentType.REFERENCE_DESIGN: ("reference design",),
+    ManufacturerDocumentType.REFERENCE_DESIGN: ("reference design", "schematic"),
     ManufacturerDocumentType.EVALUATION_BOARD_GUIDE: (
         "evaluation board",
         "evaluation module",
@@ -61,10 +65,17 @@ _DOCUMENT_TYPE_MARKERS: dict[ManufacturerDocumentType, tuple[str, ...]] = {
         "user guide",
     ),
     ManufacturerDocumentType.ERRATA: ("errata", "anomaly list"),
+    ManufacturerDocumentType.BOUNDARY_SCAN_DESCRIPTION: (
+        "bsdl",
+        "physical_pin_map",
+        "boundary_register",
+    ),
 }
 _MANUFACTURER_MARKERS: dict[str, tuple[str, ...]] = {
-    "analog devices": ("analog devices", "analog devices, inc."),
+    "analog devices": ("analog devices", "analog devices, inc.", "1-800-analogd"),
     "texas instruments": ("texas instruments",),
+    "abracon": ("abracon",),
+    "integrated silicon solution": ("integrated silicon solution", "issi.com"),
 }
 
 
@@ -90,10 +101,13 @@ def _document_directory(document_type: ManufacturerDocumentType) -> str:
         ManufacturerDocumentType.REFERENCE_DESIGN: "reference_designs",
         ManufacturerDocumentType.EVALUATION_BOARD_GUIDE: "reference_designs",
         ManufacturerDocumentType.ERRATA: "errata",
+        ManufacturerDocumentType.BOUNDARY_SCAN_DESCRIPTION: "boundary_scan",
     }[document_type]
 
 
 def evidence_source_for(document_type: ManufacturerDocumentType) -> EvidenceSource:
+    if document_type is ManufacturerDocumentType.BOUNDARY_SCAN_DESCRIPTION:
+        return EvidenceSource.EDA_VALIDATION
     return EvidenceSource(document_type.value)
 
 
@@ -136,13 +150,21 @@ class HttpManufacturerDocumentationProvider:
                 f"manufacturer document returned HTTP {response.status_code}"
             )
         content = response.content
-        if content_type != "application/pdf" or not content.startswith(b"%PDF-"):
+        is_bsdl = request.document_type is ManufacturerDocumentType.BOUNDARY_SCAN_DESCRIPTION
+        if is_bsdl:
+            if content_type not in {"application/octet-stream", "text/plain"}:
+                raise InvalidDownloadedDocumentError("downloaded response is not a BSDL artifact")
+        elif content_type != "application/pdf" or not content.startswith(b"%PDF-"):
             raise InvalidDownloadedDocumentError(
                 "downloaded response is not an application/pdf PDF document"
             )
         if len(content) < 32:
             raise InvalidDownloadedDocumentError("downloaded PDF is empty")
-        extracted_text = self._extract_identity_text(content)
+        extracted_text = (
+            self._extract_bsdl_identity_text(content)
+            if is_bsdl
+            else self._extract_identity_text(content)
+        )
         status, messages = self._verify_identity(request, extracted_text)
         digest = hashlib.sha256(content).hexdigest()
         local_path = self._store_original(request, content, digest, status)
@@ -229,6 +251,19 @@ class HttpManufacturerDocumentationProvider:
         finally:
             document.close()  # type: ignore[no-untyped-call]
 
+    @staticmethod
+    def _extract_bsdl_identity_text(content: bytes) -> str:
+        try:
+            text = content.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise InvalidDownloadedDocumentError("BSDL artifact is not UTF-8 text") from exc
+        folded = text.casefold()
+        if "entity " not in folded or "physical_pin_map" not in folded:
+            raise InvalidDownloadedDocumentError(
+                "artifact does not contain a BSDL entity and pin map"
+            )
+        return text
+
     def _verify_identity(
         self, request: AcquisitionRequest, extracted_text: str
     ) -> tuple[AcquisitionVerificationStatus, list[str]]:
@@ -236,7 +271,8 @@ class HttpManufacturerDocumentationProvider:
         normalized = _identity_text(extracted_text)
         failures: list[str] = []
         markers = _MANUFACTURER_MARKERS.get(request.manufacturer.casefold(), ())
-        if not markers or not any(marker in folded for marker in markers):
+        is_bsdl = request.document_type is ManufacturerDocumentType.BOUNDARY_SCAN_DESCRIPTION
+        if not is_bsdl and (not markers or not any(marker in folded for marker in markers)):
             failures.append("expected manufacturer identity does not appear in the PDF")
         if _identity_text(request.part_number) not in normalized:
             failures.append("expected part number does not appear in the PDF")
@@ -253,7 +289,14 @@ class HttpManufacturerDocumentationProvider:
         if failures:
             return AcquisitionVerificationStatus.IDENTITY_UNVERIFIED, failures
         return AcquisitionVerificationStatus.TRUSTED, [
-            "trusted domain, PDF format, manufacturer, part number, and document type verified"
+            (
+                "trusted domain, BSDL structure, part number, and document type verified"
+                if is_bsdl
+                else (
+                    "trusted domain, PDF format, manufacturer, part number, and document "
+                    "type verified"
+                )
+            )
         ]
 
     def _store_original(
@@ -266,16 +309,19 @@ class HttpManufacturerDocumentationProvider:
         manufacturer_slug = _slug(request.manufacturer)
         if status is AcquisitionVerificationStatus.TRUSTED:
             directory = (
-                self.knowledge_root
-                / _document_directory(request.document_type)
-                / manufacturer_slug
+                self.knowledge_root / _document_directory(request.document_type) / manufacturer_slug
             )
         else:
             directory = self.knowledge_root / "quarantine" / manufacturer_slug
         directory.mkdir(parents=True, exist_ok=True)
+        suffix = (
+            ".bsdl"
+            if request.document_type is ManufacturerDocumentType.BOUNDARY_SCAN_DESCRIPTION
+            else ".pdf"
+        )
         filename = (
             f"{_slug(request.part_number)}-{request.document_type.value.casefold()}-"
-            f"{digest[:16]}.pdf"
+            f"{digest[:16]}{suffix}"
         )
         path = (directory / filename).resolve()
         if path.is_file():
@@ -297,9 +343,7 @@ class HttpManufacturerDocumentationProvider:
     def _catalog(self) -> AcquisitionCatalog:
         if not self.catalog_path.is_file():
             return AcquisitionCatalog()
-        return AcquisitionCatalog.model_validate_json(
-            self.catalog_path.read_text(encoding="utf-8")
-        )
+        return AcquisitionCatalog.model_validate_json(self.catalog_path.read_text(encoding="utf-8"))
 
     def _register(self, result: AcquisitionResult) -> AcquisitionResult:
         catalog = self._catalog()
@@ -314,9 +358,14 @@ class HttpManufacturerDocumentationProvider:
             ),
             None,
         )
-        if prior is not None and prior.sha256 == result.sha256:
+        if (
+            prior is not None
+            and prior.sha256 == result.sha256
+            and prior.verification_status is result.verification_status
+        ):
             return prior.model_copy(update={"unchanged": True})
-        changed = prior is not None
+        changed = prior is not None and prior.sha256 != result.sha256
+        reverification = prior is not None and not changed
         registered = result.model_copy(
             update={"previous_sha256": prior.sha256 if prior is not None else None}
         )
@@ -325,7 +374,11 @@ class HttpManufacturerDocumentationProvider:
             kind=(
                 AcquisitionChangeKind.CONTENT_CHANGED
                 if changed
-                else AcquisitionChangeKind.ACQUIRED
+                else (
+                    AcquisitionChangeKind.VERIFICATION_CHANGED
+                    if reverification
+                    else AcquisitionChangeKind.ACQUIRED
+                )
             ),
             acquisition_id=registered.acquisition_id,
             original_url=registered.original_url,
@@ -340,7 +393,7 @@ class HttpManufacturerDocumentationProvider:
         )
         self.metadata_root.mkdir(parents=True, exist_ok=True)
         document_metadata = self.metadata_root / f"{registered.acquisition_id}.json"
-        if not document_metadata.exists():
+        if not document_metadata.exists() or reverification:
             document_metadata.write_text(
                 registered.model_dump_json(indent=2), encoding="utf-8", newline="\n"
             )
@@ -384,9 +437,7 @@ class ManufacturerEvidenceAcquisitionPipeline:
                         part_number=result.part_number,
                         acquisition_provenance=result.provenance(),
                     )
-                    reports.append(
-                        self.indexer.index_document(record).model_dump(mode="json")
-                    )
+                    reports.append(self.indexer.index_document(record).model_dump(mode="json"))
             except (AcquisitionError, OSError, ValueError) as exc:
                 failures.append(AcquisitionFailure(request=request, error=str(exc)))
         return AcquisitionBatchResult(

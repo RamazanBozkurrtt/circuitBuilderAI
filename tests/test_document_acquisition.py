@@ -144,6 +144,33 @@ def test_invalid_non_pdf_response_fails_closed(tmp_path: Path) -> None:
         _provider(tmp_path, transport).acquire(_request())
 
 
+def test_trusted_manufacturer_bsdl_is_content_addressed(tmp_path: Path) -> None:
+    content = b"""-- BSDL for ADSP21569
+entity ADSP21569 is
+  generic (PHYSICAL_PIN_MAP : string := \"PKG_400CSPBGA\");
+  attribute BOUNDARY_REGISTER of ADSP21569: entity is \"0\";
+end ADSP21569;
+"""
+    transport = httpx.MockTransport(
+        lambda request: httpx.Response(
+            200,
+            headers={"content-type": "application/octet-stream"},
+            content=content,
+            request=request,
+        )
+    )
+    result = _provider(tmp_path, transport).acquire(
+        AcquisitionRequest(
+            manufacturer="Analog Devices",
+            part_number="ADSP21569",
+            document_type=ManufacturerDocumentType.BOUNDARY_SCAN_DESCRIPTION,
+            canonical_source_url="https://www.analog.com/adsp21569.bsdl",
+        )
+    )
+    assert result.verification_status is AcquisitionVerificationStatus.TRUSTED
+    assert Path(result.local_path).suffix == ".bsdl"
+
+
 def test_wrong_part_number_document_is_not_trusted(tmp_path: Path) -> None:
     transport = httpx.MockTransport(
         lambda request: httpx.Response(
