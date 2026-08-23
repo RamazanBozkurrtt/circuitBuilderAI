@@ -1,0 +1,62 @@
+[
+  {
+    "case_id": "holdout-adau-full-scale-common-mode",
+    "query": {"query": "differential full-scale input and input common-mode voltage", "part_number": "ADAU1978", "top_k": 5},
+    "expected_document_id": "doc-0b11dc12b9252bbae514fe75",
+    "expected_page": 3
+  },
+  {
+    "case_id": "holdout-adau-tdm4-clock",
+    "query": {"query": "TDM4 bit clock for four 32-bit slots", "part_number": "ADAU1978", "top_k": 5},
+    "expected_document_id": "doc-0b11dc12b9252bbae514fe75",
+    "expected_page": 19
+  },
+  {
+    "case_id": "holdout-adau-96k-current",
+    "query": {"query": "IOVDD current at 96 kHz and four-channel ADC analog current", "part_number": "ADAU1978", "top_k": 5},
+    "expected_document_id": "doc-0b11dc12b9252bbae514fe75",
+    "expected_page": 4
+  },
+  {
+    "case_id": "holdout-tas-96k-latency",
+    "query": {"query": "input to output latency sample count when FSYNC is 96 kHz", "part_number": "TAS6424-Q1", "top_k": 5},
+    "expected_document_id": "doc-65522416cfc0ceb9a550712a",
+    "expected_page": 10
+  },
+  {
+    "case_id": "holdout-tas-tdm4-format",
+    "query": {"query": "TDM mode four channels 24-bit data and serial clock ratio", "part_number": "TAS6424-Q1", "top_k": 5},
+    "expected_document_id": "doc-65522416cfc0ceb9a550712a",
+    "expected_page": 19
+  },
+  {
+    "case_id": "holdout-tas-three-supplies",
+    "query": {"query": "PVDD VBAT VDD three power supply recommendations", "part_number": "TAS6424-Q1", "top_k": 5},
+    "expected_document_id": "doc-65522416cfc0ceb9a550712a",
+    "expected_page": 55
+  },
+  {
+    "case_id": "holdout-adsp-operating-rails",
+    "query": {"query": "core external IO analog and clock reference supply voltages", "part_number": "ADSP-21569", "top_k": 5},
+    "expected_document_id": "doc-95221221bd9522f368d4a5fd",
+    "expected_page": 44
+  },
+  {
+    "case_id": "holdout-adsp-reset-release",
+    "query": {"query": "hardware reset deassertion after supplies and system clock stable", "part_number": "ADSP-21569", "top_k": 5},
+    "expected_document_id": "doc-95221221bd9522f368d4a5fd",
+    "expected_page": 53
+  },
+  {
+    "case_id": "holdout-adsp-fir-macs",
+    "query": {"query": "FIR accelerator multiplier accumulator units and operating clock", "part_number": "ADSP-21569", "top_k": 5},
+    "expected_document_id": "doc-95221221bd9522f368d4a5fd",
+    "expected_page": 16
+  },
+  {
+    "case_id": "holdout-adsp-external-clock-range",
+    "query": {"query": "external SYS_CLKIN0 valid frequency range", "part_number": "ADSP-21569", "top_k": 5},
+    "expected_document_id": "doc-95221221bd9522f368d4a5fd",
+    "expected_page": 54
+  }
+]

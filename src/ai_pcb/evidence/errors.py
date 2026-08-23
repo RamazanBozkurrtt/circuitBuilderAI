@@ -28,3 +28,15 @@ class InconsistentDocumentHashError(KnowledgeError):
 
 class FactExtractionError(KnowledgeError):
     pass
+
+
+class AcquisitionError(KnowledgeError):
+    pass
+
+
+class UntrustedSourceError(AcquisitionError):
+    pass
+
+
+class InvalidDownloadedDocumentError(AcquisitionError):
+    pass

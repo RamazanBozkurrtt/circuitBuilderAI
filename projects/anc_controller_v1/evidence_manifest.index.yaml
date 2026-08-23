@@ -1,0 +1,36 @@
+# Deliberate Phase 3.1 retrieval-regression subset. The full acquisition manifest remains the
+# authoritative acquisition request set. The 2,453-page hardware reference and supporting notes
+# remain acquired but are deferred from dense indexing until incremental indexing is implemented.
+documents:
+  - manufacturer: Analog Devices
+    part_number: ADSP-21569
+    document_type: DATASHEET
+    canonical_source_url: https://www.analog.com/media/en/technical-documentation/data-sheets/adsp-21562-21563-21565-21566-21567-21569.pdf
+    expected_revision: Rev. D
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Texas Instruments
+    part_number: PCM3168A
+    document_type: DATASHEET
+    canonical_source_url: https://www.ti.com/lit/ds/symlink/pcm3168a.pdf
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Analog Devices
+    part_number: AD1938
+    document_type: DATASHEET
+    canonical_source_url: https://www.analog.com/media/en/technical-documentation/data-sheets/ad1938.pdf
+    expected_revision: Rev. E
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Analog Devices
+    part_number: ADAU1978
+    document_type: DATASHEET
+    canonical_source_url: https://www.analog.com/media/en/technical-documentation/data-sheets/adau1978.pdf
+    expected_revision: Rev. B
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Texas Instruments
+    part_number: TAS6424-Q1
+    document_type: DATASHEET
+    canonical_source_url: https://www.ti.com/lit/ds/symlink/tas6424-q1.pdf
+    url_origin: MANUFACTURER_PRODUCT_PAGE

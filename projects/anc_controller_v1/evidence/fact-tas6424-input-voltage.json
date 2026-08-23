@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-08-22T22:38:32.558225Z",
+  "evidence_id": "fact-tas6424-input-voltage",
+  "title": "TAS6424-Q1 input_voltage_range",
+  "provenance": {
+    "created_at": "2026-08-22T22:38:32.558211Z",
+    "source": "DATASHEET",
+    "manufacturer": "Texas Instruments",
+    "document": "tas6424_q1-datasheet-4cbfe2ed1be61492.pdf",
+    "revision": null,
+    "page": "7",
+    "section": null,
+    "locator": "page=7",
+    "source_url": "https://www.ti.com/lit/ds/symlink/tas6424-q1.pdf",
+    "sha256": "4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e",
+    "acquisition_id": "acquisition-e3d49fb08688ebd9fed8d4fd"
+  },
+  "extracted_content": "PVDD Output FET supply voltage Relative to GND 4.5 26.4 V",
+  "normalized_fact": "TAS6424-Q1 PVDD recommended operating range is 4.5 V to 26.4 V.",
+  "confidence": null,
+  "artifact_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\texas_instruments\\tas6424_q1-datasheet-4cbfe2ed1be61492.pdf"
+}

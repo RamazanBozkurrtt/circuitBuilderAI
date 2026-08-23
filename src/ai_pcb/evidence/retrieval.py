@@ -14,6 +14,7 @@ from qdrant_client import QdrantClient, models
 
 from ai_pcb.evidence.embedding import EmbeddingProvider
 from ai_pcb.evidence.errors import InconsistentDocumentHashError, MissingIndexError
+from ai_pcb.evidence.query import classify_engineering_query
 from ai_pcb.evidence.store import EvidenceStore
 from ai_pcb.models.evidence import Evidence, EvidenceProvenance
 from ai_pcb.models.knowledge import (
@@ -24,6 +25,8 @@ from ai_pcb.models.knowledge import (
     EvidenceContextPiece,
     IngestionIssue,
     IngestionReport,
+    QueryClassification,
+    QueryIntent,
     RetrievalMethod,
     RetrievalScores,
 )
@@ -40,7 +43,15 @@ def _point_id(chunk_id: str) -> str:
 
 
 def _tokens(text: str) -> list[str]:
-    return [match.group(0).casefold() for match in _TOKEN.finditer(text)]
+    normalized = (
+        text.replace("Ω", " ohm ")
+        .replace("Ω", " ohm ")
+        .replace("µ", "u")
+        .replace("\u2013", "-")
+        .replace("\u2014", "-")
+        .replace("\u00d7", "x")
+    )
+    return [match.group(0).casefold() for match in _TOKEN.finditer(normalized)]
 
 
 class QdrantHybridEvidenceIndex:
@@ -128,9 +139,7 @@ class QdrantHybridEvidenceIndex:
         prior = registry.get(metadata.source_file)
         previous_hash = prior.get("sha256") if prior else None
         self._ensure_collection()
-        fingerprint = hashlib.sha256(
-            metadata.model_dump_json().encode("utf-8")
-        ).hexdigest()
+        fingerprint = hashlib.sha256(metadata.model_dump_json().encode("utf-8")).hexdigest()
         chunk_fingerprint = hashlib.sha256(
             "\0".join(chunk.chunk_id for chunk in record.chunks).encode("utf-8")
         ).hexdigest()
@@ -265,26 +274,39 @@ class QdrantHybridEvidenceIndex:
         if not self.client.collection_exists(self.collection_name):
             raise MissingIndexError(f"knowledge index does not exist: {self.collection_name}")
         query_filter = self._filter(query)
-        candidate_limit = max(query.top_k * 5, 25)
-        vector = self.embedding_provider.embed_query(query.query)
-        dense_points = self.client.query_points(
-            collection_name=self.collection_name,
-            query=vector,
-            query_filter=query_filter,
-            limit=candidate_limit,
-            with_payload=True,
-        ).points
-        dense: list[tuple[DocumentChunk, float]] = []
-        for point in dense_points:
-            chunk = self._chunk_from_payload(point.payload)
-            dense.append((chunk, float(point.score)))
+        classification = classify_engineering_query(query.query)
+        candidate_limit = max(query.top_k * 20, 100)
+        dense_by_id: dict[str, tuple[DocumentChunk, float, int]] = {}
+        for subquery in classification.decomposed_queries:
+            vector = self.embedding_provider.embed_query(subquery)
+            dense_points = self.client.query_points(
+                collection_name=self.collection_name,
+                query=vector,
+                query_filter=query_filter,
+                limit=candidate_limit,
+                with_payload=True,
+            ).points
+            for rank, point in enumerate(dense_points, start=1):
+                chunk = self._chunk_from_payload(point.payload)
+                prior = dense_by_id.get(chunk.chunk_id)
+                if prior is None or rank < prior[2]:
+                    dense_by_id[chunk.chunk_id] = (chunk, float(point.score), rank)
+        dense = [
+            (chunk, score)
+            for chunk, score, _ in sorted(dense_by_id.values(), key=lambda item: item[2])
+        ][:candidate_limit]
         lexical_chunks = self._filtered_chunks(query_filter)
         lexical = self._lexical_rank(query.query, lexical_chunks)[:candidate_limit]
-        fused = self._fuse(dense, lexical, query.section_preference)
+        fused = self._fuse(
+            dense,
+            lexical,
+            query.section_preference,
+            classification,
+            lexical_chunks,
+            query.query,
+        )
         selected = [
-            entry
-            for entry in fused
-            if entry[1].fused >= query.minimum_retrieval_confidence
+            entry for entry in fused if entry[1].fused >= query.minimum_retrieval_confidence
         ]
         results = [
             self._candidate(chunk, scores, method)
@@ -364,9 +386,7 @@ class QdrantHybridEvidenceIndex:
             return []
         documents = [_tokens(chunk.text) for chunk in chunks]
         average_length = sum(len(document) for document in documents) / len(documents)
-        document_frequency = Counter(
-            term for document in documents for term in set(document)
-        )
+        document_frequency = Counter(term for document in documents for term in set(document))
         ranked: list[tuple[DocumentChunk, float]] = []
         for chunk, terms in zip(chunks, documents, strict=True):
             frequencies = Counter(terms)
@@ -393,6 +413,9 @@ class QdrantHybridEvidenceIndex:
         dense: Sequence[tuple[DocumentChunk, float]],
         lexical: Sequence[tuple[DocumentChunk, float]],
         section_preference: str | None,
+        classification: QueryClassification,
+        all_chunks: Sequence[DocumentChunk],
+        query_text: str,
     ) -> list[tuple[DocumentChunk, RetrievalScores, RetrievalMethod]]:
         by_id: dict[str, dict[str, object]] = {}
         for rank, (chunk, score) in enumerate(dense, start=1):
@@ -401,22 +424,50 @@ class QdrantHybridEvidenceIndex:
         for rank, (chunk, score) in enumerate(lexical, start=1):
             by_id.setdefault(chunk.chunk_id, {"chunk": chunk})
             by_id[chunk.chunk_id].update(lexical=score, lexical_rank=rank)
-        maximum = 2 / (self.rrf_constant + 1)
-        output: list[tuple[DocumentChunk, RetrievalScores, RetrievalMethod]] = []
+        weights = {
+            QueryIntent.EXACT_IDENTIFIER: (0.25, 0.75),
+            QueryIntent.ELECTRICAL_SPECIFICATION: (0.35, 0.65),
+            QueryIntent.INTERFACE_CLOCK: (0.40, 0.60),
+            QueryIntent.PERFORMANCE: (0.50, 0.50),
+            QueryIntent.TIMING_LATENCY: (0.40, 0.60),
+            QueryIntent.LAYOUT_THERMAL: (0.55, 0.45),
+            QueryIntent.GENERAL_SEMANTIC: (0.60, 0.40),
+        }
+        dense_weight, lexical_weight = weights[classification.intent]
+        maximum = 1 / (self.rrf_constant + 1)
+        query_terms = set(_tokens(query_text))
+        exact_terms = set(_tokens(" ".join(classification.exact_terms)))
+        raw_output: list[
+            tuple[DocumentChunk, float, float | None, float | None, RetrievalMethod]
+        ] = []
         for values in by_id.values():
             contribution = 0.0
             if "dense_rank" in values:
-                contribution += 1 / (self.rrf_constant + cast(int, values["dense_rank"]))
+                contribution += dense_weight / (self.rrf_constant + cast(int, values["dense_rank"]))
             if "lexical_rank" in values:
-                contribution += 1 / (self.rrf_constant + cast(int, values["lexical_rank"]))
+                contribution += lexical_weight / (
+                    self.rrf_constant + cast(int, values["lexical_rank"])
+                )
             chunk = cast(DocumentChunk, values["chunk"])
             fused_score = contribution / maximum
+            chunk_terms = set(_tokens(f"{chunk.section or ''} {chunk.text}"))
+            if query_terms:
+                fused_score += 0.12 * len(query_terms & chunk_terms) / len(query_terms)
+            if exact_terms:
+                fused_score += 0.18 * len(exact_terms & chunk_terms) / len(exact_terms)
+            section = (chunk.section or "").casefold()
+            if any(preference in section for preference in classification.preferred_sections):
+                fused_score += 0.08
+            if classification.prefer_tables and chunk.kind.value == "TABLE":
+                fused_score += 0.06
+            if classification.prefer_overview:
+                fused_score += {1: 0.65, 2: 0.08, 3: 0.40}.get(chunk.page, 0.0)
             if (
                 section_preference
                 and chunk.section
                 and section_preference.casefold() in chunk.section.casefold()
             ):
-                fused_score = min(1.0, fused_score + 0.05)
+                fused_score += 0.10
             has_dense = "dense" in values
             has_lexical = "lexical" in values
             method = (
@@ -426,18 +477,66 @@ class QdrantHybridEvidenceIndex:
                 if has_dense
                 else RetrievalMethod.LEXICAL
             )
-            output.append(
+            raw_output.append(
                 (
                     chunk,
-                    RetrievalScores(
-                        dense=cast(float | None, values.get("dense")),
-                        lexical=cast(float | None, values.get("lexical")),
-                        fused=fused_score,
-                    ),
+                    fused_score,
+                    cast(float | None, values.get("dense")),
+                    cast(float | None, values.get("lexical")),
                     method,
                 )
             )
-        return sorted(output, key=lambda item: (-item[1].fused, item[0].chunk_id))
+
+        # A page is the stable evidence-location unit. Aggregate supporting chunks on the
+        # same page, then diversify pages before returning additional chunks. This prevents
+        # a register table split into many chunks from consuming the whole result window.
+        pages: dict[
+            tuple[str, int],
+            list[tuple[DocumentChunk, float, float | None, float | None, RetrievalMethod]],
+        ] = {}
+        for item in raw_output:
+            pages.setdefault((item[0].document_id, item[0].page), []).append(item)
+        page_results: list[
+            tuple[DocumentChunk, float, float | None, float | None, RetrievalMethod]
+        ] = []
+        for items in pages.values():
+            ranked = sorted(items, key=lambda item: (-item[1], item[0].chunk_id))
+            aggregate = ranked[0][1]
+            if len(ranked) > 1:
+                aggregate += 0.12 * ranked[1][1]
+            if len(ranked) > 2:
+                aggregate += 0.04 * ranked[2][1]
+            best = ranked[0]
+            page_results.append((best[0], aggregate, best[2], best[3], best[4]))
+
+        # Cross-page continuations inherit a bounded amount of adjacent-page relevance.
+        page_scores = {(item[0].document_id, item[0].page): item[1] for item in page_results}
+        adjusted: list[
+            tuple[DocumentChunk, float, float | None, float | None, RetrievalMethod]
+        ] = []
+        for item in page_results:
+            chunk, score, dense_score, lexical_score, method = item
+            neighbors = [
+                page_scores.get((chunk.document_id, chunk.page - 1), 0.0),
+                page_scores.get((chunk.document_id, chunk.page + 1), 0.0),
+            ]
+            adjusted.append(
+                (chunk, score + 0.04 * max(neighbors), dense_score, lexical_score, method)
+            )
+        adjusted.sort(key=lambda item: (-item[1], item[0].chunk_id))
+        normalizer = max((item[1] for item in adjusted), default=1.0)
+        return [
+            (
+                chunk,
+                RetrievalScores(
+                    dense=dense_score,
+                    lexical=lexical_score,
+                    fused=min(1.0, score / max(normalizer, 1e-12)),
+                ),
+                method,
+            )
+            for chunk, score, dense_score, lexical_score, method in adjusted
+        ]
 
     @staticmethod
     def _candidate(
@@ -453,6 +552,7 @@ class QdrantHybridEvidenceIndex:
             part_number=chunk.part_number,
             document_title=chunk.document_title,
             document_revision=chunk.document_revision,
+            acquisition=chunk.acquisition,
             document_hash=chunk.document_hash,
             page=chunk.page,
             section=chunk.section,
@@ -462,9 +562,7 @@ class QdrantHybridEvidenceIndex:
             retrieval_method=method,
         )
 
-    def _expand(
-        self, document_id: str, chunk_id: str, distance: int
-    ) -> list[EvidenceContextPiece]:
+    def _expand(self, document_id: str, chunk_id: str, distance: int) -> list[EvidenceContextPiece]:
         chunks = self._filtered_chunks(
             models.Filter(
                 must=[
@@ -499,6 +597,7 @@ class QdrantHybridEvidenceIndex:
                 section=chunk.section,
                 locator=chunk.locator,
                 text=chunk.text,
+                acquisition=chunk.acquisition,
             )
             for chunk in selected
         ]
@@ -528,6 +627,11 @@ def promote_retrieval_candidate(
             page=str(candidate.page),
             section=candidate.section,
             locator=candidate.locator,
+            source_url=(candidate.acquisition.final_url if candidate.acquisition else None),
+            sha256=candidate.document_hash,
+            acquisition_id=(
+                candidate.acquisition.acquisition_id if candidate.acquisition else None
+            ),
         ),
         extracted_content=candidate.extracted_text,
         normalized_fact=normalized_fact,

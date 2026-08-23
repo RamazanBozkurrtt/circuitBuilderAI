@@ -169,6 +169,15 @@ def _compose_context(
         engineering_guidance=[
             item for definition in resolved for item in definition.engineering_guidance
         ],
+        architecture_blocks=[
+            item for definition in resolved for item in definition.architecture_blocks
+        ],
+        component_categories=[
+            item for definition in resolved for item in definition.component_categories
+        ],
+        evaluation_criteria=[
+            item for definition in resolved for item in definition.evaluation_criteria
+        ],
         evidence_requirements=[
             item for definition in resolved for item in definition.evidence_requirements
         ],

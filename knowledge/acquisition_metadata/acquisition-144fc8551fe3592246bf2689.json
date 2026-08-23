@@ -1,0 +1,19 @@
+{
+  "acquisition_id": "acquisition-144fc8551fe3592246bf2689",
+  "original_url": "https://www.ti.com/lit/pdf/slaa701",
+  "final_url": "https://www.ti.com/lit/an/slaa701b/slaa701b.pdf?ts=1787304149574&ref_url=https%253A%252F%252Fwww.google.com%252F",
+  "manufacturer": "Texas Instruments",
+  "part_number": "SLAA701",
+  "document_type": "APPLICATION_NOTE",
+  "content_type": "application/pdf",
+  "retrieved_at": "2026-08-21T20:16:31.864198Z",
+  "sha256": "c0b700ff064306630ae5d8995f7371880df06970bedd4cf43d8c825e8de5e040",
+  "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\quarantine\\texas_instruments\\slaa701-application_note-c0b700ff06430663.pdf",
+  "http_status": 200,
+  "verification_status": "IDENTITY_UNVERIFIED",
+  "verification_messages": [
+    "expected revision does not appear in the PDF"
+  ],
+  "unchanged": false,
+  "previous_sha256": null
+}

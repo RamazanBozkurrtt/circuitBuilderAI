@@ -1,0 +1,19 @@
+{
+  "acquisition_id": "acquisition-719ee649491b885c840285fa",
+  "original_url": "https://www.analog.com/media/en/technical-documentation/application-notes/ee418v02.pdf",
+  "final_url": "https://www.analog.com/media/en/technical-documentation/application-notes/ee418v02.pdf",
+  "manufacturer": "Analog Devices",
+  "part_number": "ADSP-2156x",
+  "document_type": "APPLICATION_NOTE",
+  "content_type": "application/pdf",
+  "retrieved_at": "2026-08-21T20:16:23.394767Z",
+  "sha256": "5cf5847980dfb32e53723ed765f951ad7d26026b70e98bc0f8347d6b555c92df",
+  "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\app_notes\\analog_devices\\adsp_2156x-application_note-5cf5847980dfb32e.pdf",
+  "http_status": 200,
+  "verification_status": "TRUSTED",
+  "verification_messages": [
+    "trusted domain, PDF format, manufacturer, part number, and document type verified"
+  ],
+  "unchanged": false,
+  "previous_sha256": null
+}

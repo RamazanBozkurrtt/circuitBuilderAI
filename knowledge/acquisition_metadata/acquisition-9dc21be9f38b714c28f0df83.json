@@ -1,0 +1,19 @@
+{
+  "acquisition_id": "acquisition-9dc21be9f38b714c28f0df83",
+  "original_url": "https://www.ti.com/lit/gpn/tas6424-q1",
+  "final_url": "https://www.ti.com/lit/ds/symlink/tas6424-q1.pdf?ts=1787342997065",
+  "manufacturer": "Texas Instruments",
+  "part_number": "TAS6424-Q1",
+  "document_type": "DATASHEET",
+  "content_type": "application/pdf",
+  "retrieved_at": "2026-08-21T20:16:29.363799Z",
+  "sha256": "4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e",
+  "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\quarantine\\texas_instruments\\tas6424_q1-datasheet-4cbfe2ed1be61492.pdf",
+  "http_status": 200,
+  "verification_status": "IDENTITY_UNVERIFIED",
+  "verification_messages": [
+    "expected revision does not appear in the PDF"
+  ],
+  "unchanged": false,
+  "previous_sha256": null
+}

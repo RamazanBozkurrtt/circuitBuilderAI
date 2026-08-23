@@ -13,6 +13,7 @@ from ai_pcb.evidence.errors import (
     EmptyDocumentError,
     UnsupportedDocumentError,
 )
+from ai_pcb.models.acquisition import ManufacturerAcquisitionProvenance
 from ai_pcb.models.evidence import EvidenceSource
 from ai_pcb.models.knowledge import (
     BlockKind,
@@ -50,6 +51,8 @@ def _source_type(path: Path) -> EvidenceSource:
         return EvidenceSource.REFERENCE_DESIGN
     if "app_notes" in directory_names:
         return EvidenceSource.APPLICATION_NOTE
+    if "errata" in directory_names:
+        return EvidenceSource.ERRATA
     raise UnsupportedDocumentError(
         "document type is unknown; place the PDF under datasheets, reference_designs, or app_notes"
     )
@@ -72,6 +75,7 @@ class PdfDocumentIngestor:
         source_type: EvidenceSource | None = None,
         manufacturer: str | None = None,
         part_number: str | None = None,
+        acquisition_provenance: ManufacturerAcquisitionProvenance | None = None,
     ) -> DocumentRecord:
         path = path.resolve()
         if path.suffix.lower() != ".pdf":
@@ -105,6 +109,7 @@ class PdfDocumentIngestor:
                 title=title,
                 revision=revision,
                 total_pages=document.page_count,
+                acquisition=acquisition_provenance,
             )
             chunks = self.chunker.chunk(metadata, pages)
             return DocumentRecord(

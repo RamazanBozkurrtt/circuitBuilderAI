@@ -18,6 +18,9 @@ def current_engine_capabilities() -> frozenset[EngineeringCapability]:
         {
             EngineeringCapability.DATASHEET_RETRIEVAL,
             EngineeringCapability.EVIDENCE_TRACEABILITY,
+            EngineeringCapability.ARCHITECTURE_ANALYSIS,
+            EngineeringCapability.COMPONENT_SELECTION,
+            EngineeringCapability.REAL_TIME_PROCESSING_ANALYSIS,
         }
     )
 

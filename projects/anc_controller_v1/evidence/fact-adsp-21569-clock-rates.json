@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-08-22T23:08:18.140776Z",
+  "evidence_id": "fact-adsp-21569-clock-rates",
+  "title": "ADSP-21569 clock_rates",
+  "provenance": {
+    "created_at": "2026-08-22T23:08:18.140748Z",
+    "source": "DATASHEET",
+    "manufacturer": "Analog Devices",
+    "document": "adsp_21569-datasheet-0c908438ea8f71cc.pdf",
+    "revision": null,
+    "page": "54",
+    "section": null,
+    "locator": "page=54",
+    "source_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adsp-21562-21563-21565-21566-21567-21569.pdf",
+    "sha256": "0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e",
+    "acquisition_id": "acquisition-e7fb2a74d5f69cae96221c1b"
+  },
+  "extracted_content": "SYS_CLKIN0 Frequency (External SYS_CLKIN0)",
+  "normalized_fact": "ADSP-21569 accepts the provisional 24.576 MHz external clock input.",
+  "confidence": null,
+  "artifact_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\analog_devices\\adsp_21569-datasheet-0c908438ea8f71cc.pdf"
+}

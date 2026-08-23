@@ -1,0 +1,730 @@
+facts:
+  - fact_id: fact-adsp-21569-core-clock
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: compute_throughput
+    value: [800, 1000]
+    unit: MHz
+    conditions: [Available ADSP-21569 speed grades; this is not an FxLMS workload validation.]
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 3
+    evidence_text: SHARC+ Core (MHz Maximum)
+    normalized_fact: ADSP-21569 is offered in 800 MHz and 1000 MHz core speed grades.
+
+  - fact_id: fact-adsp-21569-memory
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: memory
+    value: 640 kB L1 SRAM and 1024 kB L2 SRAM
+    conditions: [ADSP-21569 column in the processor feature table.]
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 3
+    evidence_text: SHARC L1 SRAM (kB)
+    normalized_fact: ADSP-21569 has 640 kB L1 SRAM and 1024 kB L2 SRAM.
+
+  - fact_id: fact-adsp-21569-sports
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: audio_interfaces
+    value: 2 x 4 full SPORTs, 2 x 1 S/PDIF Rx/Tx, and 2 x 4 ASRCs
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 3
+    evidence_text: Full SPORTs
+    normalized_fact: ADSP-21569 provides the documented SPORT, S/PDIF, and ASRC resources.
+
+  - fact_id: fact-adsp-21569-accelerators
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: acceleration
+    value: FIR and IIR hardware accelerators
+    conditions: [Accelerators do not by themselves prove a final FxLMS workload fits.]
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 3
+    evidence_text: Hardware Accelerators
+    normalized_fact: ADSP-21569 includes FIR and IIR hardware accelerators.
+
+  - fact_id: fact-adsp-21569-clocking
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: clocking
+    value: 2 x 2 precision clock generators
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 3
+    evidence_text: Precision Clock Generators
+    normalized_fact: ADSP-21569 provides two pairs of precision clock generators.
+
+  - fact_id: fact-pcm3168a-input-channels
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: PCM3168A
+    attribute: input_channels
+    value: 6
+    unit: channels
+    acquisition_id: acquisition-a8f1f3a77cf273a787a83e51
+    document_sha256: 959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93
+    page: 1
+    evidence_text: Six-ChanneL ADC
+    normalized_fact: PCM3168A provides six ADC input channels.
+
+  - fact_id: fact-pcm3168a-output-channels
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: PCM3168A
+    attribute: output_channels
+    value: 8
+    unit: channels
+    acquisition_id: acquisition-a8f1f3a77cf273a787a83e51
+    document_sha256: 959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93
+    page: 1
+    evidence_text: Eight-Channel DAC
+    normalized_fact: PCM3168A provides eight DAC output channels.
+
+  - fact_id: fact-pcm3168a-sample-rate
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: PCM3168A
+    attribute: sample_rate
+    value: ADC 8-96 kHz; DAC 8-192 kHz
+    acquisition_id: acquisition-a8f1f3a77cf273a787a83e51
+    document_sha256: 959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93
+    page: 1
+    evidence_text: Sampling Rate
+    normalized_fact: PCM3168A ADC supports 8-96 kHz and DAC supports 8-192 kHz.
+
+  - fact_id: fact-pcm3168a-bit-depth
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: PCM3168A
+    attribute: bit_depth
+    value: 24
+    unit: bits
+    acquisition_id: acquisition-a8f1f3a77cf273a787a83e51
+    document_sha256: 959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93
+    page: 1
+    evidence_text: 24-Bit ΔΣ ADC and DAC
+    normalized_fact: PCM3168A contains 24-bit delta-sigma ADCs and DACs.
+
+  - fact_id: fact-pcm3168a-interface
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: PCM3168A
+    attribute: audio_interface
+    value: I2S, left-justified, right-justified, DSP, and TDM
+    acquisition_id: acquisition-a8f1f3a77cf273a787a83e51
+    document_sha256: 959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93
+    page: 1
+    evidence_text: ADC/DAC Independent I2S
+    normalized_fact: PCM3168A supports the documented serial audio formats.
+
+  - fact_id: fact-pcm3168a-clock
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: PCM3168A
+    attribute: clocking
+    value: ADC 256/384/512/768 fS; DAC 128/192/256/384/512/768 fS
+    acquisition_id: acquisition-a8f1f3a77cf273a787a83e51
+    document_sha256: 959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93
+    page: 1
+    evidence_text: System Clock
+    normalized_fact: PCM3168A requires the documented sample-rate-related system clocks.
+
+  - fact_id: fact-pcm3168a-snr
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: PCM3168A
+    attribute: snr
+    value: ADC 107 dB differential; DAC 112 dB
+    conditions: [Typical at 48 kHz under first-page feature conditions.]
+    acquisition_id: acquisition-a8f1f3a77cf273a787a83e51
+    document_sha256: 959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93
+    page: 1
+    evidence_text: SNR
+    normalized_fact: PCM3168A typical SNR is 107 dB ADC differential and 112 dB DAC.
+
+  - fact_id: fact-pcm3168a-thdn
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: PCM3168A
+    attribute: thd_n
+    value: ADC -93 dB; DAC -94 dB
+    conditions: [Typical first-page performance conditions.]
+    acquisition_id: acquisition-a8f1f3a77cf273a787a83e51
+    document_sha256: 959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93
+    page: 1
+    evidence_text: THD+N
+    normalized_fact: PCM3168A typical THD+N is -93 dB ADC and -94 dB DAC.
+
+  - fact_id: fact-pcm3168a-adc-delay
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: PCM3168A
+    attribute: adc_latency
+    value: 27 / fS
+    unit: seconds
+    conditions: [ADC single-speed digital filter group delay; sample rate remains UNKNOWN.]
+    acquisition_id: acquisition-a8f1f3a77cf273a787a83e51
+    document_sha256: 959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93
+    page: 10
+    evidence_text: Group delay time (single)
+    normalized_fact: PCM3168A ADC single-speed group delay is 27/fS seconds.
+
+  - fact_id: fact-pcm3168a-dac-delay
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: PCM3168A
+    attribute: dac_latency
+    value: 28/fS single or dual speed; 19/fS quad speed
+    unit: seconds
+    conditions: [DAC digital filter group delay; sample rate and speed mode remain UNKNOWN.]
+    acquisition_id: acquisition-a8f1f3a77cf273a787a83e51
+    document_sha256: 959ffa69e2f9656f766739aad0759be2e0c5509f26768d4b702925e3f9d68f93
+    page: 12
+    evidence_text: Group delay time (single, dual)
+    normalized_fact: PCM3168A DAC group delay is 28/fS in single or dual speed and 19/fS in quad speed.
+
+  - fact_id: fact-ad1938-input-channels
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: AD1938
+    attribute: input_channels
+    value: 4
+    unit: channels
+    acquisition_id: acquisition-0da3c952b99279d5d2cf8a65
+    document_sha256: 45957be7b198d70bd6998324be0d0d84114c0d99907dc415711c4e28feaab5f3
+    page: 1
+    evidence_text: four analog-to-digital converters (ADCs)
+    normalized_fact: AD1938 provides four ADC input channels.
+
+  - fact_id: fact-ad1938-output-channels
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: AD1938
+    attribute: output_channels
+    value: 8
+    unit: channels
+    acquisition_id: acquisition-0da3c952b99279d5d2cf8a65
+    document_sha256: 45957be7b198d70bd6998324be0d0d84114c0d99907dc415711c4e28feaab5f3
+    page: 1
+    evidence_text: eight digital-to-analog converters (DACs)
+    normalized_fact: AD1938 provides eight DAC output channels.
+
+  - fact_id: fact-ad1938-sample-rate
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: AD1938
+    attribute: sample_rate
+    value: 8-192 kHz
+    acquisition_id: acquisition-0da3c952b99279d5d2cf8a65
+    document_sha256: 45957be7b198d70bd6998324be0d0d84114c0d99907dc415711c4e28feaab5f3
+    page: 1
+    evidence_text: Supports 24 bits and 8 kHz to 192 kHz sample rates
+    normalized_fact: AD1938 supports sample rates from 8 kHz through 192 kHz.
+
+  - fact_id: fact-ad1938-bit-depth
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: AD1938
+    attribute: bit_depth
+    value: 24
+    unit: bits
+    acquisition_id: acquisition-0da3c952b99279d5d2cf8a65
+    document_sha256: 45957be7b198d70bd6998324be0d0d84114c0d99907dc415711c4e28feaab5f3
+    page: 1
+    evidence_text: 192 kHz, 24-Bit Codec
+    normalized_fact: AD1938 is a 24-bit codec.
+
+  - fact_id: fact-ad1938-interface
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: AD1938
+    attribute: audio_interface
+    value: right-justified, left-justified, I2S, and TDM
+    acquisition_id: acquisition-0da3c952b99279d5d2cf8a65
+    document_sha256: 45957be7b198d70bd6998324be0d0d84114c0d99907dc415711c4e28feaab5f3
+    page: 1
+    evidence_text: Right-justified, left-justified, I2S-justified, and TDM modes
+    normalized_fact: AD1938 supports the documented serial audio modes.
+
+  - fact_id: fact-ad1938-performance
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: AD1938
+    attribute: snr
+    value: DAC 108 dB; ADC 107 dB
+    acquisition_id: acquisition-0da3c952b99279d5d2cf8a65
+    document_sha256: 45957be7b198d70bd6998324be0d0d84114c0d99907dc415711c4e28feaab5f3
+    page: 1
+    evidence_text: 108 dB DAC/107 dB ADC dynamic range and SNR
+    normalized_fact: AD1938 lists 108 dB DAC and 107 dB ADC dynamic range and SNR.
+
+  - fact_id: fact-ad1938-adc-delay
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: AD1938
+    attribute: adc_latency
+    value: 22.9844/fS
+    unit: seconds
+    conditions: [ADC decimation filter; 479 us typical at 48 kHz.]
+    acquisition_id: acquisition-0da3c952b99279d5d2cf8a65
+    document_sha256: 45957be7b198d70bd6998324be0d0d84114c0d99907dc415711c4e28feaab5f3
+    page: 6
+    evidence_text: ADC DECIMATION FILTER
+    normalized_fact: AD1938 ADC group delay is 22.9844/fS, 479 us typical at 48 kHz.
+
+  - fact_id: fact-ad1938-dac-delay
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: AD1938
+    attribute: dac_latency
+    value: 25/fS at 48 kHz; 11/fS at 96 kHz; 8/fS at 192 kHz
+    unit: seconds
+    conditions: [DAC interpolation filter; sample rate remains UNKNOWN.]
+    acquisition_id: acquisition-0da3c952b99279d5d2cf8a65
+    document_sha256: 45957be7b198d70bd6998324be0d0d84114c0d99907dc415711c4e28feaab5f3
+    page: 6
+    evidence_text: DAC INTERPOLATION FILTER
+    normalized_fact: AD1938 DAC group delay is documented separately for 48, 96, and 192 kHz modes.
+
+  - fact_id: fact-adau1978-channels
+    candidate_category: ADC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADAU1978
+    attribute: channel_count
+    value: 4
+    unit: channels
+    acquisition_id: acquisition-bc51d34a5f871bc519c72acb
+    document_sha256: 5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838
+    page: 1
+    evidence_text: The ADAU1978 incorporates four high performance
+    normalized_fact: ADAU1978 provides four ADC channels.
+
+  - fact_id: fact-adau1978-rate-depth
+    candidate_category: ADC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADAU1978
+    attribute: sample_rate
+    value: 8-192 kHz at 24 bits
+    acquisition_id: acquisition-bc51d34a5f871bc519c72acb
+    document_sha256: 5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838
+    page: 1
+    evidence_text: 24-bit stereo ADC with 8 kHz to 192 kHz sample rates
+    normalized_fact: ADAU1978 supports 24-bit conversion from 8 kHz through 192 kHz.
+
+  - fact_id: fact-adau1978-performance
+    candidate_category: ADC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADAU1978
+    attribute: snr
+    value: 109 dB dynamic range
+    acquisition_id: acquisition-bc51d34a5f871bc519c72acb
+    document_sha256: 5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838
+    page: 1
+    evidence_text: 109 dB analog-to-digital converter (ADC) dynamic range
+    normalized_fact: ADAU1978 lists 109 dB ADC dynamic range.
+
+  - fact_id: fact-adau1978-interface
+    candidate_category: ADC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADAU1978
+    attribute: audio_interface
+    value: right justified, left justified, I2S, and TDM
+    acquisition_id: acquisition-bc51d34a5f871bc519c72acb
+    document_sha256: 5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838
+    page: 1
+    evidence_text: Right justified, left justified, I2S, and TDM modes
+    normalized_fact: ADAU1978 supports the documented serial audio modes.
+
+  - fact_id: fact-adau1978-delay
+    candidate_category: ADC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADAU1978
+    attribute: latency
+    value: 22.9844/fS at 8-96 kHz; 35 us at 192 kHz
+    unit: seconds
+    conditions: [ADC decimation-filter group delay; sample rate remains UNKNOWN.]
+    acquisition_id: acquisition-bc51d34a5f871bc519c72acb
+    document_sha256: 5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838
+    page: 4
+    evidence_text: ADC DECIMATION FILTER
+    normalized_fact: ADAU1978 group delay is 22.9844/fS from 8-96 kHz and 35 us at 192 kHz.
+
+  - fact_id: fact-tas6424-channels
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: channel_count
+    value: 4
+    unit: channels
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 1
+    evidence_text: Four-Channel Bridge-Tied Load (BTL)
+    normalized_fact: TAS6424-Q1 provides four BTL output channels.
+
+  - fact_id: fact-tas6424-load
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: speaker_load
+    value: [2, 4]
+    unit: ohm
+    conditions: [Documented output-power conditions; final project speaker load remains UNKNOWN.]
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 1
+    evidence_text: 45 W, 10% THD Into 2
+    normalized_fact: TAS6424-Q1 has documented 2-ohm and 4-ohm output-power conditions.
+
+  - fact_id: fact-tas6424-power
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: output_power
+    value: 27 W into 4 ohm or 45 W into 2 ohm at 14.4 V; 75 W into 4 ohm at 25 V, all at 10% THD+N
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 1
+    evidence_text: The device provides four channels
+    normalized_fact: TAS6424-Q1 output power depends on supply, load, and 10% THD+N conditions.
+
+  - fact_id: fact-tas6424-switching
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: switching_frequency
+    value: up to 2.1 MHz
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 1
+    evidence_text: Up to 2.1-MHz Output Switching Frequency
+    normalized_fact: TAS6424-Q1 output switching frequency is configurable up to 2.1 MHz.
+
+  - fact_id: fact-tas6424-interface
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: audio_interface
+    value: I2S, left justified, right justified, or TDM
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 18
+    evidence_text: receives audio in either I2S, left justified, right justified, or TDM formats
+    normalized_fact: TAS6424-Q1 accepts the documented serial audio formats.
+
+  - fact_id: fact-tas6424-noise
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: noise
+    value: 42
+    unit: uV RMS
+    conditions: [Zero input, A-weighted, gain level 1, PVDD 14.4 V.]
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 8
+    evidence_text: Output noise voltage
+    normalized_fact: TAS6424-Q1 typical output noise is 42 uV RMS under the stated conditions.
+
+  - fact_id: fact-tas6424-efficiency
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: efficiency
+    value: 86
+    unit: percent
+    conditions: [Four channels, 25 W per channel, 4-ohm load, PVDD 14.4 V, 25 C, inductor losses included.]
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 8
+    evidence_text: Power efficiency
+    normalized_fact: TAS6424-Q1 typical efficiency is 86 percent under the stated conditions.
+
+  - fact_id: fact-tas6424-protection
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: protection
+    value: current limit, short, 40 V load dump, DC offset, overtemperature, undervoltage, overvoltage
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 1
+    evidence_text: Output Current Limiting
+    normalized_fact: TAS6424-Q1 documents the listed electrical and thermal protections.
+
+  - fact_id: fact-tas6424-thermal
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: thermal_limits
+    value: channel overtemperature warning 150 C
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 8
+    evidence_text: Channel overtemperature warning
+    normalized_fact: TAS6424-Q1 channel overtemperature warning threshold is documented as 150 C.
+
+  - fact_id: fact-tas6424-sample-rate
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: sample_rate
+    value: [44.1, 48, 96]
+    unit: kHz
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 19
+    evidence_text: The device supports FSYNC rates of 44.1 kHz, 48 kHz, or 96 kHz.
+    normalized_fact: TAS6424-Q1 supports 44.1 kHz, 48 kHz, and 96 kHz audio sample rates.
+
+  - fact_id: fact-tas6424-input-voltage
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: input_voltage_range
+    value: 4.5-26.4
+    unit: V
+    conditions: [PVDD recommended operating range relative to GND.]
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 7
+    evidence_text: PVDD Output FET supply voltage Relative to GND 4.5 26.4 V
+    normalized_fact: TAS6424-Q1 PVDD recommended operating range is 4.5 V to 26.4 V.
+
+  - fact_id: fact-ad1938-clocking
+    candidate_category: AUDIO_CODEC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: AD1938
+    attribute: clocking
+    value: on-chip PLL with selectable PLL or MCLK ADC and DAC clock sources
+    acquisition_id: acquisition-0da3c952b99279d5d2cf8a65
+    document_sha256: 45957be7b198d70bd6998324be0d0d84114c0d99907dc415711c4e28feaab5f3
+    page: 24
+    evidence_text: PLL AND CLOCK CONTROL REGISTERS
+    normalized_fact: AD1938 provides an on-chip PLL and selectable converter clock sources.
+
+  - fact_id: fact-adsp-21569-debug-interface
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: programming_support
+    value: IEEE 1149.1 JTAG debug access port
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 19
+    evidence_text: IEEE 1149.1 JTAG inter-
+    normalized_fact: ADSP-21569 provides an IEEE 1149.1 JTAG debug interface.
+
+  - fact_id: fact-adau1978-input-range
+    candidate_category: ADC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADAU1978
+    attribute: analog_input
+    value: 2 V rms differential full scale, 1.5 V dc common mode, 28.6 kohm differential input
+    acquisition_id: acquisition-bc51d34a5f871bc519c72acb
+    document_sha256: 5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838
+    page: 3
+    evidence_text: Full-Scale AC Differential Input Voltage 2 V rms
+    normalized_fact: ADAU1978 has a 2 V rms differential full-scale input at 1.5 V common mode.
+
+  - fact_id: fact-adau1978-clocking
+    candidate_category: ADC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADAU1978
+    attribute: clocking
+    value: MCLK or LRCLK PLL input; serial port master or slave; TDM4 supports 128 fS with 32-bit slots
+    acquisition_id: acquisition-bc51d34a5f871bc519c72acb
+    document_sha256: 5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838
+    page: 19
+    evidence_text: TDM4 64 × fS 96 × fS 128 × fS
+    normalized_fact: ADAU1978 supports slave TDM4 at 128 fS and derives internal clocks from MCLK or LRCLK.
+
+  - fact_id: fact-adau1978-power
+    candidate_category: ADC
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADAU1978
+    attribute: power_supply
+    value: 3.3 V AVDD, 1.62-3.6 V IOVDD, internal 1.8 V DVDD; 14 mA AVDD and 0.88 mA IOVDD typical at 96 kHz
+    acquisition_id: acquisition-bc51d34a5f871bc519c72acb
+    document_sha256: 5b80650206aba0345f6acb32d50cd5c3515575e3647846c55d3c497ce260f838
+    page: 4
+    evidence_text: 4-channel ADC, DVDD internal 14 mA
+    normalized_fact: ADAU1978 requires 3.3 V analog power and draws documented typical currents at 96 kHz.
+
+  - fact_id: fact-adsp-21569-operating-rails
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: power_supply
+    value: VDD_INT 1.0 V, VDD_EXT 3.3 V, VDD_REF and VDD_ANA 1.8 V; VDD_DMC omitted when DDR is unused
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 44
+    evidence_text: VDD_INT Internal (Core) Supply Voltage
+    normalized_fact: ADSP-21569 requires documented 1.0 V, 1.8 V, and 3.3 V domains; VDD_DMC applies to DDR.
+
+  - fact_id: fact-adsp-21569-current
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: power_current
+    value: 1157 mA typical VDD_INT at 1 GHz, full core activity and 456 MB/s DMA
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 47
+    evidence_text: IDD_TYP VDD_INT Current
+    normalized_fact: ADSP-21569 documents 1157 mA typical core current for the stated 1 GHz activity condition.
+
+  - fact_id: fact-adsp-21569-sequencing
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: power_sequencing
+    value: hold SYS_HWRST until all supplies and SYS_CLKIN0 are stable; maintain VDD_EXT delta to VDD_REF and VDD_ANA
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 53
+    evidence_text: SYS_HWRST Deasserted after VDD_SUPPLIES
+    normalized_fact: ADSP-21569 reset release and rail-delta sequencing requirements are explicit.
+
+  - fact_id: fact-adsp-21569-clock-rates
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: clock_rates
+    value: SYS_CLKIN0 20-30 MHz
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 54
+    evidence_text: SYS_CLKIN0 Frequency (External SYS_CLKIN0)
+    normalized_fact: ADSP-21569 accepts the provisional 24.576 MHz external clock input.
+
+  - fact_id: fact-adsp-21569-core-clock-rates
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: core_clock_rates
+    value: CCLK 400-1000 MHz; SYSCLK 200-500 MHz
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 45
+    evidence_text: Core Clock (CCLK) Frequency
+    normalized_fact: ADSP-21569 clock ranges admit the provisional 983.04 MHz core plan.
+
+  - fact_id: fact-adsp-21569-fir-throughput
+    candidate_category: DSP_PROCESSOR
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADSP-21569
+    attribute: accelerator_throughput
+    value: four FIR MAC units running at core clock frequency
+    acquisition_id: acquisition-e7fb2a74d5f69cae96221c1b
+    document_sha256: 0c908438ea8f71ccd559f44db26e7715fcd93dbf1d962c36e9a790e09efca85e
+    page: 16
+    evidence_text: four multiplier-accumulator (MAC) units
+    normalized_fact: ADSP-21569 FIR accelerator provides four MAC units at the core clock frequency.
+
+  - fact_id: fact-tas6424-clocking
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: clocking
+    value: TDM4 or TDM8; SCLK 128 or 256 fS in TDM; MCLK 128, 256, or 512 fS; 25 MHz maximum
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 19
+    evidence_text: In TDM mode SCLK and MCLK can be connected together
+    normalized_fact: TAS6424-Q1 accepts the selected 96 kHz TDM4, 128 fS BCLK, and 256 fS MCLK plan.
+
+  - fact_id: fact-tas6424-latency
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: latency
+    value: 12 FSYNC samples at 96 kHz
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 10
+    evidence_text: FSYNC = 96 kHz 12
+    normalized_fact: TAS6424-Q1 documents 12 sample periods of input-to-output latency at 96 kHz.
+
+  - fact_id: fact-tas6424-supplies
+    candidate_category: CLASS_D_AMPLIFIER
+    candidate_manufacturer: Texas Instruments
+    candidate_part_number: TAS6424-Q1
+    attribute: power_supply
+    value: PVDD high-current, VBAT higher-voltage analog, and 3.3 V VDD logic; PVDD and VBAT may share a source in range
+    acquisition_id: acquisition-e3d49fb08688ebd9fed8d4fd
+    document_sha256: 4cbfe2ed1be614928d9331e77c96462f67b9bd2937af82550bc90fcfb526404e
+    page: 55
+    evidence_text: The TAS6424-Q1 requires three power supplies
+    normalized_fact: TAS6424-Q1 uses PVDD, VBAT, and 3.3 V VDD with documented supply recommendations.
+
+  - fact_id: fact-adp5054-input
+    candidate_category: POWER_MANAGEMENT
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADP5054
+    attribute: input_voltage_range
+    value: 4.5-15.5
+    unit: V
+    acquisition_id: acquisition-f175bbce0ba1b9cd383c5ca5
+    document_sha256: 577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79
+    page: 1
+    evidence_text: "Wide input voltage range: 4.5 V to 15.5 V"
+    normalized_fact: ADP5054 accepts 4.5 V to 15.5 V.
+
+  - fact_id: fact-adp5054-output-voltage
+    candidate_category: POWER_MANAGEMENT
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADP5054
+    attribute: output_voltage
+    value: four adjustable buck outputs with 0.8 V feedback reference
+    acquisition_id: acquisition-f175bbce0ba1b9cd383c5ca5
+    document_sha256: 577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79
+    page: 6
+    evidence_text: Adjustable Feedback Voltage VFB1 0.800 V
+    normalized_fact: ADP5054 provides four adjustable buck outputs suitable for the provisional low-voltage rails.
+
+  - fact_id: fact-adp5054-output-current
+    candidate_category: POWER_MANAGEMENT
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADP5054
+    attribute: output_current
+    value: channels 1 and 2 programmable 2/4/6 A; channels 3 and 4 2.5 A
+    acquisition_id: acquisition-f175bbce0ba1b9cd383c5ca5
+    document_sha256: 577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79
+    page: 1
+    evidence_text: Programmable 2 A/4 A/6 A sync buck regulators with low-side FET drivers
+    normalized_fact: ADP5054 current capabilities cover the provisional DSP and auxiliary rail envelopes.
+
+  - fact_id: fact-adp5054-efficiency
+    candidate_category: POWER_MANAGEMENT
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADP5054
+    attribute: efficiency
+    value: condition-dependent curves; must be recalculated for each selected rail
+    acquisition_id: acquisition-f175bbce0ba1b9cd383c5ca5
+    document_sha256: 577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79
+    page: 11
+    evidence_text: Channel 3/Channel 4 Efficiency Curve, VIN = 12 V
+    normalized_fact: ADP5054 efficiency is operating-point dependent and remains a schematic calculation.
+
+  - fact_id: fact-adp5054-thermal
+    candidate_category: POWER_MANAGEMENT
+    candidate_manufacturer: Analog Devices
+    candidate_part_number: ADP5054
+    attribute: thermal_limits
+    value: 150 C typical thermal shutdown with 15 C hysteresis
+    acquisition_id: acquisition-f175bbce0ba1b9cd383c5ca5
+    document_sha256: 577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79
+    page: 5
+    evidence_text: Thermal Shutdown Threshold TSHDN 150 °C
+    normalized_fact: ADP5054 documents thermal shutdown and hysteresis.

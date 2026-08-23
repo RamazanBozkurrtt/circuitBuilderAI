@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-08-21T20:26:50.417182Z",
+  "evidence_id": "fact-ad1938-interface",
+  "title": "AD1938 audio_interface",
+  "provenance": {
+    "created_at": "2026-08-21T20:26:50.417160Z",
+    "source": "DATASHEET",
+    "manufacturer": "Analog Devices",
+    "document": "ad1938-datasheet-45957be7b198d70b.pdf",
+    "revision": null,
+    "page": "1",
+    "section": null,
+    "locator": "page=1",
+    "source_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/ad1938.pdf",
+    "sha256": "45957be7b198d70bd6998324be0d0d84114c0d99907dc415711c4e28feaab5f3",
+    "acquisition_id": "acquisition-0da3c952b99279d5d2cf8a65"
+  },
+  "extracted_content": "Right-justified, left-justified, I2S-justified, and TDM modes",
+  "normalized_fact": "AD1938 supports the documented serial audio modes.",
+  "confidence": null,
+  "artifact_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\analog_devices\\ad1938-datasheet-45957be7b198d70b.pdf"
+}

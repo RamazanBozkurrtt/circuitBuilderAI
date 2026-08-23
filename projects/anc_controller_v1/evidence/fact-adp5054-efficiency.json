@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-08-22T23:09:11.609145Z",
+  "evidence_id": "fact-adp5054-efficiency",
+  "title": "ADP5054 efficiency",
+  "provenance": {
+    "created_at": "2026-08-22T23:09:11.609107Z",
+    "source": "DATASHEET",
+    "manufacturer": "Analog Devices",
+    "document": "adp5054-datasheet-577509c6d7feba56.pdf",
+    "revision": null,
+    "page": "11",
+    "section": null,
+    "locator": "page=11",
+    "source_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adp5054.pdf",
+    "sha256": "577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79",
+    "acquisition_id": "acquisition-f175bbce0ba1b9cd383c5ca5"
+  },
+  "extracted_content": "Channel 3/Channel 4 Efficiency Curve, VIN = 12 V",
+  "normalized_fact": "ADP5054 efficiency is operating-point dependent and remains a schematic calculation.",
+  "confidence": null,
+  "artifact_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\analog_devices\\adp5054-datasheet-577509c6d7feba56.pdf"
+}

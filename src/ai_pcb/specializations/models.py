@@ -96,6 +96,28 @@ class EngineeringGuidance(StrictModel):
     concerns: list[NonEmptyString] = Field(min_length=1)
 
 
+class ArchitectureBlockGuidance(StrictModel):
+    """A declarative block concern; the synthesizer decides topology and applicability."""
+
+    role: Identifier
+    required_capabilities: list[NonEmptyString] = Field(default_factory=list)
+    rationale: NonEmptyString
+    retrieval_hints: list[NonEmptyString] = Field(default_factory=list)
+
+
+class ComponentCategoryGuidance(StrictModel):
+    category: Identifier
+    required_facts: list[Identifier] = Field(default_factory=list)
+    retrieval_hints: list[NonEmptyString] = Field(default_factory=list)
+
+
+class EvaluationCriterionGuidance(StrictModel):
+    criterion_id: Identifier
+    dimension: NonEmptyString
+    applicable_categories: list[Identifier] = Field(default_factory=list)
+    default_weight: float = Field(default=1.0, ge=0.0)
+
+
 class SpecializationMetadata(StrictModel):
     tags: list[Identifier] = Field(default_factory=list)
     retrieval_hints: list[NonEmptyString] = Field(default_factory=list)
@@ -118,6 +140,9 @@ class DesignSpecialization(StrictModel):
     evidence_requirements: list[EvidenceRequirement] = Field(default_factory=list)
     acceptance_criteria_extensions: list[AcceptanceCriterionExtension] = Field(default_factory=list)
     engineering_guidance: list[EngineeringGuidance] = Field(default_factory=list)
+    architecture_blocks: list[ArchitectureBlockGuidance] = Field(default_factory=list)
+    component_categories: list[ComponentCategoryGuidance] = Field(default_factory=list)
+    evaluation_criteria: list[EvaluationCriterionGuidance] = Field(default_factory=list)
     metadata: SpecializationMetadata = Field(default_factory=SpecializationMetadata)
 
     @model_validator(mode="after")
@@ -152,6 +177,9 @@ class ResolvedSpecializationContext(StrictModel):
     validation_domains: list[ValidationDomain]
     capabilities: list[AggregatedCapabilityRequirement]
     engineering_guidance: list[EngineeringGuidance]
+    architecture_blocks: list[ArchitectureBlockGuidance]
+    component_categories: list[ComponentCategoryGuidance]
+    evaluation_criteria: list[EvaluationCriterionGuidance]
     evidence_requirements: list[EvidenceRequirement]
     acceptance_criteria_extensions: list[AcceptanceCriterionExtension]
     retrieval_hints: list[NonEmptyString]

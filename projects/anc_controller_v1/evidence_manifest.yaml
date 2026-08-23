@@ -1,0 +1,97 @@
+documents:
+  - manufacturer: Analog Devices
+    part_number: ADSP-21569
+    document_type: DATASHEET
+    canonical_source_url: https://www.analog.com/media/en/technical-documentation/data-sheets/adsp-21562-21563-21565-21566-21567-21569.pdf
+    expected_revision: Rev. D
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Analog Devices
+    part_number: ADSP-2156x
+    document_type: HARDWARE_REFERENCE
+    canonical_source_url: https://www.analog.com/media/en/dsp-documentation/processor-manuals/adsp-2156x_hwr.pdf
+    expected_title: ADSP-21562/3/5/6/7/9 SHARC+ Processor Hardware Reference
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Analog Devices
+    part_number: ADSP-2156x
+    document_type: APPLICATION_NOTE
+    canonical_source_url: https://www.analog.com/media/en/technical-documentation/application-notes/EE408V02.pdf
+    expected_title: Using ADSP-2156x High Performance FIR/IIR Accelerators
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Analog Devices
+    part_number: ADSP-2156x
+    document_type: APPLICATION_NOTE
+    canonical_source_url: https://www.analog.com/media/en/technical-documentation/application-notes/ee414.pdf
+    expected_title: Estimating Power for ADSP-2156x SHARC+ Processors
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Analog Devices
+    part_number: ADSP-2156x
+    document_type: APPLICATION_NOTE
+    canonical_source_url: https://www.analog.com/media/en/technical-documentation/application-notes/ee-470.pdf
+    expected_title: ADSP-2156x Power Sequencing Requirements
+    expected_revision: Rev. 1
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Analog Devices
+    part_number: ADSP-2156x
+    document_type: APPLICATION_NOTE
+    canonical_source_url: https://www.analog.com/media/en/technical-documentation/application-notes/ee418v02.pdf
+    expected_title: ADSP-2156x Board Design Guidelines for Dynamic Memory Controller
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Analog Devices
+    part_number: ADSP-21562
+    document_type: ERRATA
+    canonical_source_url: https://www.analog.com/media/en/dsp-documentation/integrated-circuit-anomalies/adsp-21562-21563-21565-21566-21567-21569-anomalies.pdf
+    expected_title: Silicon Anomaly List
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Texas Instruments
+    part_number: PCM3168A
+    document_type: DATASHEET
+    canonical_source_url: https://www.ti.com/lit/ds/symlink/pcm3168a.pdf
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Analog Devices
+    part_number: AD1938
+    document_type: DATASHEET
+    canonical_source_url: https://www.analog.com/media/en/technical-documentation/data-sheets/ad1938.pdf
+    expected_revision: Rev. E
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Analog Devices
+    part_number: ADAU1978
+    document_type: DATASHEET
+    canonical_source_url: https://www.analog.com/media/en/technical-documentation/data-sheets/adau1978.pdf
+    expected_revision: Rev. B
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Texas Instruments
+    part_number: TAS6424-Q1
+    document_type: DATASHEET
+    canonical_source_url: https://www.ti.com/lit/ds/symlink/tas6424-q1.pdf
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Texas Instruments
+    part_number: SLOA242
+    document_type: APPLICATION_NOTE
+    canonical_source_url: https://www.ti.com/lit/an/sloa242a/sloa242a.pdf
+    expected_title: Inductor Selection Guide for 2.1 MHz Class-D Amplifiers
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Texas Instruments
+    part_number: SLAA701
+    document_type: APPLICATION_NOTE
+    canonical_source_url: https://www.ti.com/lit/an/slaa701b/slaa701b.pdf
+    expected_title: LC Filter Design
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Analog Devices
+    part_number: ADP5054
+    document_type: DATASHEET
+    canonical_source_url: https://www.analog.com/media/en/technical-documentation/data-sheets/adp5054.pdf
+    expected_revision: Rev. G
+    url_origin: MANUFACTURER_PRODUCT_PAGE

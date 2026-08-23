@@ -12,6 +12,9 @@ class EvidenceSource(StrEnum):
     DATASHEET = "DATASHEET"
     REFERENCE_DESIGN = "REFERENCE_DESIGN"
     APPLICATION_NOTE = "APPLICATION_NOTE"
+    HARDWARE_REFERENCE = "HARDWARE_REFERENCE"
+    EVALUATION_BOARD_GUIDE = "EVALUATION_BOARD_GUIDE"
+    ERRATA = "ERRATA"
     SIMULATION = "SIMULATION"
     EDA_VALIDATION = "EDA_VALIDATION"
     RULE_ENGINE = "RULE_ENGINE"
@@ -25,6 +28,9 @@ class EvidenceProvenance(TimestampedModel):
     page: str | None = None
     section: str | None = None
     locator: str | None = None
+    source_url: str | None = None
+    sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+    acquisition_id: Identifier | None = None
 
 
 class Evidence(TimestampedModel):
@@ -35,4 +41,3 @@ class Evidence(TimestampedModel):
     normalized_fact: NonEmptyString
     confidence: float | None = Field(default=None, ge=0.0, le=1.0)
     artifact_path: str | None = None
-

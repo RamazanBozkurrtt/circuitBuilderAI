@@ -1,0 +1,203 @@
+schema_version: '1.1'
+project:
+  project_name: anc_controller_v1
+  revision: '0.1'
+  description: Four-channel real-time Active Noise Cancellation controller PCB
+  author: null
+design:
+  specializations:
+  - audio_anc
+electrical:
+  requirements:
+    board_purpose:
+      status: RESOLVED
+      critical: true
+      value: Active Noise Cancellation controller
+      description: Primary electrical system purpose
+    speaker_impedance:
+      status: UNKNOWN
+      critical: false
+      description: Speaker impedance is an unresolved design variable
+    speaker_power_per_channel:
+      status: UNKNOWN
+      critical: false
+      description: Required speaker power per channel is unresolved
+audio:
+  requirements:
+    microphone_input_channels:
+      status: RESOLVED
+      critical: true
+      value: 4
+      unit: channels
+      description: Four synchronized microphone input channels are required
+    speaker_output_channels:
+      status: RESOLVED
+      critical: true
+      value: 4
+      unit: channels
+      description: Four synchronized speaker output channels are required
+    onboard_class_d_amplification:
+      status: RESOLVED
+      critical: true
+      value: true
+      description: Class-D speaker amplification must be integrated on the PCB
+    amplification_output_channels:
+      status: RESOLVED
+      critical: true
+      value: 4
+      unit: channels
+      description: Four onboard amplification channels are required
+    audio_quality_priority:
+      status: RESOLVED
+      critical: false
+      value: HIGH
+      description: Audio quality is a high-priority optimization objective
+    channel_synchronization_priority:
+      status: RESOLVED
+      critical: false
+      value: HIGH
+      description: Four-channel input/output synchronization is high priority
+    sample_rate:
+      status: UNKNOWN
+      critical: false
+      description: Sample rate remains an architecture and component design variable
+    bit_depth:
+      status: UNKNOWN
+      critical: false
+      description: Audio bit depth remains an architecture and component design variable
+    adc_or_codec_model:
+      status: UNKNOWN
+      critical: false
+      description: ADC or input-codec model is an unresolved component-selection variable
+    dac_or_codec_model:
+      status: UNKNOWN
+      critical: false
+      description: DAC or output-codec model is an unresolved component-selection variable
+    microphone_technology:
+      status: UNKNOWN
+      critical: false
+      description: Microphone technology is not specified
+    microphone_electrical_interface:
+      status: UNKNOWN
+      critical: false
+      description: Microphone electrical interface is not specified
+    microphone_signal_level:
+      status: UNKNOWN
+      critical: false
+      description: Microphone signal level is not specified
+processing:
+  requirements:
+    real_time_processing:
+      status: RESOLVED
+      critical: true
+      value: true
+      description: Signal processing must operate in real time
+    fxlms_support:
+      status: RESOLVED
+      critical: true
+      value: true
+      description: The processing architecture must support FxLMS
+    dedicated_dsp_required:
+      status: RESOLVED
+      critical: true
+      value: true
+      description: Dedicated DSP processing capability is required
+    dsp_model:
+      status: UNKNOWN
+      critical: false
+      description: DSP model is a component-selection design variable
+    filter_length:
+      status: UNKNOWN
+      critical: false
+      description: FxLMS filter length is unresolved and must not be invented
+power:
+  requirements:
+    input_supply_voltage:
+      status: UNKNOWN
+      critical: false
+      description: Input supply voltage is an unresolved design variable
+    power_budget:
+      status: UNKNOWN
+      critical: false
+      description: Board power budget is unresolved
+interfaces:
+  requirements:
+    programming_interface:
+      status: UNKNOWN
+      critical: false
+      description: Programming interface is unresolved
+    control_interface:
+      status: UNKNOWN
+      critical: false
+      description: Control interface is unresolved
+    external_connectivity:
+      status: UNKNOWN
+      critical: false
+      description: External connectivity is unresolved
+mechanical:
+  requirements:
+    pcb_dimensions:
+      status: UNKNOWN
+      critical: false
+      description: PCB dimensions are unresolved
+    pcb_layer_count:
+      status: UNKNOWN
+      critical: false
+      description: PCB layer count is unresolved
+manufacturing:
+  requirements:
+    final_goal:
+      status: RESOLVED
+      critical: true
+      value: manufacturable custom PCB
+      description: The eventual project outcome is a manufacturable custom PCB
+environmental:
+  requirements:
+    operating_environment:
+      status: UNKNOWN
+      critical: false
+      description: Operating environment and ratings are unresolved
+design_constraints:
+  requirements:
+    minimize_end_to_end_latency:
+      status: RESOLVED
+      critical: false
+      value: minimize
+      description: End-to-end ANC latency is a critical optimization objective without a numeric maximum
+    maximize_dsp_headroom:
+      status: RESOLVED
+      critical: false
+      value: maximize
+      description: Provide sufficient DSP headroom for real-time FxLMS
+    synchronized_multichannel_processing:
+      status: RESOLVED
+      critical: true
+      value: true
+      description: Maintain synchronized four-channel input and output processing
+    minimize_noise_coupling:
+      status: RESOLVED
+      critical: false
+      value: minimize
+      description: Minimize analog, digital, and power noise coupling
+    optimize_converter_signal_path:
+      status: RESOLVED
+      critical: false
+      value: optimize
+      description: Optimize the ADC to DSP to DAC signal path
+    integrate_four_class_d_channels:
+      status: RESOLVED
+      critical: true
+      value: true
+      description: Integrate four Class-D amplification channels
+acceptance_criteria:
+  requirements:
+    evidence_grounded_phase3_plan:
+      status: RESOLVED
+      critical: true
+      value: true
+      description: Architecture and major-component claims require traceable evidence or explicit evidence gaps
+    preserve_unresolved_variables:
+      status: RESOLVED
+      critical: true
+      value: true
+      description: Unspecified engineering values must remain explicit UNKNOWN design variables

@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-08-22T23:09:11.593424Z",
+  "evidence_id": "fact-adp5054-output-current",
+  "title": "ADP5054 output_current",
+  "provenance": {
+    "created_at": "2026-08-22T23:09:11.593394Z",
+    "source": "DATASHEET",
+    "manufacturer": "Analog Devices",
+    "document": "adp5054-datasheet-577509c6d7feba56.pdf",
+    "revision": null,
+    "page": "1",
+    "section": null,
+    "locator": "page=1",
+    "source_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adp5054.pdf",
+    "sha256": "577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79",
+    "acquisition_id": "acquisition-f175bbce0ba1b9cd383c5ca5"
+  },
+  "extracted_content": "Programmable 2 A/4 A/6 A sync buck regulators with low-side FET drivers",
+  "normalized_fact": "ADP5054 current capabilities cover the provisional DSP and auxiliary rail envelopes.",
+  "confidence": null,
+  "artifact_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\analog_devices\\adp5054-datasheet-577509c6d7feba56.pdf"
+}

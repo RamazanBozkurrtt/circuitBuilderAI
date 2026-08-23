@@ -1,9 +1,12 @@
 from ai_pcb.specializations.models import (
     AcceptanceCriterionExtension,
+    ArchitectureBlockGuidance,
     CapabilityRequirement,
+    ComponentCategoryGuidance,
     DesignSpecialization,
     EngineeringCapability,
     EngineeringGuidance,
+    EvaluationCriterionGuidance,
     EvidenceRequirement,
     RequirementDomain,
     SpecializationMetadata,
@@ -127,6 +130,65 @@ GENERIC = DesignSpecialization(
                 "component lifecycle and provenance where available",
             ],
         )
+    ],
+    architecture_blocks=[
+        ArchitectureBlockGuidance(
+            role="power_management",
+            required_capabilities=["safe rail generation", "power sequencing where required"],
+            rationale="Every active board requires an explicit power architecture.",
+            retrieval_hints=["recommended operating conditions", "power sequencing"],
+        ),
+        ArchitectureBlockGuidance(
+            role="programming_debug",
+            required_capabilities=["bring-up and firmware development access"],
+            rationale="Programmable devices need an explicit, possibly unresolved, debug path.",
+        ),
+        ArchitectureBlockGuidance(
+            role="protection",
+            required_capabilities=["interface and supply protection as requirements demand"],
+            rationale="Protection applicability must be considered rather than silently omitted.",
+        ),
+    ],
+    component_categories=[
+        ComponentCategoryGuidance(
+            category="POWER_MANAGEMENT",
+            required_facts=[
+                "input_voltage_range",
+                "output_voltage",
+                "output_current",
+                "efficiency",
+                "thermal_limits",
+            ],
+            retrieval_hints=["power management input voltage efficiency thermal"],
+        )
+    ],
+    evaluation_criteria=[
+        EvaluationCriterionGuidance(
+            criterion_id="functional_compatibility",
+            dimension="functional compatibility",
+        ),
+        EvaluationCriterionGuidance(
+            criterion_id="power_requirements",
+            dimension="power requirements",
+        ),
+        EvaluationCriterionGuidance(
+            criterion_id="thermal_implications",
+            dimension="thermal implications",
+        ),
+        EvaluationCriterionGuidance(
+            criterion_id="package_complexity",
+            dimension="package and PCB complexity",
+            default_weight=0.5,
+        ),
+        EvaluationCriterionGuidance(
+            criterion_id="evidence_completeness",
+            dimension="evidence completeness",
+        ),
+        EvaluationCriterionGuidance(
+            criterion_id="lifecycle_confidence",
+            dimension="lifecycle and manufacturer confidence",
+            default_weight=0.5,
+        ),
     ],
     metadata=SpecializationMetadata(
         tags=["pcb", "universal"],

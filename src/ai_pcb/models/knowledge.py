@@ -4,6 +4,7 @@ from enum import StrEnum
 
 from pydantic import Field, model_validator
 
+from ai_pcb.models.acquisition import ManufacturerAcquisitionProvenance
 from ai_pcb.models.common import Identifier, NonEmptyString, StrictModel
 from ai_pcb.models.evidence import EvidenceSource
 
@@ -29,6 +30,27 @@ class RetrievalMethod(StrEnum):
     DENSE = "DENSE"
     LEXICAL = "LEXICAL"
     HYBRID = "HYBRID"
+
+
+class QueryIntent(StrEnum):
+    EXACT_IDENTIFIER = "EXACT_IDENTIFIER"
+    ELECTRICAL_SPECIFICATION = "ELECTRICAL_SPECIFICATION"
+    INTERFACE_CLOCK = "INTERFACE_CLOCK"
+    PERFORMANCE = "PERFORMANCE"
+    TIMING_LATENCY = "TIMING_LATENCY"
+    LAYOUT_THERMAL = "LAYOUT_THERMAL"
+    GENERAL_SEMANTIC = "GENERAL_SEMANTIC"
+
+
+class QueryClassification(StrictModel):
+    """Deterministic retrieval controls derived from an engineering query."""
+
+    intent: QueryIntent
+    exact_terms: list[NonEmptyString] = Field(default_factory=list)
+    decomposed_queries: list[NonEmptyString] = Field(min_length=1)
+    preferred_sections: list[NonEmptyString] = Field(default_factory=list)
+    prefer_tables: bool = False
+    prefer_overview: bool = False
 
 
 class FactStatus(StrEnum):
@@ -63,6 +85,7 @@ class DocumentMetadata(StrictModel):
     title: NonEmptyString
     revision: str | None = None
     total_pages: int = Field(ge=1)
+    acquisition: ManufacturerAcquisitionProvenance | None = None
 
     @model_validator(mode="after")
     def local_document_source(self) -> DocumentMetadata:
@@ -70,6 +93,9 @@ class DocumentMetadata(StrictModel):
             EvidenceSource.DATASHEET,
             EvidenceSource.REFERENCE_DESIGN,
             EvidenceSource.APPLICATION_NOTE,
+            EvidenceSource.HARDWARE_REFERENCE,
+            EvidenceSource.EVALUATION_BOARD_GUIDE,
+            EvidenceSource.ERRATA,
         }
         if self.source_type not in allowed:
             raise ValueError("knowledge documents require a supported local document source type")
@@ -148,6 +174,7 @@ class DocumentChunk(StrictModel):
     part_number: str | None = None
     document_title: NonEmptyString
     document_revision: str | None = None
+    acquisition: ManufacturerAcquisitionProvenance | None = None
     page: int = Field(ge=1)
     section: str | None = None
     kind: ChunkKind
@@ -179,6 +206,7 @@ class DocumentRecord(StrictModel):
                 or chunk.document_hash != self.metadata.sha256
                 or chunk.source_file != self.metadata.source_file
                 or chunk.source_type is not self.metadata.source_type
+                or chunk.acquisition != self.metadata.acquisition
             ):
                 raise ValueError("chunk provenance is inconsistent with document metadata")
         return self
@@ -231,6 +259,7 @@ class EvidenceContextPiece(StrictModel):
     section: str | None = None
     locator: NonEmptyString
     text: NonEmptyString
+    acquisition: ManufacturerAcquisitionProvenance | None = None
 
 
 class EngineeringEvidenceCandidate(StrictModel):
@@ -251,6 +280,7 @@ class EngineeringEvidenceCandidate(StrictModel):
     scores: RetrievalScores
     retrieval_method: RetrievalMethod
     context: list[EvidenceContextPiece] = Field(default_factory=list)
+    acquisition: ManufacturerAcquisitionProvenance | None = None
 
 
 class FactConflict(StrictModel):
@@ -295,7 +325,32 @@ class RetrievalEvaluationCase(StrictModel):
     expected_chunk_id: Identifier | None = None
 
 
+class RetrievalFailureCategory(StrEnum):
+    INCORRECT_SECTION_DETECTION = "INCORRECT_SECTION_DETECTION"
+    TABLE_EXTRACTION_FAILURE = "TABLE_EXTRACTION_FAILURE"
+    HYBRID_RANKING_ISSUE = "HYBRID_RANKING_ISSUE"
+    METADATA_ISSUE = "METADATA_ISSUE"
+    CROSS_PAGE_CONTEXT_ISSUE = "CROSS_PAGE_CONTEXT_ISSUE"
+    DOCUMENT_PARSING_ISSUE = "DOCUMENT_PARSING_ISSUE"
+
+
+class RetrievalEvaluationFailure(StrictModel):
+    case_id: Identifier
+    category: RetrievalFailureCategory
+    description: NonEmptyString
+
+
 class RetrievalEvaluationMetrics(StrictModel):
     cases: int = Field(ge=0)
+    recall_at_1: float = Field(default=0.0, ge=0.0, le=1.0)
+    recall_at_3: float = Field(default=0.0, ge=0.0, le=1.0)
+    recall_at_5: float = Field(default=0.0, ge=0.0, le=1.0)
     recall_at_k: float = Field(ge=0.0, le=1.0)
     mean_reciprocal_rank: float = Field(ge=0.0, le=1.0)
+    failures: list[RetrievalEvaluationFailure] = Field(default_factory=list)
+
+
+class RetrievalCorpusMetrics(StrictModel):
+    synthetic: RetrievalEvaluationMetrics
+    real_datasheets: RetrievalEvaluationMetrics
+    real_corpus_meaningful: bool

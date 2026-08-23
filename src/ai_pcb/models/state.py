@@ -4,7 +4,28 @@ from enum import StrEnum
 
 from pydantic import Field, JsonValue, model_validator
 
+from ai_pcb.models.analysis import ComputationalBudget, LatencyBudget
+from ai_pcb.models.architecture import (
+    ArchitectureCandidate,
+    ArchitectureDecision,
+    ArchitectureReview,
+    SystemArchitecture,
+)
+from ai_pcb.models.closure import (
+    DesignVariable,
+    MicrophoneFrontEnd,
+    Phase4ReadinessAssessment,
+    ProvisionalClockTree,
+    ProvisionalPowerTree,
+)
 from ai_pcb.models.common import Identifier, NonEmptyString, StrictModel, TimestampedModel
+from ai_pcb.models.components import (
+    ComponentCandidate,
+    ComponentEvaluation,
+    ComponentRequirement,
+    ComponentSelection,
+    EvidenceAcquisitionRequirement,
+)
 from ai_pcb.models.decision import EngineeringDecision
 from ai_pcb.models.spec import MasterSpec
 from ai_pcb.models.validation import VerificationReport
@@ -54,8 +75,25 @@ class DesignState(TimestampedModel):
     resolved_specializations: list[ResolvedSpecialization] = Field(default_factory=list)
     workflow_stage: WorkflowStage = WorkflowStage.SPECIFICATION
     iteration: int = Field(default=0, ge=0)
-    architecture: StageArtifact | None = None
-    components: list[StageArtifact] = Field(default_factory=list)
+    architecture: SystemArchitecture | None = None
+    architecture_candidates: list[ArchitectureCandidate] = Field(default_factory=list)
+    architecture_decision: ArchitectureDecision | None = None
+    architecture_reviews: list[ArchitectureReview] = Field(default_factory=list)
+    component_requirements: list[ComponentRequirement] = Field(default_factory=list)
+    component_candidates: list[ComponentCandidate] = Field(default_factory=list)
+    component_evaluations: list[ComponentEvaluation] = Field(default_factory=list)
+    components: list[ComponentSelection] = Field(default_factory=list)
+    evidence_acquisition_requirements: list[EvidenceAcquisitionRequirement] = Field(
+        default_factory=list
+    )
+    computational_budget: ComputationalBudget | None = None
+    latency_budget: LatencyBudget | None = None
+    design_variables: list[DesignVariable] = Field(default_factory=list)
+    microphone_front_end: MicrophoneFrontEnd | None = None
+    clock_tree: ProvisionalClockTree | None = None
+    power_tree: ProvisionalPowerTree | None = None
+    phase4_readiness: Phase4ReadinessAssessment | None = None
+    phase3_complete: bool = False
     evidence_ids: list[Identifier] = Field(default_factory=list)
     decisions: list[EngineeringDecision] = Field(default_factory=list)
     verification_reports: list[VerificationReport] = Field(default_factory=list)
