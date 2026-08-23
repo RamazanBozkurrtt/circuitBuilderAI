@@ -1,0 +1,19 @@
+{
+  "acquisition_id": "acquisition-6d38f94c4cd5db1fc858934a",
+  "original_url": "https://www.ti.com/lit/ds/symlink/sn74avc2t245.pdf",
+  "final_url": "https://www.ti.com/lit/ds/symlink/sn74avc2t245.pdf",
+  "manufacturer": "Texas Instruments",
+  "part_number": "SN74AVC2T245",
+  "document_type": "DATASHEET",
+  "content_type": "application/pdf",
+  "retrieved_at": "2026-08-23T10:49:43.739845Z",
+  "sha256": "2d473c07fce653298ed85fa2b948201ca6bd91616cd2b04eb486760c9de0eb3b",
+  "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\texas_instruments\\sn74avc2t245-datasheet-2d473c07fce65329.pdf",
+  "http_status": 200,
+  "verification_status": "TRUSTED",
+  "verification_messages": [
+    "trusted domain, PDF format, manufacturer, part number, and document type verified"
+  ],
+  "unchanged": false,
+  "previous_sha256": null
+}

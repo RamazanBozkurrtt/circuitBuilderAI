@@ -379,6 +379,177 @@
       ],
       "unchanged": false,
       "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-29511604a3f976beb37bb6d3",
+      "original_url": "https://www.analog.com/media/en/simulation-models/bsdl-model-files/adsp-21566_adsp-21567_adsp-21569_bga_bsdl.bsdl",
+      "final_url": "https://www.analog.com/media/en/simulation-models/bsdl-model-files/adsp-21566_adsp-21567_adsp-21569_bga_bsdl.bsdl",
+      "manufacturer": "Analog Devices",
+      "part_number": "ADSP21569",
+      "document_type": "BOUNDARY_SCAN_DESCRIPTION",
+      "content_type": "application/octet-stream",
+      "retrieved_at": "2026-08-23T10:49:39.543199Z",
+      "sha256": "06d87db0de185714250360489f78330732a38d20a32e7bb08df4e711a1430562",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\boundary_scan\\analog_devices\\adsp21569-boundary_scan_description-06d87db0de185714.bsdl",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, BSDL structure, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-c38de8a5afaf388b9d163fb6",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/eval-board-schematic/ev-21569-som-schematic.pdf",
+      "final_url": "https://www.analog.com/media/en/technical-documentation/eval-board-schematic/ev-21569-som-schematic.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "EV-21569-SOM",
+      "document_type": "REFERENCE_DESIGN",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-23T10:49:41.085238Z",
+      "sha256": "4d17b931291563f925ed3cb1bf14d7b02e0546d92f48c58a2e54da07c3cec9ea",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\quarantine\\analog_devices\\ev_21569_som-reference_design-4d17b931291563f9.pdf",
+      "http_status": 200,
+      "verification_status": "IDENTITY_UNVERIFIED",
+      "verification_messages": [
+        "document type identity is not plausible from extracted PDF text"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-0322671c82a293c0245e9875",
+      "original_url": "https://www.ti.com/lit/ds/symlink/thp210.pdf",
+      "final_url": "https://www.ti.com/lit/ds/symlink/thp210.pdf",
+      "manufacturer": "Texas Instruments",
+      "part_number": "THP210",
+      "document_type": "DATASHEET",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-23T10:49:42.613874Z",
+      "sha256": "c84641ad2e15584c073ae7cd9f1ad2cadd2c1fe5035819b825dc581e364807f8",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\texas_instruments\\thp210-datasheet-c84641ad2e15584c.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-6d38f94c4cd5db1fc858934a",
+      "original_url": "https://www.ti.com/lit/ds/symlink/sn74avc2t245.pdf",
+      "final_url": "https://www.ti.com/lit/ds/symlink/sn74avc2t245.pdf",
+      "manufacturer": "Texas Instruments",
+      "part_number": "SN74AVC2T245",
+      "document_type": "DATASHEET",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-23T10:49:43.739845Z",
+      "sha256": "2d473c07fce653298ed85fa2b948201ca6bd91616cd2b04eb486760c9de0eb3b",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\texas_instruments\\sn74avc2t245-datasheet-2d473c07fce65329.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-32b2a10e50a3ba1fd744c0cb",
+      "original_url": "https://www.ti.com/lit/ds/symlink/tpd2e2u06.pdf",
+      "final_url": "https://www.ti.com/lit/ds/symlink/tpd2e2u06.pdf",
+      "manufacturer": "Texas Instruments",
+      "part_number": "TPD2E2U06",
+      "document_type": "DATASHEET",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-23T10:49:44.913296Z",
+      "sha256": "a133b86ea3d3c3d34667339b92d3b5e98d541d10e9775d63e7cdfa153794f4ed",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\texas_instruments\\tpd2e2u06-datasheet-a133b86ea3d3c3d3.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-88f595bfae507d094a32106f",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adm6315.pdf",
+      "final_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adm6315.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "ADM6315",
+      "document_type": "DATASHEET",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-23T10:49:46.015125Z",
+      "sha256": "80976019d58f729126f43fb23092ec368bdb7b28bbf93ef53c7b582609bb2cdd",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\analog_devices\\adm6315-datasheet-80976019d58f7291.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-1566804addff639e8bf5d241",
+      "original_url": "https://abracon.com/datasheets/ASDLJ.pdf",
+      "final_url": "https://abracon.com/datasheets/ASDLJ.pdf",
+      "manufacturer": "Abracon",
+      "part_number": "ASDLJ",
+      "document_type": "DATASHEET",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-23T10:49:47.622414Z",
+      "sha256": "2438abf53b77c249be7644d5b1e82cf93095b3897ce383794ad4fe07b6a687f4",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\quarantine\\abracon\\asdlj-datasheet-2438abf53b77c249.pdf",
+      "http_status": 200,
+      "verification_status": "IDENTITY_UNVERIFIED",
+      "verification_messages": [
+        "document type identity is not plausible from extracted PDF text"
+      ],
+      "unchanged": false,
+      "previous_sha256": null
+    },
+    {
+      "acquisition_id": "acquisition-c38de8a5afaf388b9d163fb6",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/eval-board-schematic/ev-21569-som-schematic.pdf",
+      "final_url": "https://www.analog.com/media/en/technical-documentation/eval-board-schematic/ev-21569-som-schematic.pdf",
+      "manufacturer": "Analog Devices",
+      "part_number": "EV-21569-SOM",
+      "document_type": "REFERENCE_DESIGN",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-23T10:50:37.406088Z",
+      "sha256": "4d17b931291563f925ed3cb1bf14d7b02e0546d92f48c58a2e54da07c3cec9ea",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\reference_designs\\analog_devices\\ev_21569_som-reference_design-4d17b931291563f9.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": "4d17b931291563f925ed3cb1bf14d7b02e0546d92f48c58a2e54da07c3cec9ea"
+    },
+    {
+      "acquisition_id": "acquisition-1566804addff639e8bf5d241",
+      "original_url": "https://abracon.com/datasheets/ASDLJ.pdf",
+      "final_url": "https://abracon.com/datasheets/ASDLJ.pdf",
+      "manufacturer": "Abracon",
+      "part_number": "ASDLJ",
+      "document_type": "DATASHEET",
+      "content_type": "application/pdf",
+      "retrieved_at": "2026-08-23T10:50:38.277230Z",
+      "sha256": "2438abf53b77c249be7644d5b1e82cf93095b3897ce383794ad4fe07b6a687f4",
+      "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\abracon\\asdlj-datasheet-2438abf53b77c249.pdf",
+      "http_status": 200,
+      "verification_status": "TRUSTED",
+      "verification_messages": [
+        "trusted domain, PDF format, manufacturer, part number, and document type verified"
+      ],
+      "unchanged": false,
+      "previous_sha256": "2438abf53b77c249be7644d5b1e82cf93095b3897ce383794ad4fe07b6a687f4"
     }
   ],
   "events": [
@@ -561,6 +732,87 @@
       "occurred_at": "2026-08-22T22:55:55.868900Z",
       "previous_sha256": null,
       "sha256": "577509c6d7feba560b5727f009894e48b58d478377933a7df112b982f4ebed79"
+    },
+    {
+      "event_id": "event-585838616c929f96ce7afcf2",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-29511604a3f976beb37bb6d3",
+      "original_url": "https://www.analog.com/media/en/simulation-models/bsdl-model-files/adsp-21566_adsp-21567_adsp-21569_bga_bsdl.bsdl",
+      "occurred_at": "2026-08-23T10:49:39.543867Z",
+      "previous_sha256": null,
+      "sha256": "06d87db0de185714250360489f78330732a38d20a32e7bb08df4e711a1430562"
+    },
+    {
+      "event_id": "event-6cd87506c123c3c11870b96d",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-c38de8a5afaf388b9d163fb6",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/eval-board-schematic/ev-21569-som-schematic.pdf",
+      "occurred_at": "2026-08-23T10:49:41.114813Z",
+      "previous_sha256": null,
+      "sha256": "4d17b931291563f925ed3cb1bf14d7b02e0546d92f48c58a2e54da07c3cec9ea"
+    },
+    {
+      "event_id": "event-75118bcf3ae7057ad5111402",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-0322671c82a293c0245e9875",
+      "original_url": "https://www.ti.com/lit/ds/symlink/thp210.pdf",
+      "occurred_at": "2026-08-23T10:49:42.641489Z",
+      "previous_sha256": null,
+      "sha256": "c84641ad2e15584c073ae7cd9f1ad2cadd2c1fe5035819b825dc581e364807f8"
+    },
+    {
+      "event_id": "event-35817450de42a136790f963e",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-6d38f94c4cd5db1fc858934a",
+      "original_url": "https://www.ti.com/lit/ds/symlink/sn74avc2t245.pdf",
+      "occurred_at": "2026-08-23T10:49:43.768302Z",
+      "previous_sha256": null,
+      "sha256": "2d473c07fce653298ed85fa2b948201ca6bd91616cd2b04eb486760c9de0eb3b"
+    },
+    {
+      "event_id": "event-267d9d02b276ad5e441d578e",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-32b2a10e50a3ba1fd744c0cb",
+      "original_url": "https://www.ti.com/lit/ds/symlink/tpd2e2u06.pdf",
+      "occurred_at": "2026-08-23T10:49:44.944035Z",
+      "previous_sha256": null,
+      "sha256": "a133b86ea3d3c3d34667339b92d3b5e98d541d10e9775d63e7cdfa153794f4ed"
+    },
+    {
+      "event_id": "event-c731b14db38f949558517ea7",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-88f595bfae507d094a32106f",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adm6315.pdf",
+      "occurred_at": "2026-08-23T10:49:46.043888Z",
+      "previous_sha256": null,
+      "sha256": "80976019d58f729126f43fb23092ec368bdb7b28bbf93ef53c7b582609bb2cdd"
+    },
+    {
+      "event_id": "event-da12503483e8bcc69037f05f",
+      "kind": "ACQUIRED",
+      "acquisition_id": "acquisition-1566804addff639e8bf5d241",
+      "original_url": "https://abracon.com/datasheets/ASDLJ.pdf",
+      "occurred_at": "2026-08-23T10:49:47.648928Z",
+      "previous_sha256": null,
+      "sha256": "2438abf53b77c249be7644d5b1e82cf93095b3897ce383794ad4fe07b6a687f4"
+    },
+    {
+      "event_id": "event-5aa20a78fba412bce51acfb4",
+      "kind": "VERIFICATION_CHANGED",
+      "acquisition_id": "acquisition-c38de8a5afaf388b9d163fb6",
+      "original_url": "https://www.analog.com/media/en/technical-documentation/eval-board-schematic/ev-21569-som-schematic.pdf",
+      "occurred_at": "2026-08-23T10:50:37.407015Z",
+      "previous_sha256": "4d17b931291563f925ed3cb1bf14d7b02e0546d92f48c58a2e54da07c3cec9ea",
+      "sha256": "4d17b931291563f925ed3cb1bf14d7b02e0546d92f48c58a2e54da07c3cec9ea"
+    },
+    {
+      "event_id": "event-643c6d838565b348ec5a27fd",
+      "kind": "VERIFICATION_CHANGED",
+      "acquisition_id": "acquisition-1566804addff639e8bf5d241",
+      "original_url": "https://abracon.com/datasheets/ASDLJ.pdf",
+      "occurred_at": "2026-08-23T10:50:38.303154Z",
+      "previous_sha256": "2438abf53b77c249be7644d5b1e82cf93095b3897ce383794ad4fe07b6a687f4",
+      "sha256": "2438abf53b77c249be7644d5b1e82cf93095b3897ce383794ad4fe07b6a687f4"
     }
   ]
 }

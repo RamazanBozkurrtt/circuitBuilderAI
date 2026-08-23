@@ -1,0 +1,51 @@
+documents:
+  - manufacturer: Analog Devices
+    part_number: ADSP21569
+    document_type: BOUNDARY_SCAN_DESCRIPTION
+    canonical_source_url: https://www.analog.com/media/en/simulation-models/bsdl-model-files/adsp-21566_adsp-21567_adsp-21569_bga_bsdl.bsdl
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Analog Devices
+    part_number: EV-21569-SOM
+    document_type: REFERENCE_DESIGN
+    canonical_source_url: https://www.analog.com/media/en/technical-documentation/eval-board-schematic/ev-21569-som-schematic.pdf
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Texas Instruments
+    part_number: THP210
+    document_type: DATASHEET
+    canonical_source_url: https://www.ti.com/lit/ds/symlink/thp210.pdf
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Texas Instruments
+    part_number: SN74AVC2T245
+    document_type: DATASHEET
+    canonical_source_url: https://www.ti.com/lit/ds/symlink/sn74avc2t245.pdf
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Texas Instruments
+    part_number: TPD2E2U06
+    document_type: DATASHEET
+    canonical_source_url: https://www.ti.com/lit/ds/symlink/tpd2e2u06.pdf
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Analog Devices
+    part_number: ADM6315
+    document_type: DATASHEET
+    canonical_source_url: https://www.analog.com/media/en/technical-documentation/data-sheets/adm6315.pdf
+    expected_revision: Rev. I
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Abracon
+    part_number: ASDLJ
+    document_type: DATASHEET
+    canonical_source_url: https://abracon.com/datasheets/ASDLJ.pdf
+    expected_revision: Revision A
+    url_origin: MANUFACTURER_PRODUCT_PAGE
+
+  - manufacturer: Integrated Silicon Solution
+    part_number: IS25LP512M
+    document_type: DATASHEET
+    canonical_source_url: https://www.issi.com/WW/pdf/25LP-WP512M.pdf
+    expected_revision: Rev.A7
+    url_origin: MANUFACTURER_PRODUCT_PAGE

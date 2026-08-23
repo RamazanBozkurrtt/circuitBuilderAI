@@ -1,0 +1,19 @@
+{
+  "acquisition_id": "acquisition-32b2a10e50a3ba1fd744c0cb",
+  "original_url": "https://www.ti.com/lit/ds/symlink/tpd2e2u06.pdf",
+  "final_url": "https://www.ti.com/lit/ds/symlink/tpd2e2u06.pdf",
+  "manufacturer": "Texas Instruments",
+  "part_number": "TPD2E2U06",
+  "document_type": "DATASHEET",
+  "content_type": "application/pdf",
+  "retrieved_at": "2026-08-23T10:49:44.913296Z",
+  "sha256": "a133b86ea3d3c3d34667339b92d3b5e98d541d10e9775d63e7cdfa153794f4ed",
+  "local_path": "C:\\Users\\ramaz\\source\\repos\\circuitBuilderAI\\knowledge\\datasheets\\texas_instruments\\tpd2e2u06-datasheet-a133b86ea3d3c3d3.pdf",
+  "http_status": 200,
+  "verification_status": "TRUSTED",
+  "verification_messages": [
+    "trusted domain, PDF format, manufacturer, part number, and document type verified"
+  ],
+  "unchanged": false,
+  "previous_sha256": null
+}
